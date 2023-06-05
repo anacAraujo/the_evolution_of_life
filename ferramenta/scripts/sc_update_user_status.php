@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $activeValue = mysqli_real_escape_string($local_link, $activeValue);
 
             // Atualiza o status do usuário no banco de dados
-            $query = "UPDATE users SET active = '$activeValue' WHERE user_id = '$userId'";
+            $query = "UPDATE users SET active = '$activeValue' WHERE users.id = '$userId'";
 
             if (mysqli_query($local_link, $query)) {
                 // Atualização bem-sucedida
