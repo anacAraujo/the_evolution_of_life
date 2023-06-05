@@ -10,27 +10,26 @@ include_once "connections/connection.php";
 $local_link = new_db_connection();
 //VAI BUSCAR OS DADOS PARA MOSTRAR NOS CARDS INICIAIS
 //INICIA O STATEMENT
-$stmt_userNum=mysqli_stmt_init($local_link);
+$stmt_userNum = mysqli_stmt_init($local_link);
 
 
 //DEFINE A QUERY
-$query_userNum="SELECT COUNT(id) FROM users ";
+$query_userNum = "SELECT COUNT(id) FROM users WHERE last_login < DATE_SUB(NOW(), INTERVAL 30 DAY);";
 
 //PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_userNum,$query_userNum)) {
+if (mysqli_stmt_prepare($stmt_userNum, $query_userNum)) {
 
     //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_userNum)) {
+    if (mysqli_stmt_execute($stmt_userNum)) {
 
         //GUARDA O RESULTADO
-        mysqli_stmt_bind_result($stmt_userNum,$num_users);
+        mysqli_stmt_bind_result($stmt_userNum, $num_users);
 
         //VAI BUSCAR OS DADOS
-        if(mysqli_stmt_fetch($stmt_userNum)) {
+        if (mysqli_stmt_fetch($stmt_userNum)) {
 
             //GUARDA NUMA VARIÁVEL PARA DEPOIS ESCREVER
-            $write_value=$num_users;
-
+            $write_value = $num_users;
         }
         //ERRO AO IR BUSCAR DADOS
         else {
@@ -38,7 +37,6 @@ if(mysqli_stmt_prepare($stmt_userNum,$query_userNum)) {
             //VAI PARA A PÁGINA DE ERROS
             header("Location:errors.php?error=fetch");
         }
-
     }
     //SE DER ERRO NA EXECUÇÃO DO STATEMENT
     else {
@@ -46,7 +44,6 @@ if(mysqli_stmt_prepare($stmt_userNum,$query_userNum)) {
         //VAI PARA A PÁGINA DE ERROS
         header("Location:errors.php?error=execute");
     }
-
 }
 //ERRO DE PREPARAÇÃO DE STATEMENT
 else {
@@ -60,26 +57,25 @@ mysqli_stmt_close($stmt_userNum);
 
 //FAZ O PROCESSO PARA O SEGUNDO CARD
 //INICIA O STATEMENT
-$stmt_itemNum=mysqli_stmt_init($local_link);
+$stmt_itemNum = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_itemNum="SELECT COUNT(id) FROM items ";
+$query_itemNum = "SELECT COUNT(id) FROM items ";
 
 //PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_itemNum,$query_itemNum)) {
+if (mysqli_stmt_prepare($stmt_itemNum, $query_itemNum)) {
 
     //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_itemNum)) {
+    if (mysqli_stmt_execute($stmt_itemNum)) {
 
         //GUARDA O RESULTADO
-        mysqli_stmt_bind_result($stmt_itemNum,$num_items);
+        mysqli_stmt_bind_result($stmt_itemNum, $num_items);
 
         //VAI BUSCAR OS DADOS
-        if(mysqli_stmt_fetch($stmt_itemNum)) {
+        if (mysqli_stmt_fetch($stmt_itemNum)) {
 
             //GUARDA NUMA VARIÁVEL PARA DEPOIS ESCREVER
-            $write_value2=$num_items;
-
+            $write_value2 = $num_items;
         }
         //ERRO AO IR BUSCAR DADOS
         else {
@@ -87,7 +83,6 @@ if(mysqli_stmt_prepare($stmt_itemNum,$query_itemNum)) {
             //VAI PARA A PÁGINA DE ERROS
             header("Location:errors.php?error=fetch");
         }
-
     }
     //SE DER ERRO NA EXECUÇÃO DO STATEMENT
     else {
@@ -95,7 +90,6 @@ if(mysqli_stmt_prepare($stmt_itemNum,$query_itemNum)) {
         //VAI PARA A PÁGINA DE ERROS
         header("Location:errors.php?error=execute");
     }
-
 }
 //ERRO DE PREPARAÇÃO DE STATEMENT
 else {
@@ -109,26 +103,25 @@ mysqli_stmt_close($stmt_itemNum);
 
 //FAZ O PROCESSO PARA O TERCEIRO CARD
 //INICIA O STATEMENT
-$stmt_progress=mysqli_stmt_init($local_link);
+$stmt_progress = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_progress="SELECT AVG(progress) FROM planets ";
+$query_progress = "SELECT AVG(progress) FROM planets ";
 
 //PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_progress,$query_progress)) {
+if (mysqli_stmt_prepare($stmt_progress, $query_progress)) {
 
     //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_progress)) {
+    if (mysqli_stmt_execute($stmt_progress)) {
 
         //GUARDA O RESULTADO
-        mysqli_stmt_bind_result($stmt_progress,$progress);
+        mysqli_stmt_bind_result($stmt_progress, $progress);
 
         //VAI BUSCAR OS DADOS
-        if(mysqli_stmt_fetch($stmt_progress)) {
+        if (mysqli_stmt_fetch($stmt_progress)) {
 
             //GUARDA NUMA VARIÁVEL PARA DEPOIS ESCREVER
-            $write_value3=$progress;
-
+            $write_value3 = $progress;
         }
         //ERRO AO IR BUSCAR DADOS
         else {
@@ -136,7 +129,6 @@ if(mysqli_stmt_prepare($stmt_progress,$query_progress)) {
             //VAI PARA A PÁGINA DE ERROS
             header("Location:errors.php?error=fetch");
         }
-
     }
     //SE DER ERRO NA EXECUÇÃO DO STATEMENT
     else {
@@ -144,7 +136,6 @@ if(mysqli_stmt_prepare($stmt_progress,$query_progress)) {
         //VAI PARA A PÁGINA DE ERROS
         header("Location:errors.php?error=execute");
     }
-
 }
 //ERRO DE PREPARAÇÃO DE STATEMENT
 else {
@@ -158,26 +149,25 @@ mysqli_stmt_close($stmt_progress);
 
 //FAZ O PROCESSO PARA O QUARTO CARD
 //INICIA O STATEMENT
-$stmt_market=mysqli_stmt_init($local_link);
+$stmt_market = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_market="SELECT COUNT(id) FROM market_offers ";
+$query_market = "SELECT COUNT(id) FROM market_offers ";
 
 //PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_market,$query_market)) {
+if (mysqli_stmt_prepare($stmt_market, $query_market)) {
 
     //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_market)) {
+    if (mysqli_stmt_execute($stmt_market)) {
 
         //GUARDA O RESULTADO
-        mysqli_stmt_bind_result($stmt_market,$market);
+        mysqli_stmt_bind_result($stmt_market, $market);
 
         //VAI BUSCAR OS DADOS
-        if(mysqli_stmt_fetch($stmt_market)) {
+        if (mysqli_stmt_fetch($stmt_market)) {
 
             //GUARDA NUMA VARIÁVEL PARA DEPOIS ESCREVER
-            $write_value4=$market;
-
+            $write_value4 = $market;
         }
         //ERRO AO IR BUSCAR DADOS
         else {
@@ -185,7 +175,6 @@ if(mysqli_stmt_prepare($stmt_market,$query_market)) {
             //VAI PARA A PÁGINA DE ERROS
             header("Location:errors.php?error=fetch");
         }
-
     }
     //SE DER ERRO NA EXECUÇÃO DO STATEMENT
     else {
@@ -193,7 +182,6 @@ if(mysqli_stmt_prepare($stmt_market,$query_market)) {
         //VAI PARA A PÁGINA DE ERROS
         header("Location:errors.php?error=execute");
     }
-
 }
 //ERRO DE PREPARAÇÃO DE STATEMENT
 else {
@@ -211,7 +199,7 @@ mysqli_stmt_close($stmt_market);
 $stmt_chart = mysqli_stmt_init($local_link);
 
 //ARRAY QUE VAI GUARDAR O NÚMERO DE USERS POR MÊS
-$dados_chart= array();
+$dados_chart = array();
 
 //VARIÁVEL MÊS COMEÇA A 1
 $mes = 0;
@@ -240,17 +228,14 @@ if (mysqli_stmt_prepare($stmt_chart, $query_chart)) {
 
                 //MANDA PRO ARRAY
                 $dados_chart[$mes] = $numUsers;
-
             }
 
             //PASSA PARA O PRÓXIMO MÊS
             $mes++;
-
         } //SE DER ERRO NA EXECUÇÃO DO STATEMENT
         else {
             //VAI PARA A PÁGINA DE ERROS
             header("Location:erros.php?error=execute");
-
         }
     }
 
@@ -261,8 +246,7 @@ if (mysqli_stmt_prepare($stmt_chart, $query_chart)) {
     array_shift($dados_chart);
 
     //MUDA OS DADOS DO ARRAY DO ARRAY E SEPARA POR VÍRGULAS
-    $dados_chart_changed=implode(',',$dados_chart);
-
+    $dados_chart_changed = implode(',', $dados_chart);
 } //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
 else {
     //VAI PARA A PÁGINA DE ERROS
@@ -273,10 +257,8 @@ mysqli_stmt_close($stmt_chart);
 mysqli_close($local_link);
 ?>
 <script>
-
     //ESCREVE AS VARIÁVEIS DO GRÁFICO
-    var valores = new Array(<?= $dados_chart_changed;?>);
-
+    var valores = new Array(<?= $dados_chart_changed; ?>);
 </script>
 
 <body id="page-top">
@@ -286,9 +268,9 @@ mysqli_close($local_link);
 
 
         <!--CHAMA O NAVBAR -->
-       <?php
-       include_once "components/cp_sidebar.php";
-       ?>
+        <?php
+        include_once "components/cp_sidebar.php";
+        ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -358,13 +340,11 @@ mysqli_close($local_link);
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $write_value3?>%</div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?= $write_value3 ?>%</div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar"
-                                                            style="width: <?= $write_value3?>%" aria-valuenow="<?= $write_value3?>" aria-valuemin="0"
-                                                            aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: <?= $write_value3 ?>%" aria-valuenow="<?= $write_value3 ?>" aria-valuemin="0" aria-valuemax="100"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -385,7 +365,7 @@ mysqli_close($local_link);
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                                 Ofertas Mercado</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $write_value4?></div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $write_value4 ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-cart-plus fa-2x text-gray-300"></i>
