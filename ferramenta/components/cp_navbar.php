@@ -121,7 +121,7 @@ else {
                 //ESCREVE UM ITEM DE Login
                 echo '<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                  aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="./profile.php">
+                <a class="dropdown-item" href="./login.php">
                     <i class="fas fa-sign-in-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                     Login
                 </a></div>';

@@ -303,14 +303,23 @@ if (in_array($tabela_query, $tabelas, true)) {
                                         //SE FOR ADMINISTRADOR
                                         if ($_SESSION['admin'] == 1) {
 
-                                            echo "<td class='text-center'>" . $results[$i] . "</td>";
+                                            //SE O NOME FOR DIFERENTE DE PASSWORD
+                                            if ($nome_coluna_atual != 'pwd_hash') {
+
+                                                echo "<td class='text-center'>" . $results[$i] . "</td>";
+
+                                            }
 
 
                                         } //SE NÃO FOR ADIM
                                         else {
 
-                                            //ESCREVE SEM  EDIÇÃO
-                                            echo "<td class='text-center'>" . $results[$i] . "</td>";
+                                            //SE O NOME FOR DIFERENTE DE PASSWORD
+                                            if ($nome_coluna_atual != 'pwd_hash') {
+
+                                                echo "<td class='text-center'>" . $results[$i] . "</td>";
+
+                                            }
                                         }
 
                                         //AUMENTA 1 PARA PASSAR AO DADO SEGUINTE

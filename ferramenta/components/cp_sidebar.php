@@ -49,6 +49,10 @@ $local_link = new_db_connection();
                 <h6 class="collapse-header">Tabelas:</h6>
 
                 <?php
+
+                //ARRAY DE TABLEAS QUE NÃO DEVE SER ESCRITO
+                $unnecessary_table=array("land","market_offers", "microorganism_usage","planets","used_formulas_planet");
+
                 //VAI BUSCAR AS TABELAS
                 //COMEÇA O STATEMENT
                 $stmt=mysqli_stmt_init($local_link);
@@ -68,8 +72,13 @@ $local_link = new_db_connection();
                         //FAZ FETCH DOS DADOS
                         while(mysqli_stmt_fetch($stmt)) {
 
-                            //ESCREVE OS DADOS NA PÁGINA
-                            echo'<a class="collapse-item" href="tables.php?table='.$tabela.'">'.$tabela.'</a>';
+                            //SE A TABELA FOR UMA DAS QUE DEVE APARECER
+                            if(!in_array($tabela, $unnecessary_table)) {
+
+                                //ESCREVE OS DADOS NA PÁGINA
+                                echo'<a class="collapse-item" href="tables.php?table='.$tabela.'">'.$tabela.'</a>';
+                            }
+
                         }
                     }
                     //SE DER ERRO NA EXECUÇÃO DE UM STATEMENT

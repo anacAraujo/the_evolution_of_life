@@ -1,12 +1,26 @@
 <?php
 
 session_start();
-
+var_dump($_POST);
 // conexão à base de dados
 include_once "../connections/connection.php";
 
 // Create a new DB connection
 $local_link = new_db_connection();
+
+//SE O POST TROUXER ALGUMA COISA COM ID
+foreach ($_POST as $key => $valor) {
+
+    //SE CONTIVER A PALAVRA ID NA CHAVE
+    if (strpos($key, 'formula_id') !== false || strpos($key, 'item_id') !== false || strpos($key, 'planets_user_id') !== false || strpos($key, 'land_id') !== false || strpos($key, 'user_id') !== false) {
+
+        //ID VINDO DO POST
+        $id_post=$key;
+        break;
+
+
+    }
+}
 
 //SE NO SESSION ESTIVER O A TABELA, COLUNA E ID
 if (isset($_SESSION['table']) && $_SESSION['table'] != "" && isset($_SESSION['id']) && $_SESSION['id'] != "") {
@@ -145,10 +159,12 @@ if (mysqli_stmt_prepare($stmt_columns, $query_columns)) {
                     //GUARDA O VALOR ATUAL DA COLUNA EM QUESTÃO
                     $current_value = $dados;
 
-                    echo $current_value . "<hr>";
+
 
                     //COMPARA O VALOR QUE O USER COLOCOU NO POST COM O VALOR QUE A COLUNA TEM ATUALMENTE
-                    if ($valor_post != $current_value) {
+                    if (!empty($valor_post) && $valor_post != $current_value) {
+
+                        echo "$valor_post<hr>$current_value";
 
                         //SE A VARIÁVEL DO VALOR POST ESTIVER DEFINIDA
                         if (isset($valor_post) && $valor_post != "") {
@@ -167,7 +183,11 @@ if (mysqli_stmt_prepare($stmt_columns, $query_columns)) {
                                 $stmt_update = mysqli_stmt_init($local_link);
 
                                 //DEFINE A QUERY
-                                $query_update = "UPDATE $table SET $col_update = ? WHERE id=?";
+                                $query_update = "UPDATE $table SET $col_update = ? WHERE $id_post=?";
+
+                                //echo $col_update;
+
+                                echo $query_update;
 
                                 //PREPARA O STATEMENT
                                 if (mysqli_stmt_prepare($stmt_update, $query_update)) {
