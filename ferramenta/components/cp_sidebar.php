@@ -39,8 +39,7 @@ $local_link = new_db_connection();
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages"
-           aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="fas fa-fw fa-table"></i>
             <span>Tabelas na BD</span>
         </a>
@@ -51,34 +50,33 @@ $local_link = new_db_connection();
                 <?php
 
                 //ARRAY DE TABLEAS QUE NÃO DEVE SER ESCRITO
-                $unnecessary_table=array("land","market_offers", "microorganism_usage","planets","used_formulas_planet", "planets_items_inventory", "planets_land_items");
+                $unnecessary_table = array("land", "market_offers", "microorganism_usage", "planets", "used_formulas_planet", "planets_items_inventory", "planets_land_items");
 
                 //VAI BUSCAR AS TABELAS
                 //COMEÇA O STATEMENT
-                $stmt=mysqli_stmt_init($local_link);
+                $stmt = mysqli_stmt_init($local_link);
 
                 //QUERY QUE VAI BUSCAR OS NOMES DAS TABELAS
-                $query="SHOW TABLES";
+                $query = "SHOW TABLES";
 
                 //PREPARA O STATEMENT
-                if(mysqli_stmt_prepare($stmt,$query)) {
+                if (mysqli_stmt_prepare($stmt, $query)) {
 
                     //EXECUTA O STATEMENT
-                    if(mysqli_stmt_execute($stmt)) {
+                    if (mysqli_stmt_execute($stmt)) {
 
                         //GUARDA O RESULTADO ATUAL
-                        mysqli_stmt_bind_result($stmt,$tabela);
+                        mysqli_stmt_bind_result($stmt, $tabela);
 
                         //FAZ FETCH DOS DADOS
-                        while(mysqli_stmt_fetch($stmt)) {
+                        while (mysqli_stmt_fetch($stmt)) {
 
                             //SE A TABELA FOR UMA DAS QUE DEVE APARECER
-                            if(!in_array($tabela, $unnecessary_table)) {
+                            if (!in_array($tabela, $unnecessary_table)) {
 
                                 //ESCREVE OS DADOS NA PÁGINA
-                                echo'<a class="collapse-item" href="tables.php?table='.$tabela.'">'.$tabela.'</a>';
+                                echo '<a class="collapse-item" href="tables.php?table=' . $tabela . '">' . $tabela . '</a>';
                             }
-
                         }
                     }
                     //SE DER ERRO NA EXECUÇÃO DE UM STATEMENT
@@ -86,9 +84,7 @@ $local_link = new_db_connection();
 
                         //VAI PARA A PÁGINA DE ERROS
                         header("Location:errors.php?error=execute");
-
                     }
-
                 }
                 //SE HOUVER ERRO NA PREPARAÇÃO DO STATEMENT
                 else {
