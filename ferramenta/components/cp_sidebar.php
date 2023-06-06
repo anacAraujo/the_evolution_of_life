@@ -51,7 +51,7 @@ $local_link = new_db_connection();
                 <?php
 
                 //ARRAY DE TABLEAS QUE NÃO DEVE SER ESCRITO
-                $unnecessary_table=array("land","market_offers", "microorganism_usage","planets","used_formulas_planet");
+                $unnecessary_table=array("land","market_offers", "microorganism_usage","planets","used_formulas_planet", "planets_items_inventory", "planets_land_items");
 
                 //VAI BUSCAR AS TABELAS
                 //COMEÇA O STATEMENT
