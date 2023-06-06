@@ -106,7 +106,7 @@ mysqli_stmt_close($stmt_itemNum);
 $stmt_progress = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_progress = "SELECT (COUNT(CASE WHEN progress = 100 THEN 1 END) / COUNT(*) * 100) AS percentage
+$query_progress = "SELECT ROUND((COUNT(CASE WHEN progress = 100 THEN 1 END) / COUNT(*) * 100)) AS percentage
 FROM planets
 INNER JOIN users ON users.id = planets.user_id
 WHERE users.active = 1;";
