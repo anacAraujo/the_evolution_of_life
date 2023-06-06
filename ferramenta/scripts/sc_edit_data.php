@@ -424,4 +424,3 @@ else {
 
 }
 mysqli_close($local_link);
-?>

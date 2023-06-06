@@ -68,7 +68,3 @@ else {
     header("Location:../errors.php?error=noData");
 
 }
-
-
-?>
-

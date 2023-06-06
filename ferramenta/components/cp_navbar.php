@@ -14,7 +14,6 @@ $admin = 0;
 if (isset($_SESSION["id_user"])) {
 
     $user_id = $_SESSION["id_user"];
-
 }
 //GUARDA  O PERFIL
 if (isset($_SESSION['profile_id']) && $_SESSION['profile_id'] == 1) {
@@ -51,7 +50,6 @@ if (mysqli_stmt_prepare($stmt, $query)) {
         //VAI PARA A PÁGINA DE ERROS
         header("Location:errors.php?error=execute");
     }
-
 } //SE DER ERRO
 else {
     //VAI PARA A PÁGINA DE ERROS
@@ -73,8 +71,7 @@ else {
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <?php
                 //SE A VARIÁVEL ESTIVER DEFINIDA
                 if (isset($username) && $username != "") {
@@ -151,4 +148,3 @@ else {
 
 <!-- Page level custom scripts -->
 <script src="./js/demo/chart-area-demo.js"></script>
-

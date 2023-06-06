@@ -87,5 +87,3 @@ if(isset($_POST['pssw']) && $_POST['pssw']!="" && isset($_POST['pssw_repeat']) &
     }
 
 }
-
-?>

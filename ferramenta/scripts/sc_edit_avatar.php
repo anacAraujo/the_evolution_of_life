@@ -64,5 +64,3 @@ else {
     //VAI PARA A PÁGINA DE ERROS
     header("Location:../errors.php?error=prepare");
 }
-
-?>

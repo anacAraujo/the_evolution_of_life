@@ -42,7 +42,6 @@ if (isset($_POST["Username"]) && isset($_POST["Password"])) {
                     // Feedback de sucesso
                     //VOLTA PARA INDEX
                     header("Location:../index.php");
-
                 } else {
 
                     // Password está errada
@@ -57,14 +56,11 @@ if (isset($_POST["Username"]) && isset($_POST["Password"])) {
 
             // Acção de erro
             header("Location:../login.php");
-
         }
     } else {
 
         // Acção de erro
         header("Location:../login.php");
-
-
     }
 
     //FECHA O STATEMENT E A LIGAÇÃO

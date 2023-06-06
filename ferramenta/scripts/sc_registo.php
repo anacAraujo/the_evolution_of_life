@@ -13,11 +13,10 @@ if (isset($_POST["Username"]) && isset($_POST["Password"]) && isset($_POST["Repe
     $password_repeat_hash = password_hash($password_repeat, PASSWORD_DEFAULT);
 
     //COMPARA AS PASSWORDS
-    if (password_verify($password_hash,$password_repeat_hash)) {
+    if (password_verify($password_hash, $password_repeat_hash)) {
 
         //VAI PARA REGISTO COM INDICAÇÃO
         header("Location:../register.php?psswd=noMatch");
-
     } //SE CORRESPONDEREM
     else {
 
@@ -51,7 +50,6 @@ if (isset($_POST["Username"]) && isset($_POST["Password"]) && isset($_POST["Repe
 
                 //SE EXISTIREM
                 header("Location:../register.php?error=registered");
-
             } else {
 
                 if (mysqli_stmt_prepare($stmt, $query_insert)) {
@@ -64,7 +62,6 @@ if (isset($_POST["Username"]) && isset($_POST["Password"]) && isset($_POST["Repe
 
                         // Acção de sucesso
                         header("Location:../login.php");
-
                     } else {
 
                         // Acção de erro
@@ -85,9 +82,5 @@ if (isset($_POST["Username"]) && isset($_POST["Password"]) && isset($_POST["Repe
 
             echo "<script>alert('O registo não foi bem sucedido! Tente novamente.');</script>";
         }
-
     }
 }
-
-
-
