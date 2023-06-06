@@ -60,7 +60,7 @@ mysqli_stmt_close($stmt_userNum);
 $stmt_itemNum = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_itemNum = "SELECT COUNT(id) FROM items ";
+$query_itemNum = "SELECT COUNT(id) FROM users WHERE MONTH(users.date) = MONTH(CURRENT_DATE()); ";
 
 //PREPARA O STATEMENT
 if (mysqli_stmt_prepare($stmt_itemNum, $query_itemNum)) {
@@ -106,7 +106,10 @@ mysqli_stmt_close($stmt_itemNum);
 $stmt_progress = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_progress = "SELECT AVG(progress) FROM planets ";
+$query_progress = "SELECT (COUNT(CASE WHEN progress = 100 THEN 1 END) / COUNT(*) * 100) AS percentage
+FROM planets
+INNER JOIN users ON users.id = planets.user_id
+WHERE users.active = 1;";
 
 //PREPARA O STATEMENT
 if (mysqli_stmt_prepare($stmt_progress, $query_progress)) {
@@ -152,7 +155,9 @@ mysqli_stmt_close($stmt_progress);
 $stmt_market = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query_market = "SELECT COUNT(id) FROM market_offers ";
+$query_market = "SELECT COUNT(id) FROM market_offers
+WHERE MONTH(date) = MONTH(CURRENT_DATE())
+AND YEAR(date) = YEAR(CURRENT_DATE()); ";
 
 //PREPARA O STATEMENT
 if (mysqli_stmt_prepare($stmt_market, $query_market)) {
@@ -288,7 +293,7 @@ mysqli_close($local_link);
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Resumo</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Resumo deste mês</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -321,7 +326,7 @@ mysqli_close($local_link);
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Itens</div>
+                                                Novos Registos</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $write_value2 ?></div>
                                         </div>
                                         <div class="col-auto">
@@ -338,7 +343,7 @@ mysqli_close($local_link);
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Média Progresso
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Users ativos com Jogo Concluido
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
