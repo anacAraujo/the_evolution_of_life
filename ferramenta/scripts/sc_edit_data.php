@@ -8,26 +8,412 @@ include_once "../connections/connection.php";
 // Create a new DB connection
 $local_link = new_db_connection();
 
-//SE O POST TROUXER ALGUMA COISA COM ID
-foreach ($_POST as $key => $valor) {
-
-    //SE CONTIVER A PALAVRA ID NA CHAVE
-    if (strpos($key, 'formula_id') !== false || strpos($key, 'item_id') !== false || strpos($key, 'planets_user_id') !== false || strpos($key, 'land_id') !== false || strpos($key, 'user_id') !== false) {
-
-        //ID VINDO DO POST
-        $id_post=$key;
-        break;
-
-
-    }
-}
 
 //SE NO SESSION ESTIVER O A TABELA, COLUNA E ID
-if (isset($_SESSION['table']) && $_SESSION['table'] != "" && isset($_SESSION['id']) && $_SESSION['id'] != "") {
+if (isset($_GET['table']) && $_GET['table'] != "" && isset($_SESSION['id']) && $_SESSION['id'] != "") {
 
     //GUARDA NAS VARIÁVEIS
-    $table = $_SESSION['table'];
+    $table = $_GET['table'];
     $id = $_SESSION['id'];
+
+    //VÊ QUE TABELA VAIS ATUALIZAR
+    //SE FOR AVATARS
+    if($table=="avatars") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && isset($_POST['path']) && $_POST['path'] !="") {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $avatar_id=htmlspecialchars($_POST['id']);
+            $avatar_path=htmlspecialchars($_POST['path']);
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA AVATARES
+            $stmt_change_avatars=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_avatars="UPDATE avatars SET path=? WHERE id=$avatar_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_avatars,$query_change_avatars)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_avatars,'s',$avatar_path);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_avatars)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_avatars);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+
+
+
+        }
+        else {
+            //VAI PARA A PÁGINA DE ERROS
+            header("Location:../errors.php?error=noData");
+        }
+    }
+    //SE A TABELA FOR FORMULAS
+    else if($table=="formulas") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && (isset($_POST['formula_location_id']) && $_POST['formula_location_id'] !="") && (isset($_POST['name']) && $_POST['name'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $formula_id=htmlspecialchars($_POST['id']);
+            $formula_location_id=htmlspecialchars($_POST['formula_location_id']);
+            $formula_name=htmlspecialchars($_POST['name']);
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA FORMULAS
+            $stmt_change_formulas=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_formulas="UPDATE formulas SET formula_location_id=?,name=? WHERE id=$formula_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_formulas,$query_change_formulas)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_formulas,'is',$formula_location_id,$formula_name);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_formulas)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_formulas);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+
+
+
+        }
+        else {
+            //VAI PARA A PÁGINA DE ERROS
+            header("Location:../errors.php?error=noData");
+        }
+
+    }
+    //SE A TABELA FOR FORMULAS_ITENS
+    else if($table=="formula_itens") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['formula_id']) && $_POST['formula_id']!="") && (isset($_POST['items_id']) && $_POST['items_id'] !="") && (isset($_POST['qty']) && $_POST['qty'] !="") && (isset($_POST['side']) && $_POST['side'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $formula_id=htmlspecialchars($_POST['formula_id']);
+            $formula_itens_items_id=htmlspecialchars($_POST['items_id']);
+            $formula_itens_qty=htmlspecialchars($_POST['qty']);
+            $formula_itens_side=htmlspecialchars($_POST['side']);
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA FORMULA_ITENS
+            $stmt_change_formula_itens=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_formula_itens="UPDATE formula_itens SET qty=?,side=? WHERE formula_id=$formula_id AND items_id=$formula_itens_items_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_formula_itens,$query_change_formula_itens)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_formula_itens,'ii',$formula_itens_qty,$formula_itens_side);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_formula_itens)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_formula_itens);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
+    //SE A TABELA FOR FORMULAS_LOCATION
+    else if($table=="formula_location") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && (isset($_POST['name']) && $_POST['name'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $formula_location_id=htmlspecialchars($_POST['id']);
+            $formula_location_name=htmlspecialchars($_POST['name']);
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA FORMULA LOCATION
+            $stmt_change_formula_location=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_formula_location="UPDATE formula_location SET name=? WHERE id=$formula_location_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_formula_location,$query_change_formula_location)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_formula_location,'s',$formula_location_name);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_formula_location)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_formula_location);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
+    //SE A TABELA FOR ITEMS
+    else if($table=="items") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && (isset($_POST['name']) && $_POST['name'] !="") && (isset($_POST['symbol']) && $_POST['symbol'] !="") && (isset($_POST['goal']) && $_POST['goal'] !="") && (isset($_POST['qnt_elements_default']) && $_POST['qnt_elements_default'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $items_id=htmlspecialchars($_POST['id']);
+            $items_name=htmlspecialchars($_POST['name']);
+            $items_symbol=htmlspecialchars($_POST['symbol']);
+            $items_goal=htmlspecialchars($_POST['goal']);
+            $items_qnt_elements_default=htmlspecialchars($_POST['qnt_elements_default']);
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA ITEMS
+            $stmt_change_items=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_items="UPDATE items SET name=?, symbol=?, goal=?, qnt_elements_default=? WHERE id=$items_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_items,$query_change_items)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_items,'sssi',$items_name,$items_symbol,$items_goal,$items_qnt_elements_default);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_items)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_items);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
+    //SE A TABELA FOR microorganism_settings
+    else if($table=="microorganism_settings") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && (isset($_POST['max_usage']) && $_POST['max_usage'] !="") && (isset($_POST['break_duration']) && $_POST['break_duration'] !="") && (isset($_POST['perc_progress']) && $_POST['perc_progress'] !="") ) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $microorganism_settings_id=htmlspecialchars($_POST['id']);
+            $microorganism_settings_max_usage=htmlspecialchars($_POST['max_usage']);
+            $microorganism_settings_break_duration=htmlspecialchars($_POST['break_duration']);
+            $microorganism_settings_perc_progress=htmlspecialchars($_POST['perc_progress']);
+
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA microorganism_settings
+            $stmt_change_microorganism_settings=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_microorganism_settings="UPDATE microorganism_settings SET max_usage=?, break_duration=?, perc_progress=? WHERE id=$microorganism_settings_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_microorganism_settings,$query_change_microorganism_settings)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_microorganism_settings,'iii',$microorganism_settings_max_usage,$microorganism_settings_break_duration,$microorganism_settings_perc_progress);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_microorganism_settings)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_microorganism_settings);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
+    //SE A TABELA FOR profiles
+    else if($table=="profiles") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="") && (isset($_POST['type']) && $_POST['type'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $profiles_id=htmlspecialchars($_POST['id']);
+            $profiles_type=htmlspecialchars($_POST['type']);
+
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA profiles
+            $stmt_change_profiles=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_profiles="UPDATE profiles SET type=? WHERE id=$profiles_id";
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_profiles,$query_change_profiles)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_profiles,'s',$profiles_type);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_profiles)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_profiles);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
+    //SE A TABELA FOR users
+    else if($table=="users") {
+
+        //PROCURA NO POST OS VALORES QUE PODEM ENTRAR NESSA TABELA
+        if((isset($_POST['id']) && $_POST['id']!="")  && (isset($_POST['avatar_id']) && $_POST['avatar_id'] !="") && (isset($_POST['profiles_id']) && $_POST['profiles_id'] !="") && (isset($_POST['active']) && $_POST['active'] !="") && (isset($_POST['last_login']) && $_POST['last_login'] !="")) {
+
+            //GUARDA NAS VARIÁVEIS ESSES VALORES
+            $users_id=htmlspecialchars($_POST['id']);
+            $users_avatar_id=htmlspecialchars($_POST['avatar_id']);
+            $users_profiles_id=htmlspecialchars($_POST['profiles_id']);
+            $users_active=htmlspecialchars($_POST['active']);
+            $users_last_login=htmlspecialchars($_POST['last_login']);
+
+
+            //INICIA O STATEMENT QUE ALTERA A TABELA profiles
+            $stmt_change_users=mysqli_stmt_init($local_link);
+
+            //DEFINE A QUERY DE ALTERAÇÃO PERMITADA || EVITA O ID
+            $query_change_users="UPDATE users SET avatar_id=?, profiles_id=?,active=? WHERE id=$users_id";
+
+            echo $query_change_users;
+
+            //PREPARA ESSE STATEMENT
+            if(mysqli_stmt_prepare($stmt_change_users,$query_change_users)) {
+
+                //DÁ BIND DOS PARÂMETROS
+                mysqli_stmt_bind_param($stmt_change_users,'iii',$users_avatar_id,$users_profiles_id,$users_active);
+
+                //EXECUTA O STATEMENT
+                if(!mysqli_stmt_execute($stmt_change_users)) {
+
+                    //VAI PARA A PÁGINA DE ERROS
+                    header("Location:../errors.php?error=execute");
+
+                }
+                else {
+
+                    //SUCESSO
+                    header("Location:../tables.php?table=$table&action=edited");
+                }
+                //FECHA O STATEMENT
+                mysqli_stmt_close($stmt_change_users);
+            }
+            //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+            else {
+                //VAI PARA A PÁGINA DE ERROS
+                header("Location:../errors.php?error=prepare");
+            }
+
+        }
+
+    }
 
 
 } //SENÃO VAI PARA A PÁGINA DE ERRO
@@ -36,211 +422,6 @@ else {
     //VAI PARA A PÁGINA DE ERROS
     header("Location:../errors.php?error=noData");
 
-
 }
-
-//VAI BUSCAR OS DADOS DA COLUNA QUE PRECISAS E GUARDA NUM ARRAY
-//INICIA O STATEMENT
-$stmt_results = mysqli_stmt_init($local_link);
-
-//FAZ TUDO ISTO
-$query_table = "SELECT * FROM " . $table;
-
-//PREPARA O STATEMENT
-if (mysqli_stmt_prepare($stmt_results, $query_table)) {
-
-    //EXECUTA O STATEMENT
-    if (mysqli_stmt_execute($stmt_results)) {
-
-        //GUARDA O NÚMERO DE LINHAS
-        $linhas_resultado = mysqli_stmt_store_result($stmt_results);
-
-        //FUNÇÃO QUE POSSIBILITA SABER O NUMERO DE COLUNAS
-        $colunas = mysqli_stmt_result_metadata($stmt_results);
-
-        //PROCURA O NÚMERO DE COLUNAS
-        $colunas_valor = mysqli_num_fields($colunas);
-
-        //DECLARA O NÚMERO DE VARIÁVEIS QUE VAI PRECISAR PARA OS RESULTADOS
-        $num_vars_ = $colunas_valor;
-
-        //CRIA O ARRAY QUE VAI GUARDAR ESSES DADOS
-        $results = array();
-
-        //CRIA ESSAS VARIÁVEIS E DEIXA AS VAZIAS
-        for ($i = 0; $i < $num_vars_; $i++) {
-            ${"var" . $i} = "";
-
-            //INSERE PARA O ARRAY A VARIÁVEL ATUAL
-            $results[$i] = ${"var" . $i};
-        }
-
-        //DÁ BIND DOS RESULTADOS DA QUERY, MAS VAI DANDO UNPACK
-        mysqli_stmt_bind_result($stmt_results, ...$results);
-
-        mysqli_stmt_fetch($stmt_results);
-        mysqli_stmt_close($stmt_results);
-
-
-    } //SE DER ERRO NA EXECUÇÃO DE UM STATEMENT
-    else {
-
-        //VAI PARA A PÁGINA DE ERROS
-        header("Location:errors.php?error=execute");
-    }
-
-} //SE HOUVER ERRO NA PREPARAÇÃO DO STATEMENT
-else {
-
-    //VAI PARA A PÁGINA DE ERROS
-    header("Location:errors.php?error=prepare");
-}
-
-//PEGA NA TABELA E VAI BUSCAR TODAS AS SUAS COLUNAS
-$stmt_columns = mysqli_stmt_init($local_link);
-
-//QUERY
-$query_columns = "SELECT * FROM " . $table . " LIMIT 0";
-
-//PREPARA O STATEMENT
-if (mysqli_stmt_prepare($stmt_columns, $query_columns)) {
-
-    //EXECUTA O STATEMENT
-    if (mysqli_stmt_execute($stmt_columns)) {
-
-        //VAI BUSCAR OS METADADOS PARA CONSEGUIRES ESCREVER OS NOMES DE CAMPOS
-        $metadados = mysqli_stmt_result_metadata($stmt_columns);
-
-        //FAZ UM ARRAY PARA GUARDAR OS NOMES
-        $nomes_colunas = array();
-
-        //USA OS METADADOS QUE GUARDASTER E VAI BUSCAR OS NOMES DOS CAMPOS
-        while ($campo = mysqli_fetch_field($metadados)) {
-
-            //MANDA PRO ARRAY
-            $nomes_colunas[] = $campo;
-        }
-
-        mysqli_stmt_close($stmt_columns);
-
-        //VÊ SE O ARRAY QUE RETORNA DO POST TEM ALGUMA COISA IGUAL A UMA COLUNA
-        $dados_post = $_POST;
-
-        //REORGANIZA O ARRAY DOS DADOS QUE A PESSOA METEU
-        $dados_post_reorganizado = array();
-
-        //PERCORRE O ARRAY
-        foreach ($dados_post as $chave => $valor) {
-
-            //COLOCA NA CHAVE A INFO PARA COMPARAR
-            $dados_post_reorganizado[$chave] = $valor;
-        }
-
-        //echo "<pre>" . print_r($dados_post_reorganizado, true) . "</pre>";
-
-        //echo "<pre>" . print_r($nomes_colunas, true) . "</pre>";
-
-        //PERCORRE O ARRAY QUE TEM OS NOMES DAS COLUNAS
-        foreach ($nomes_colunas as $cols) {
-
-            //GUARDA O NOME
-            $nomes_coluna = $cols->name;
-
-            //VÊ SE O NOME DA COLUNA QUE ESTÁS A PERCORRER EXISTE DENTRO DO ARRAY QUE FOI REORGANIZADO
-            if (isset($dados_post_reorganizado[$nomes_coluna])) {
-
-                //VALOR INTRODUZIDO
-                $valor_post = $dados_post_reorganizado[$nomes_coluna];
-
-                //PERCORRE O ARRAY PARA ENCONTRAR O VALOR ATUAL DA COLUNA
-                foreach ($results as $key => $dados) {
-
-
-                    //GUARDA O VALOR ATUAL DA COLUNA EM QUESTÃO
-                    $current_value = $dados;
-
-
-
-                    //COMPARA O VALOR QUE O USER COLOCOU NO POST COM O VALOR QUE A COLUNA TEM ATUALMENTE
-                    if (!empty($valor_post) && $valor_post != $current_value) {
-
-                        echo "$valor_post<hr>$current_value";
-
-                        //SE A VARIÁVEL DO VALOR POST ESTIVER DEFINIDA
-                        if (isset($valor_post) && $valor_post != "") {
-
-                            //SE TIVER DADOS GUARDA NA VARIÁVEL O NOME DA COLUNA QUE VAIS PRECISAR PARA A QUERY
-                            $col_update = $nomes_coluna;
-
-                            //SE NO POSTO VIER A INFORMAÇÃO DOS CAMPOS OBRIGATÓRIOS
-                            if (isset($_POST[$col_update]) && $_POST[$col_update] != "") {
-
-                                //VALOR QUE O UTILIZADOR INTRODUZIU
-                                //GUARDA O DADO
-                                $dado = htmlspecialchars($_POST[$col_update]);
-
-                                //INICIA O STATEMENT
-                                $stmt_update = mysqli_stmt_init($local_link);
-
-                                //DEFINE A QUERY
-                                $query_update = "UPDATE $table SET $col_update = ? WHERE $id_post=?";
-
-                                //echo $col_update;
-
-                                echo $query_update;
-
-                                //PREPARA O STATEMENT
-                                if (mysqli_stmt_prepare($stmt_update, $query_update)) {
-
-                                    //DÁ BIND DOS PARÂMETROS
-                                    mysqli_stmt_bind_param($stmt_update, 'si', $dado, $id);
-
-                                    //EXECUTA O STATEMENT
-                                    if (mysqli_stmt_execute($stmt_update)) {
-
-                                        //SUCESSO
-                                        header("Location:../tables.php?table=$table&action=edited");
-                                    } //ERRO NA EXECUÇÃO
-                                    else {
-                                        //VAI PARA A PÁGINA DE ERROS
-                                        header("Location:../tables.php?table=$table&action=notEdited");
-                                    }
-                                } //SE DER ERRO A PREPARAR O STATEMENT
-                                else {
-                                    //VAI PARA A PÁGINA DE ERROS
-                                    header("Location:../errors.php?error=prepare");
-                                }
-                            } //SE NÃO ESTIVER
-                            else {
-                                //VAI PARA A PÁGINA DE ERROS
-                                header("Location:../errors.php?error=noData");
-                            }
-
-                            //FECHA OS STATEMENTS E A LIGAÇÃO
-                            mysqli_stmt_close($stmt_update);
-
-
-                        }
-
-                    }
-
-                }
-            }
-        }
-
-
-    } //SE DER ERRO A EXECUTAR O STATEMENT
-    else {
-        //VAI PARA A PÁGINA DE ERROS
-        header("Location:../errors.php?error=execute");
-    }
-
-
-} //SE DER ERRO A PREPARAR O STATEMENT
-else {
-    //VAI PARA A PÁGINA DE ERROS
-    header("Location:../errors.php?error=prepare");
-}
-
 mysqli_close($local_link);
 ?>
