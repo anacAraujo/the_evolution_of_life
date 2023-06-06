@@ -35,7 +35,7 @@ if (isset($_GET['action']) && $_GET['action'] != "") {
 
     } //SE NÃO ESTIVEREM
     else {
-        //header("Location:./errors.php?error=noData");
+        header("Location:./errors.php?error=noData");
 
     }
 
@@ -223,7 +223,7 @@ else {
                         .
                     </p>
                 </div>
-                <form method='post' action='./scripts/sc_edit_data.php'>
+                <form method='post' action='./scripts/sc_edit_data.php?table=$tabela_query'>
                     <div class='form-row mb-5'>
                         <div class='col-12 mb-4 mt-4'>";
 
@@ -266,42 +266,184 @@ else {
                     } //SENÃO SE FOR A TABLE FORMULA_ITENS
                     else if (($tabela_query == "formula_itens")) {
 
-                        if ($nome == "formula_id") {
+                        //VAI BUSCAR OS DADOS CORRETOS
+                        if(isset($_GET['item_id']) && $_GET['item_id'] !="" ) {
 
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
+                            $item_id_PK= $_GET['item_id'];
+
+                            //inicia o statement
+                            $stmt_formulas_itens=mysqli_stmt_init($local_link);
+
+                            //DEFINE A QUERY
+                            $query_formulas_itens="SELECT formulas.name, items.name,formula_itens.qty,formula_itens.side FROM formula_itens INNER JOIN formulas ON formula_id=formulas.id INNER JOIN items ON items_id=items.id WHERE formula_id=$id AND items_id=$item_id_PK ";
+
+
+
+                            //PREPARA O STATEMENT
+                            if(mysqli_stmt_prepare($stmt_formulas_itens,$query_formulas_itens)) {
+
+                                //DÁ BIND DOS RESULTADOS
+                                mysqli_stmt_bind_result($stmt_formulas_itens,$nome_formula_items,$nome_item_formulas_itens,$qty, $side);
+
+                                //EXECUTA O STATEMENT
+                                if(mysqli_stmt_execute($stmt_formulas_itens)) {
+
+                                    //GUARDA OS RESULTADOS
+                                    mysqli_stmt_store_result($stmt_formulas_itens);
+
+                                }
+                                //SE DER ERRO NA EXECUÇÃO DO STATEMENT
+                                else {
+                                    //VAI PARA ERRO
+                                    //VAI PARA A PÁGINA DE ERROS
+                                    header("Location:../errors.php?error=execute");
+                                }
+                            }
+                            //SE DER ERRO NA PREPARAÇÃO
+                            else {
+                                //VAI PARA ERRO
+                                //VAI PARA A PÁGINA DE ERROS
+                                header("Location:../errors.php?error=prepare");
+                            }
+                            //ESCREVE OS CAMPOS
+                            if ($nome == "formula_id") {
+
+                                    //PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
+                                    $stmt_formula_id = mysqli_stmt_init($local_link);
+
+                                    //DEFINE A QUERY QUE PRECISAS
+                                    $query_formula_id = "SELECT formulas.name,formula_id FROM formula_itens INNER JOIN formulas ON formula_id= formulas.id ";
+
+                                    //PREPARA O STATEMENT
+                                    if (mysqli_stmt_prepare($stmt_formula_id, $query_formula_id)) {
+
+                                        $nome_formula = "";
+                                        $formula_id = "";
+
+                                        //DÁ BIND DOS RESULTADOS AO ARRAY
+                                        mysqli_stmt_bind_result($stmt_formula_id, $nome_formula, $formula_id);
+
+                                        //EXECUTA O STATEMENT
+                                        if (mysqli_stmt_execute($stmt_formula_id)) {
+
+                                            //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
+                                            echo "<div class='col-12 mb-4 mt-4'>
+                                               <label class='text-uppercase font-weight-bolder'>Fórmula</label><br>";
+
+                                            //ABRE O MENU DE SELEÇÃO
+                                            echo "<select name='$nome' class='form-control form-control-sm'>";
+
+                                            while (mysqli_stmt_fetch($stmt_formula_id)) {
+
+                                                //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
+                                                echo "
+                                            <option class='ml-1'  value='$formula_id' style='transform: scale(130%); '> <n class='ml-2 pl-3'>$nome_formula</n><br>";
+                                            }
+                                            //FECHA A SECÇÃO
+                                            echo "</select>
+                                            </div>";
+
+                                            //FECHA O STATEMENT
+                                            mysqli_stmt_close($stmt_formula_id);
+                                        }
+
+
+                                    }
+                            }
+
+                            else if($nome=="items_id") {
+                                //PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
+                                $stmt_nome_item_atmosfera = mysqli_stmt_init($local_link);
+
+                                //DEFINE A QUERY QUE PRECISAS
+                                $query_nome_item_atmosfera = "SELECT id,name FROM items";
+
+                                //PREPARA O STATEMENT
+                                if (mysqli_stmt_prepare($stmt_nome_item_atmosfera, $query_nome_item_atmosfera)) {
+
+                                    $results_nome_item_atmosfera = "";
+                                    $id_nome_item_atmosfera = "";
+
+                                    //DÁ BIND DOS RESULTADOS AO ARRAY
+                                    mysqli_stmt_bind_result($stmt_nome_item_atmosfera, $id_nome_item_atmosfera, $results_nome_item_atmosfera);
+
+                                    //EXECUTA O STATEMENT
+                                    if (mysqli_stmt_execute($stmt_nome_item_atmosfera)) {
+
+                                        //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
+                                        echo "<div class='col-12 mb-4 mt-4'>
+                                               <label class='text-uppercase font-weight-bolder'>Nome do Elemento</label><br>";
+
+                                        //ABRE O MENU DE SELEÇÃO
+                                        echo "<select name='$nome' class='form-control form-control-sm'>";
+                                        while (mysqli_stmt_fetch($stmt_nome_item_atmosfera)) {
+
+                                            //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
+                                            echo "
+                                            <option class='ml-1'  value='$id_nome_item_atmosfera' style='transform: scale(130%); '> <n class='ml-2 pl-3'>$results_nome_item_atmosfera</n><br>";
+                                        }
+                                        //FECHA A SECÇÃO
+                                        echo "</select>
+                                            </div>";
+
+                                        //FECHA O STATEMENT
+                                        mysqli_stmt_close($stmt_nome_item_atmosfera);
+
+                                    } //SE DER ERRO NA EXECUÇÃO DO STATEMENT
+                                    else {
+                                        //VAI PARA A PÁGINA DE ERROS
+                                        header("Location:errors.php?error=execute");
+                                    }
+
+                                } //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
+                                else {
+                                    //VAI PARA A PÁGINA DE ERROS
+                                    header("Location:errors.php?error=prepare");
+                                }
+                            }
+                            else {
+                                //CONTINUA A PERCORRER O ARRAY
+                                for ($fields = 1; $fields < $num_nomes; $fields++) {
+
+                                    $i++;
+                                    //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
+                                    $nome = $nomes_colunas[$fields]->name;
+
+                                    if($nome=="qty") {
+
+                                        //FAZ FETCH DOS DADOS
+                                        if(!mysqli_stmt_fetch($stmt_formulas_itens)) {
+
+                                            //VAI PARA ERRO
+                                            //VAI PARA A PÁGINA DE ERROS
+                                            header("Location:../errors.php?error=fetch");
+                                        }
+
+                                        //fecha o statement
+                                        mysqli_stmt_close($stmt_formulas_itens);
+
+                                        //ESCREVE
+                                        //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
+                                        echo "<div class='col-12 mb-4 mt-4'>
                                             <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
+                                            <input type='text' class='form-control shadow' value=$qty name='$nome' >
                                            </div>";
-                        }
-
-                        //CONTINUA A PERCORRER O ARRAY
-                        for ($fields = 1; $fields < $num_nomes; $fields++) {
-
-                            $i++;
-                            //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
-                            $nome = $nomes_colunas[$fields]->name;
-
-                            //ESCONDE OS CAMPOS INALTRÁVEIS
-                            if ($nome == "items_id") {
-
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
+                                    }
+                                    else if($nome=="side") {
+                                        //ESCREVE
+                                        //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
+                                        echo "<div class='col-12 mb-4 mt-4'>
                                             <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
+                                            <input type='text' class='form-control shadow' value=$side name='$nome' >
                                            </div>";
-                            } else {
+                                    }
 
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow ' value=$results[$fields] name='$nome'>
-                                           </div>";
+
+
+                                }
                             }
                         }
+
                     } else if ($tabela_query == "formula_location") {
 
                         if ($nome == "id") {
@@ -437,131 +579,7 @@ else {
                             }
                         }
 
-                    } //SENÃO SE FOR A TABLE PLANETS
-                    else if (($tabela_query == "planets_items_inventory")) {
-
-                        //NÃO PERMITAS EDITAR
-                        if ($nome == "planets_user_id") {
-
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
-                                           </div>";
-
-                        } else if ($nome == "item_id") {
-
-                            //PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
-                            $stmt_nome_item_atmosfera = mysqli_stmt_init($local_link);
-
-                            //DEFINE A QUERY QUE PRECISAS
-                            $query_nome_item_atmosfera = "SELECT id,name FROM items";
-
-                            //PREPARA O STATEMENT
-                            if (mysqli_stmt_prepare($stmt_nome_item_atmosfera, $query_nome_item_atmosfera)) {
-
-                                $results_nome_item_atmosfera = "";
-                                $id_nome_item_atmosfera = "";
-
-                                //DÁ BIND DOS RESULTADOS AO ARRAY
-                                mysqli_stmt_bind_result($stmt_nome_item_atmosfera, $id_nome_item_atmosfera, $results_nome_item_atmosfera);
-
-                                //EXECUTA O STATEMENT
-                                if (mysqli_stmt_execute($stmt_nome_item_atmosfera)) {
-
-                                    //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
-                                    echo "<div class='col-12 mb-4 mt-4'>
-                                               <label class='text-uppercase font-weight-bolder'>Nome do Elemento</label><br>";
-
-                                    //ABRE O MENU DE SELEÇÃO
-                                    echo "<select name='$nome' class='form-control form-control-sm'>";
-                                    while (mysqli_stmt_fetch($stmt_nome_item_atmosfera)) {
-
-                                        //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
-                                        echo "
-                                            <option class='ml-1'  value='$id_nome_item_atmosfera' style='transform: scale(130%); '> <n class='ml-2 pl-3'>$results_nome_item_atmosfera</n><br>";
-                                    }
-                                    //FECHA A SECÇÃO
-                                    echo "</select>
-                                            </div>";
-
-                                    //FECHA O STATEMENT
-                                    mysqli_stmt_close($stmt_nome_item_atmosfera);
-
-                                } //SE DER ERRO NA EXECUÇÃO DO STATEMENT
-                                else {
-                                    //VAI PARA A PÁGINA DE ERROS
-                                    header("Location:errors.php?error=execute");
-                                }
-
-                            } //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
-                            else {
-                                //VAI PARA A PÁGINA DE ERROS
-                                header("Location:errors.php?error=prepare");
-                            }
-
-                        } else {
-                            //CONTINUA A PERCORRER O ARRAY
-                            for ($fields = 2; $fields < $num_nomes; $fields++) {
-                                $i++;
-
-                                //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
-                                $nome = $nomes_colunas[$fields]->name;
-
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow ' value=$results[$fields] name='$nome'>
-                                           </div>";
-                            }
-
-                        }
-
-
-                    } //SENÃO SE FOR A TABLE PLANETS_LAND ITEMS
-                    else if (($tabela_query == "planets_land_items")) {
-
-                        if ($nome == "item_id") {
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
-                                           </div>";
-                        } else if ($nome == "user_id") {
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
-                                           </div>";
-                        } else if ($nome == "land_id") {
-
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
-                                           </div>";
-                        } else {
-                            //CONTINUA A PERCORRER O ARRAY
-                            for ($fields = 3; $fields < $num_nomes; $fields++) {
-                                $i++;
-
-                                //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
-                                $nome = $nomes_colunas[$fields]->name;
-
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow ' value=$results[$fields] name='$nome'>
-                                           </div>";
-                            }
-                        }
-                    } //SENÃO SE FOR A TABLE USERS
+                    }  //SENÃO SE FOR A TABLE USERS
                     else if (($tabela_query == "users")) {
 
                         if ($nome != "pwd_hash") {
@@ -694,7 +712,6 @@ else {
                                            </div>";
                             }
 
-
                             else if($nome=="active"){
 
                                 //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
@@ -709,6 +726,14 @@ else {
                                 //FECHA A SECÇÃO
                                 echo "</select>
                                             </div>";
+                            }
+                            else if($nome=="last_login") {
+
+                                echo "<div class='col-12 mb-4 mt-4'>
+                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
+                                            <input type='text' class='form-control shadow bg-gray-400' value=$results[$i] name='$nome' readonly>
+                                           </div>";
+
                             }
 
                         }
@@ -735,7 +760,7 @@ else {
                         <n class='font-weight-bolder'>$tabela_query</n>.
                     </p>
                 </div>
-                <form method='post' action='./scripts/sc_add_data.php'>
+                <form method='post' action='./scripts/sc_add_data.php?table=$tabela_query'>
                     <div class='form-row mb-5'>
                         <div class='col-12 mb-4 mt-4'>";
 
@@ -1026,164 +1051,7 @@ else {
                             }
                         }
 
-                    } //SENÃO SE FOR A TABLE PLANETS
-                    else if (($tabela_query == "planets_items_inventory")) {
-
-                        //NÃO PERMITAS EDITAR
-                        if ($nome == "planets_user_id") {
-
-                            //PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
-                            $stmt_planets_id = mysqli_stmt_init($local_link);
-
-                            //DEFINE A QUERY QUE PRECISAS
-                            $query_planets_id = "SELECT planets.name,user_id FROM planets";
-
-                            //PREPARA O STATEMENT
-                            if (mysqli_stmt_prepare($stmt_planets_id, $query_planets_id)) {
-
-                                $nome_planeta = "";
-                                $id_planeta = "";
-
-                                //DÁ BIND DOS RESULTADOS AO ARRAY
-                                mysqli_stmt_bind_result($stmt_planets_id, $nome_planeta, $id_planeta);
-
-                                //EXECUTA O STATEMENT
-                                if (mysqli_stmt_execute($stmt_planets_id)) {
-
-                                    //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
-                                    echo "<div class='col-12 mb-4 mt-4'>
-                                               <label class='text-uppercase font-weight-bolder'>Planeta</label><br>";
-
-                                    //ABRE O MENU DE SELEÇÃO
-                                    echo "<select name='$nome' class='form-control form-control-sm'>";
-
-                                    while (mysqli_stmt_fetch($stmt_planets_id)) {
-
-                                        //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
-                                        echo "
-                                            <option class='ml-1'  value='$id_planeta' style='transform: scale(130%); '> <n class='ml-2 pl-3'>$nome_planeta</n><br>";
-                                    }
-                                    //FECHA A SECÇÃO
-                                    echo "</select>
-                                            </div>";
-
-                                    //FECHA O STATEMENT
-                                    mysqli_stmt_close($stmt_planets_id);
-                                }
-                            }
-
-                        } else if ($nome == "item_id") {
-
-                            //PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
-                            $stmt_nome_item_atmosfera = mysqli_stmt_init($local_link);
-
-                            //DEFINE A QUERY QUE PRECISAS
-                            $query_nome_item_atmosfera = "SELECT id,name FROM items";
-
-                            //PREPARA O STATEMENT
-                            if (mysqli_stmt_prepare($stmt_nome_item_atmosfera, $query_nome_item_atmosfera)) {
-
-                                $results_nome_item_atmosfera = "";
-                                $id_nome_item_atmosfera = "";
-
-                                //DÁ BIND DOS RESULTADOS AO ARRAY
-                                mysqli_stmt_bind_result($stmt_nome_item_atmosfera, $id_nome_item_atmosfera, $results_nome_item_atmosfera);
-
-                                //EXECUTA O STATEMENT
-                                if (mysqli_stmt_execute($stmt_nome_item_atmosfera)) {
-
-                                    //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
-                                    echo "<div class='col-12 mb-4 mt-4'>
-                                               <label class='text-uppercase font-weight-bolder'>Nome do Elemento</label><br>";
-
-                                    //ABRE O MENU DE SELEÇÃO
-                                    echo "<select name='$nome' class='form-control form-control-sm'>";
-                                    while (mysqli_stmt_fetch($stmt_nome_item_atmosfera)) {
-
-                                        //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
-                                        echo "
-                                            <option class='ml-1'  value='$id_nome_item_atmosfera' style='transform: scale(130%); '> <n class='ml-2 pl-3' >$results_nome_item_atmosfera</n><br>";
-                                    }
-                                    //FECHA A SECÇÃO
-                                    echo "</select>
-                                            </div>";
-
-                                    //FECHA O STATEMENT
-                                    mysqli_stmt_close($stmt_nome_item_atmosfera);
-
-                                } //SE DER ERRO NA EXECUÇÃO DO STATEMENT
-                                else {
-                                    //VAI PARA A PÁGINA DE ERROS
-                                    header("Location:errors.php?error=execute");
-                                }
-
-                            } //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
-                            else {
-                                //VAI PARA A PÁGINA DE ERROS
-                                header("Location:errors.php?error=prepare");
-                            }
-
-                        } else {
-                            //CONTINUA A PERCORRER O ARRAY
-                            for ($fields = 2; $fields < $num_nomes; $fields++) {
-                                $i++;
-
-                                //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
-                                $nome = $nomes_colunas[$fields]->name;
-
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow ' placeholder='Valor Numérico' name='$nome'>
-                                           </div>";
-                            }
-
-                        }
-
-
-                    } //SENÃO SE FOR A TABLE PLANETS_LAND ITEMS
-                    else if (($tabela_query == "planets_land_items")) {
-
-                        if ($nome == "item_id") {
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' ] name='$nome' readonly>
-                                           </div>";
-                        } else if ($nome == "user_id") {
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400'  name='$nome' readonly>
-                                           </div>";
-                        } else if ($nome == "land_id") {
-
-                            //ESCREVE
-                            //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                            echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400'  name='$nome' readonly>
-                                           </div>";
-                        } else {
-                            //CONTINUA A PERCORRER O ARRAY
-                            for ($fields = 3; $fields < $num_nomes; $fields++) {
-                                $i++;
-
-                                //GUARDA NA VARIÁVEL NOME A COLUNA QUE PERCORRESTE
-                                $nome = $nomes_colunas[$fields]->name;
-
-                                //ESCREVE
-                                //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
-                                echo "<div class='col-12 mb-4 mt-4'>
-                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow ' placeholder='Quantidade' name='$nome'>
-                                           </div>";
-                            }
-                        }
-                    } //SE FOR A TABLE ITEMS
+                    }  //SE FOR A TABLE ITEMS
                     else if ($tabela_query == "profiles") {
 
                         if ($nome == "id") {
@@ -1192,58 +1060,13 @@ else {
                                             <input type='text' class='form-control shadow bg-gray-400' readonly name='$nome'>
                                            </div>";
                         } else if ($nome == "type") {
-
-
-//PREPARA UM STATEMENT PARA IR BUSCAR OS VALORES
-                            $stmt_perfil = mysqli_stmt_init($local_link);
-
-                            //DEFINE A QUERY QUE PRECISAS
-                            $query_perfil = "SELECT id,type FROM profiles";
-
-                            //PREPARA O STATEMENT
-                            if (mysqli_stmt_prepare($stmt_perfil, $query_perfil)) {
-
-                                $results_perfil = "";
-                                $id_perfil = "";
-
-                                //DÁ BIND DOS RESULTADOS AO ARRAY
-                                mysqli_stmt_bind_result($stmt_perfil, $id_perfil, $results_perfil);
-
-                                //EXECUTA O STATEMENT
-                                if (mysqli_stmt_execute($stmt_perfil)) {
-
-                                    //ESCREVE A PRIMEIRA PARTE DA SECÇÃO DO FORMULÁRIO
-                                    echo "<div class='col-12 mb-4 mt-4'>
-                                               <label class='text-uppercase font-weight-bolder'>Cargo</label><br>";
-
-                                    //ABRE O MENU DE SELEÇÃO
-                                    echo "<select name='$nome' class='form-control form-control-sm'>";
-
-                                    while (mysqli_stmt_fetch($stmt_perfil)) {
-
-                                        //ESCREVE A SECÇÃO DO FORMULÁRIO COM OS VALORES
-                                        echo "
-                                            <option class='ml-1'  value='$id_perfil' style='transform: scale(130%); '> <n class='ml-2 pl-3'>$results_perfil</n><br>";
-                                    }
-                                    //FECHA A SECÇÃO
-                                    echo "</select>
-                                            </div>";
-
-                                    //FECHA O STATEMENT
-                                    mysqli_stmt_close($stmt_perfil);
-
-                                } //SE DER ERRO NA EXECUÇÃO DO STATEMENT
-                                else {
-                                    //VAI PARA A PÁGINA DE ERROS
-                                    header("Location:errors.php?error=execute");
-                                }
-
-                            } //SE DER ERRO NA PREPARAÇÃO DO STATEMENT
-                            else {
-                                //VAI PARA A PÁGINA DE ERROS
-                                header("Location:errors.php?error=prepare");
-                            }
+                            echo "<div class='col-12 mb-4 mt-4'>
+                                            <label class='text-uppercase font-weight-bolder'>$nome</label>
+                                            <input type='text' class='form-control shadow' placeholder='Cargo'  name='$nome'>
+                                           </div>";
                         }
+
+
 
                     } //SENÃO SE FOR A TABLE USERS
                     else if (($tabela_query == "users")) {
@@ -1265,7 +1088,7 @@ else {
                                 //SCRIPT PARA COLOCAR TANTOS CAMPOS QUANTOS DADOS EXISTENTES
                                 echo "<div class='col-12 mb-4 mt-4'>
                                             <label class='text-uppercase font-weight-bolder'>$nome</label>
-                                            <input type='text' class='form-control shadow bg-gray-400' placeholder='Username' name='$nome' readonly>
+                                            <input type='text' class='form-control shadow ' placeholder='Username' name='$nome'>
                                            </div>";
                             } else if ($nome == "avatar_id") {
 
