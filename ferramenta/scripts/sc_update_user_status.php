@@ -1,8 +1,8 @@
 <?php
 // Verifica se o formulário foi submetido
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifica se o campo 'active' foi enviado
-    if (isset($_POST['active'])) {
+    // Verifica se o campo 'active' foi enviado como array
+    if (isset($_POST['active']) && is_array($_POST['active'])) {
         // Conexão com o banco de dados
         include_once "../connections/connection.php";
         $local_link = new_db_connection();
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (mysqli_query($local_link, $query)) {
                 // Atualização bem-sucedida
-                echo "Status atualizado com sucesso para o usuário com ID $userId";
+                header("Location:../user_status.php");
             } else {
                 // Erro na atualização
                 echo "Erro ao atualizar o status para o usuário com ID $userId: " . mysqli_error($local_link);
@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Fecha a conexão com o banco de dados
         mysqli_close($local_link);
     } else {
-        // Campo 'active' não foi enviado
-        echo "Campo 'active' não foi enviado.";
+        // Campo 'active' não foi enviado corretamente como array
+        echo "Campo 'active' não foi enviado corretamente.";
     }
 } else {
     // Método de requisição inválido
