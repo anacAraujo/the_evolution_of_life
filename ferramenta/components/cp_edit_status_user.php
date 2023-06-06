@@ -99,9 +99,9 @@ else {
                                         echo "<td class='text-center'>" . $username . "</td>";
                                         echo "<td class='text-center pr-3 pl-3'>" . $date . "</td>";
                                         echo "<td class='text-center pr-3 pl-3'>";
-                                        echo "<select name='active' class='form-control form-control-sm pr-3 pl-3' id='active'>";
-                                        echo "<option value='$id' $estado_true>Ativo</option>";
-                                        echo "<option value='$id' $estado_false>Inativo</option>";
+                                        echo "<select name='active[$id]' class='form-control form-control-sm pr-3 pl-3' id='active'>";
+                                        echo "<option value='1' $estado_true>Ativo</option>";
+                                        echo "<option value='0' $estado_false>Inativo</option>";
                                         echo "</select>";
                                         echo "</td>";
                                         echo "</tr>";
