@@ -224,7 +224,10 @@ if (in_array($tabela_query, $tabelas, true)) {
 
                                                 echo '<th class="text-uppercase text-center text-primary bg-gray-300">Editar dados</th>';
 
-                                                echo '<th class="text-uppercase text-center text-primary bg-gray-300">Apagar registos</th>';
+                                                if(!$tabela_query=="users") {
+                                                    //VALOR A ESCREVER
+                                                    echo '<th class="text-uppercase text-center text-primary bg-gray-300">Apagar registos</th>';
+                                                }
                                             }
 
 
@@ -273,8 +276,11 @@ if (in_array($tabela_query, $tabelas, true)) {
 
                                     echo '<th class="text-uppercase text-center text-primary bg-gray-300">Editar dados</th>';
 
-                                    //VALOR A ESCREVER
-                                    echo '<th class="text-uppercase text-center text-primary bg-gray-300">Apagar registos</th>';
+                                    if(!$tabela_query=="users") {
+                                        //VALOR A ESCREVER
+                                        echo '<th class="text-uppercase text-center text-primary bg-gray-300">Apagar registos</th>';
+                                    }
+
                                 }
 
                                 echo "</tfoot>";
@@ -328,11 +334,31 @@ if (in_array($tabela_query, $tabelas, true)) {
                                     //SE FOR ADMIN
                                     if ($_SESSION['admin'] == 1) {
 
-                                        //COLOCA O ÍCONE PARA EDITAR
-                                        echo "<td class='text-center'><a href='edit_data.php?table=" . $tabela_query . "&id=" . $results[0] . "&col=" . $nome_coluna_atual . "&action=edit' class='text-decoration-none'><i class='fas fa-edit mx-2'></i></a></td>";
+                                        //SE NOME FOR FORMULAS_ITENS
+                                        if($tabela_query=="formula_itens") {
 
-                                        //COLOCA O ÍCONE PARA APAGAR
-                                        echo "<td class='text-center'><a href='#' class='open_modal text-center'><i class='fa fa-trash'></i></a></td>";
+                                            //COLOCA O ÍCONE PARA EDITAR com o primeiro e segundo IDs
+                                            echo "<td class='text-center'><a href='edit_data.php?table=" . $tabela_query . "&id=" . $results[0] . "&item_id=$results[1]&action=edit' class='text-decoration-none'><i class='fas fa-edit mx-2'></i></a></td>";
+
+                                        }
+
+                                        else if($tabela_query=="planets_items_inventory") {
+
+                                            //COLOCA O ÍCONE PARA EDITAR com o primeiro e segundo IDs
+                                            echo "<td class='text-center'><a href='edit_data.php?table=" . $tabela_query . "&id=" . $results[0] . "&item_id=$results[1]&action=edit' class='text-decoration-none'><i class='fas fa-edit mx-2'></i></a></td>";
+                                        }
+                                        else {
+
+                                            //COLOCA O ÍCONE PARA EDITAR
+                                            echo "<td class='text-center'><a href='edit_data.php?table=" . $tabela_query . "&id=" . $results[0] . "&col=" . $nome_coluna_atual . "&action=edit' class='text-decoration-none'><i class='fas fa-edit mx-2'></i></a></td>";
+                                        }
+
+
+                                        if(!$tabela_query=="users") {
+                                            //COLOCA O ÍCONE PARA APAGAR
+                                            echo "<td class='text-center'><a href='#' class='open_modal text-center'><i class='fa fa-trash'></i></a></td>";
+                                        }
+
                                     }
 
                                     //RESET A I
@@ -411,11 +437,30 @@ include_once "components/cp_modal_logout.php";
                         Cancelar
                     </button>
                 </a>
-                <a href="scripts/sc_delete_data.php?table=<?= $tabela_query ?>&id=<?= $results[0] ?>&col=<?= $nomes_colunas[$i]->name ?>"
+                <?php
+                //DETERMINA O QUE É ESCRITO
+                if($tabela_query=="formula_itens") {
+
+                    echo '<a href="scripts/sc_delete_data.php?table=' . $tabela_query . '&id_formula=' . $results[0] . '&items_id=' . $results[1] . '" class="ps-2">'.'<button type="button" class="btn btn-primary shadow"> Apagar
+                    </button></a>';
+
+
+                }
+                else if($tabela_query=="formulas") {
+
+                    echo '<a href="scripts/sc_delete_data.php?table=' . $tabela_query . '&id=' . $results[0] . '&formula_location_id=' . $results[1] . '" class="ps-2">'.'<button type="button" class="btn btn-primary shadow"> Apagar
+                    </button></a>';
+                }
+                else {
+                    echo '<a href="scripts/sc_delete_data.php?table=' . $tabela_query . '&id=' . $results[0] . '"
                    class="ps-2">
-                    <button type="button" class="btn btn-primary shadow"> Apagar
+                   <button type="button" class="btn btn-primary shadow"> Apagar
                     </button>
-                </a>
+                </a>';
+                }
+
+                ?>
+
             </div>
         </div>
     </div>
