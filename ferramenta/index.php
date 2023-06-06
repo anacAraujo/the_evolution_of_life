@@ -305,11 +305,19 @@ mysqli_close($local_link);
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <a href="user_status.php">
+                                            <?php if ($_SESSION['admin'] == 1) : ?>
+                                                <a href="user_status.php">
+                                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                        Utilizadores sem login há mais de 1 mês
+                                                    </div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $write_value ?> </div>
+                                                </a>
+                                            <?php else : ?>
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Utilizadores sem login à mais de 1 mês</div>
+                                                    Utilizadores sem login há mais de 1 mês
+                                                </div>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $write_value ?> </div>
-                                            </a>
+                                            <?php endif; ?>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-user fa-2x text-gray-300"></i>
