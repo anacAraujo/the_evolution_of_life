@@ -9,12 +9,84 @@ $local_link = new_db_connection();
 //COMEÇA O SESSION
 session_start();
 //SE NO SESSION ESTIVER O A TABELA, COLUNA E ID
-if (isset($_GET['table']) && $_GET['table'] != "" && isset($_GET['col']) && $_GET['col'] != "" && isset($_GET['id']) && $_GET['id'] != "") {
+if (isset($_GET['table']) && $_GET['table'] != "") {
+
+    if(isset($_GET['id']) && $_GET['id'] != "") {
+        $id = $_GET['id'];
+    }
+
+    if(isset($_GET['id_formula']) && $_GET['id_formula'] != "" && isset($_GET['items_id']) && $_GET['items_id'] != "") {
+
+        $formula_id=$_GET['id_formula'];
+        $items_id=$_GET['items_id'];
+    }
+
+    if(isset($_GET['formula_location_id']) && $_GET['formula_location_id'] != "" && isset($_GET['id']) && $_GET['id'] != "") {
+
+        $formula_location_id=$_GET['formula_location_id'];
+        $id=$_GET['id'];
+    }
+
+
 
     //GUARDA NAS VARIÁVEIS
     $table = $_GET['table'];
-    $id = $_GET['id'];
-    $col = $_GET['col'];
+
+
+
+    //DEFINE A QUERY DE APAGAR
+    if($table=="avatars") {
+
+        $query="DELETE FROM avatars WHERE id=$id";
+        $query_delete=$query;
+    }
+    //SE FOR FORMULA_ITENS
+    else if($table=="formula_itens") {
+
+        $query="DELETE FROM formula_itens WHERE formula_id=$formula_id AND items_id=$items_id";
+
+        $query_delete=$query;
+
+    }
+    //SE FOR FORMULA_LOCATION
+    else if($table=="formula_location") {
+
+        $query="DELETE FROM formula_location WHERE id=$id";
+
+        $query_delete=$query;
+
+    }
+    //SE FOR FORMULAS
+    else if($table=="formulas") {
+
+        $query="DELETE FROM formulas WHERE id=$id AND formula_location_id=$formula_location_id";
+
+        $query_delete=$query;
+
+    }
+    //SE FOR ITEMS
+    else if($table=="items") {
+
+        $query="DELETE FROM items WHERE id=$id";
+
+        $query_delete=$query;
+    }
+    //SE FOR MICROORGANISM_SETTINGS
+    else if($table=="microorganism_settings") {
+
+        $query="DELETE FROM microorganism_settings WHERE id=$id";
+
+        $query_delete=$query;
+    }
+    //SE FOR PROFILES
+    else if($table=="profiles") {
+
+        $query="DELETE FROM profiles WHERE id=$id";
+
+        $query_delete=$query;
+    }
+
+
 
     //QUERY QUE PERMITE APAGAR O REGISTO
     $query_temp_disable = "SET FOREIGN_KEY_CHECKS = 0";
@@ -28,8 +100,7 @@ if (isset($_GET['table']) && $_GET['table'] != "" && isset($_GET['col']) && $_GE
         //EXECUTA O STATEMENT
         if (mysqli_stmt_execute($stmt_temp_disable)) {
 
-            //QUERY PARA APAGAR
-            $query_delete = "DELETE FROM $table WHERE id=$id";
+
 
             //DÁ INÍCIO AO STATEMENT
             $stmt_delete = mysqli_stmt_init($local_link);
