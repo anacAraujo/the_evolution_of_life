@@ -1,8 +1,17 @@
-.body {
-    background-color: #131a72;
+body {
+    background-color: #131a72 !important;
     min-height: 100vh;
     font-family: 'Source Code Pro', monospace;
     overflow: hidden;
     margin: 0;
     padding: 0;
+}
+
+
+/* Canvas das particulas */
+.particles-js-canvas-el {
+    position: absolute;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -1;
 }
