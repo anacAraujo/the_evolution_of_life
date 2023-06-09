@@ -1,0 +1,8 @@
+.body {
+    background-color: #131a72;
+    min-height: 100vh;
+    font-family: 'Source Code Pro', monospace;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
