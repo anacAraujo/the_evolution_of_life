@@ -19,11 +19,10 @@
 </head>
 
 <body class="container">
-
     <div id="particles-js"></div>
 
     <!-- icones globais -->
-    <div class="row m-4">
+   <!--  <div class="row m-4">
         <div class="col-1 m-2">
             <img src="assets/icons_gerais/Atmosfera.svg" alt="">
         </div>
@@ -36,11 +35,11 @@
         <div class="col-1 m-2">
             <img src="assets/avatar_perfil/Perfil_Sem_Avatar.svg" alt="">
         </div>
-    </div>
+    </div> -->
 
     <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
     <!-- background particulas fica associado a esta div ou ao body?? -->
-    <div class="row">
+   <!--  <div class="row">
 
         <div>
             <img src="assets/icons_gerais/pregresso1/Mundo_Vermelho.svg">
@@ -49,11 +48,74 @@
                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
             </div>
         </div>
-    </div>
+    </div> -->
+
+  
     
 
     <!-- mudança avatar -->
-    <div>
+    <div id="Avatar_background" class="row ">
+
+        <!--DIV COM PAINEL DE ESCOLHA-->
+        <div class="col-8" id="Avatar_form">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-left mt-2" id="Avatar_go_back" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+              </svg>
+            <!--Fórmulário de Imagens-->
+            <form method="post" action="">
+                <div class="row">
+                    <div class="col-1 ms-3"></div>
+                    <div class="col-3 pt-5 text-center">
+                        <button class="Avatar_form_button" id="Avatar_current">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg">
+                        </button>
+                    </div>
+                    <div class="col-3 pt-5 text-center">
+                        <button class="Avatar_form_button">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg">
+                        </button>
+                    </div>
+                    <div class="col-3 pt-5 text-center">
+                        <button class="Avatar_form_button">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg">
+                        </button>
+                    </div>
+                    <div class="col-1"></div>
+
+                </div>
+                <div class="row">
+                    <div class="col-1 ms-3"></div>
+                    <div class="col-3 pt-3 mt-2 text-center">
+                        <button class="Avatar_form_button">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg" class="rounded border-1">
+                        </button>
+                    </div>
+                    <div class="col-3 pt-3 mt-2 text-center">
+                        <button class="Avatar_form_button">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg" class="rounded border-1">
+                        </button>
+                    </div>
+                    <div class="col-3 pt-3 mt-2 text-center">
+                        <button class="Avatar_form_button">
+                            <input type="image" src="assets/avatar_upperbody/Avatar1.svg" class="rounded border-1">
+                        </button>
+                    </div>
+                    <div class="col-1"></div>
+
+                </div>
+                
+            </form>
+        </div>
+
+        <!--DIV QUE MOSTRA O AVATAR-->
+        <div class="col-4 align-bottom text-center">
+
+            <div class="Avatar_selected">
+                <img src="assets/avatar_fullbody/Avatar1.svg" class="ms-3" id="Avatar_img_selected">
+                <img src="assets/avatar_background/form/platform.svg" class=" ms-2">
+            </div>
+        </div>
+        
 
     </div>
 
