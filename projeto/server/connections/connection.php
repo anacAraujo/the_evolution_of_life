@@ -28,7 +28,8 @@ function new_db_connection()
 
     // Se não falhar
     // Define o charset pelas questões de escrita
-    mysqli_set_charset($conn, "utf8");
+    // Change character set to utf8
+    $conn->set_charset("utf8");
 
     // ESCREVE PARA MOSTRAR QUE A LIGAÇÃO FOI BEM FEITA
     //echo "<h1 style='color:red'> ligação bem sucedida </h1>";
