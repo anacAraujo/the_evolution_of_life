@@ -19,6 +19,26 @@ async function getAllOffers() {
     return jsonData;
 }
 
+async function insertOffer(data) {
+
+    // TODO just an example
+    try {
+        const response = await fetch("../server/market/insert_offer.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log("Success:", result);
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 function mercadoEventos() {
     document.body.style.backgroundImage = 'url("img/fundo_mercado.png")';
 
@@ -33,7 +53,10 @@ function mercadoEventos() {
     document.getElementById("mercado_ver_mercado").onclick = async function () {
         document.getElementById("mercado_barracas_comprar").style.opacity = "100%";
         const allOffers = await getAllOffers();
-        console.log(allOffers);
+
+        for (const offer of allOffers) {
+            console.log(offer);
+        }
     }
 
 }
