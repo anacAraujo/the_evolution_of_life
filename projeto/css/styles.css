@@ -40,3 +40,10 @@ body {
 #mercado_barracas_comprar {
     opacity: 20%;
 }
+
+#mercado_opcoes_venda {
+    display: none;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
