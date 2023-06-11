@@ -11,12 +11,12 @@ particlesJS.load('particles-js', 'particles.json', function() {
 
 /* Otherwise just put the config content (json): */
 
-particlesJS.load('particles-js', 'JS/particlesjs-config.json', function() {
+particlesJS.load('particles-js', 'js/particles/particlesjs-config.json', function () {
   console.log('callback - particles.js config loaded');
 });
 
 particlesJS('particles-js',
-  
+
   {
     "particles": {
       "number": {
@@ -126,8 +126,8 @@ particlesJS('particles-js',
       }
     },
     "retina_detect": true,
-  
-    
+
+
   }
 
 );
