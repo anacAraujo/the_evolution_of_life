@@ -13,6 +13,12 @@ function showOpcaoVenda() {
 }
 
 
+async function getAllOffers() {
+    const response = await fetch("../server/market/get_all_offers.php");
+    const jsonData = await response.json();
+    return jsonData;
+}
+
 function mercadoEventos() {
     document.body.style.backgroundImage = 'url("img/fundo_mercado.png")';
 
@@ -24,8 +30,10 @@ function mercadoEventos() {
         showOpcaoVenda();
     }
 
-    document.getElementById("mercado_ver_mercado").onclick = function () {
+    document.getElementById("mercado_ver_mercado").onclick = async function () {
         document.getElementById("mercado_barracas_comprar").style.opacity = "100%";
+        const allOffers = await getAllOffers();
+        console.log(allOffers);
     }
 
 }
