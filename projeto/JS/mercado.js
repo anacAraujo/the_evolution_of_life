@@ -14,6 +14,10 @@ function showOpcaoVenda() {
 
 
 function mercadoEventos() {
+    document.body.style.backgroundImage = 'url("img/fundo_mercado.png")';
+
+    document.getElementById("mercado_opcoes_venda").style.display = "none";
+
     document.getElementById("mercado_vender").onclick = function () {
         document.getElementById("mercado_barracas_comprar").style.display = "none";
         document.getElementById("mercado_ver_mercado").style.display = "none";
