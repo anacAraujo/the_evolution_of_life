@@ -16,6 +16,8 @@ body {
     z-index: -1;
 }
 
+
+/* Mercado */
 .mercado {
     background-image: url("../img/fundo_mercado.png");
     height: 100vh;
@@ -47,3 +49,5 @@ body {
     display: flex;
     align-items: center;
 }
+
+/* fim Mercado */
