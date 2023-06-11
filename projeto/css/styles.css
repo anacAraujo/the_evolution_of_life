@@ -3,8 +3,10 @@ body {
     min-height: 100vh;
     font-family: 'Source Code Pro', monospace;
     overflow: hidden;
-    margin: 0;
-    padding: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 
@@ -19,11 +21,8 @@ body {
 
 /* Mercado */
 .mercado {
-    background-image: url("../img/fundo_mercado.png");
     height: 100vh;
-    width: 100vw;
-    background-repeat: no-repeat;
-    background-size: cover;
+    max-width: 100vw;
     margin: 0;
     padding: 0;
     box-sizing: 0;
@@ -36,7 +35,7 @@ body {
 }
 
 .mercado_barraca {
-    height: 55vh;
+    height: 45vh;
 }
 
 #mercado_barracas_comprar {
