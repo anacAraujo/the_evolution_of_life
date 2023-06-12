@@ -37,6 +37,8 @@ if ($result->num_rows <= 0) {
     return;
 }
 
+//TODO verify num offers per user - max 6 
+
 // Create the offer
 $sql = "INSERT INTO market_offers (my_item_id, my_item_qty, other_item_id, other_item_qty, planets_user_id) 
     VALUES (?, ?, ?, ?, ?)";
