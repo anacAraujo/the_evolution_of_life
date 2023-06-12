@@ -1,3 +1,7 @@
+let allIems = {};
+let inventory = {};
+let allOffers = [];
+
 function showOpcaoVenda() {
     document.getElementById("mercado_opcoes_venda").style.display = "block";
 
@@ -10,6 +14,9 @@ function showOpcaoVenda() {
         document.getElementById("mercado_ver_mercado").style.display = "block";
         document.getElementById("mercado_opcoes_venda").style.display = "none";
     }
+
+    // TODO test
+    insertOffer(1, 20, 3, 10);
 }
 
 
@@ -19,11 +26,26 @@ async function getAllOffers() {
     return jsonData;
 }
 
-async function insertOffer(data) {
+async function getAllItems() {
+    const response = await fetch("../server/items/get_all_items.php");
+    const jsonData = await response.json();
 
-    // TODO just an example
+    for (const item of jsonData) {
+        allIems[item.id] = item;
+    }
+}
+
+async function insertOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
+
+    const data = {
+        my_item_id: myItemId,
+        my_item_qty: myItemQty,
+        other_item_id: otherItemId,
+        other_item_qty: otherItemQty
+    };
+
     try {
-        const response = await fetch("../server/market/insert_offer.php", {
+        const response = await fetch("../server/market/create_offer.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -52,7 +74,7 @@ function mercadoEventos() {
 
     document.getElementById("mercado_ver_mercado").onclick = async function () {
         document.getElementById("mercado_barracas_comprar").style.opacity = "100%";
-        const allOffers = await getAllOffers();
+        allOffers = await getAllOffers();
 
         for (const offer of allOffers) {
             console.log(offer);
@@ -61,6 +83,12 @@ function mercadoEventos() {
 
 }
 
-window.onload = function () {
+window.onload = async function () {
+
+    await getAllItems();
+    console.log(allIems);
+
+    // TODO inventory
+
     mercadoEventos();
 }
