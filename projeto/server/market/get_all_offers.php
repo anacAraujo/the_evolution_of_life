@@ -13,13 +13,16 @@ $sql = "SELECT *
 $result = $conn->query($sql);
 
 if (!$result) {
-    echo ("Error description: " . $conn->error);
-} else if ($result->num_rows > 0) {
-    $response = array();
+    echo json_encode(['status' => false, 'message' => $conn->error]);
+    return;
+}
 
+$response = array();
+
+if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $response[] = $row;
     }
-
-    echo json_encode($response);
 }
+
+echo json_encode($response);

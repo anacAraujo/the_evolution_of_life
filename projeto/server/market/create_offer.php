@@ -33,7 +33,7 @@ $result = $stmt->get_result();
 $stmt->close();
 
 if ($result->num_rows <= 0) {
-    echo json_encode(['status' => false, 'msg' => 'No items!']);
+    echo json_encode(['status' => false, 'message' => 'Not enought items.']);
     return;
 }
 
@@ -48,6 +48,6 @@ $stmt->bind_param("iiiii", $my_item_id, $my_item_qty, $other_item_id, $other_ite
 
 $stmt->execute();
 
-echo json_encode(['status' => true, 'message' => 'Data Inserted Successfully!']);
+echo json_encode(['status' => true, 'message' => 'Offer inserted successfully.']);
 
 $stmt->close();
