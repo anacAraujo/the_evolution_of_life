@@ -23,17 +23,24 @@ include_once "../connections/connection.php";
 
 $conn = new_db_connection();
 
+$query = "SELECT *
+        FROM planets_items_inventory
+        WHERE planets_user_id = $user_id AND item_id = $my_item_id AND qty >= $my_item_qty";
 
+$result = mysqli_query($conn, $query);
+if (mysqli_num_rows($result) > 0) {
 
+    $sql = "INSERT INTO market_offers (my_item_id, my_item_qty, other_item_id, other_item_qty, planets_user_id) 
+    VALUES (?, ?, ?, ?, ?)";
 
-$sql = "INSERT INTO market_offers (my_item_id, my_item_qty, other_item_id, other_item_qty, planets_user_id) 
-        VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iiiii", $my_item_id, $my_item_qty, $other_item_id, $other_item_qty, $user_id);
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("iiiii", $my_item_id, $my_item_qty, $other_item_id, $other_item_qty, $user_id);
+    $stmt->execute();
 
-$stmt->execute();
+    echo json_encode(['status' => true, 'message' => 'Data Inserted Successfully!']);
 
-echo json_encode(['status' => true, 'message' => 'Data Inserted Successfully!']);
-
-$stmt->close();
+    $stmt->close();
+} else {
+    echo json_encode(['msg' => 'No Data!', 'status' => false]);
+}
