@@ -115,3 +115,21 @@ height: 20vh;
 }
 
 /*FIM AVATAR*/
+
+/* inicio lab */
+
+#lab_alien {
+    position: absolute;
+    width: 267px;
+    height: 157.46px;
+    left: 300px;
+    top: 66px;
+}
+
+#lab_texto {
+    position: absolute;
+    left: 41.95%;
+    right: 40.41%;
+    top: 37.62%;
+    bottom: 11.77%;
+}
