@@ -2,24 +2,6 @@ let allIems = {};
 let inventory = {};
 let allOffers = [];
 
-function showOpcaoVenda() {
-    document.getElementById("mercado_opcoes_venda").style.display = "block";
-
-    document.getElementById("mercado_opcoes_venda_vender").onclick = function () {
-
-    }
-
-    document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
-        document.getElementById("mercado_barracas_comprar").style.display = "block";
-        document.getElementById("mercado_ver_mercado").style.display = "block";
-        document.getElementById("mercado_opcoes_venda").style.display = "none";
-    }
-
-    // TODO test
-    insertOffer(1, 20, 3, 10);
-}
-
-
 async function getAllOffers() {
     const response = await fetch("../server/market/get_all_offers.php");
     const jsonData = await response.json();
@@ -33,6 +15,24 @@ async function getAllItems() {
     for (const item of jsonData) {
         allIems[item.id] = item;
     }
+}
+
+function showOpcaoVenda() {
+    document.getElementById("mercado_opcoes_venda").style.display = "block";
+
+    document.getElementById("mercado_opcoes_venda_vender").onclick = function () {
+
+    }
+
+    document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
+        document.getElementById("mercado_barracas_comprar").style.display = "block";
+        document.getElementById("mercado_ver_mercado").style.display = "block";
+        document.getElementById("mercado_opcoes_venda").style.display = "none";
+    }
+
+    // TODO
+    //insertOffer(2, 20, 3, 10);
+
 }
 
 async function insertOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
