@@ -1,45 +1,47 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 
-require_once "../connections/connection.php";
+$data = json_decode(file_get_contents("php://input"), true);
 
-if (isset($_POST["username"]) && isset($_POST["password"])) {
-    $username = $_POST['username'];
-    $password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$my_item_id = $data['my_item_id'];
+$my_item_qty = $data['my_item_qty'];
+$other_item_id = $data['other_item_id'];
+$other_item_qty = $data['other_item_qty'];
 
-    $link = new_db_connection();
+include_once "../connections/connection.php";
 
-    $stmt = mysqli_stmt_init($link);
+$conn = new_db_connection();
 
-    // Verify the user has the items
-    $sql = "SELECT username
+// Verify the user has the items
+$sql = "SELECT username
         FROM users
         WHERE username = ?";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $username);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $username);
 
-    $stmt->execute();
+$stmt->execute();
 
-    $result = $stmt->get_result();
+$result = $stmt->get_result();
 
-    $stmt->close();
+$stmt->close();
 
-    if ($result->num_rows <= 0) {
-        echo json_encode(['status' => false, 'message' => 'Username already exists.']);
-        return;
-    }
-
-    // Create the offer
-    $sql = "INSERT INTO utilizadores (nome, email, login, password_hash) VALUES (?,?,?,?)";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ssss', $username, $email, $login, $password_hash);
-
-    $stmt->execute();
-
-    echo json_encode(['status' => true, 'message' => 'Offer inserted successfully.']);
-
-    $stmt->close();
+if ($result->num_rows <= 0) {
+    echo json_encode(['status' => false, 'message' => 'Username already exists.']);
+    return;
 }
+
+// Create the offer
+$sql = "INSERT INTO utilizadores (nome, email, login, password_hash) VALUES (?,?,?,?)";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param('ssss', $username, $email, $login, $password_hash);
+
+$stmt->execute();
+
+echo json_encode(['status' => true, 'message' => 'Offer inserted successfully.']);
+
+$stmt->close();
