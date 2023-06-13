@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
 // conexão à base de dados
 include_once "../connections/connection.php";
@@ -34,13 +36,13 @@ if(mysqli_stmt_prepare($stmt,$query)) {
         }
     }
     else {
-        echo "Error" . mysqli_error;
+        echo "Error" . mysqli_error($local_link);
     }
 
 
 }
 else {
-    echo "Error" . mysqli_error;
+    echo "Error" . mysqli_error($local_link);
 }
 
 //FECHA AS LIGAÇÕES

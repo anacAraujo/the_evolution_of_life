@@ -22,7 +22,7 @@ $query="SELECT path FROM users INNER JOIN avatars ON avatar_id= avatars.id WHERE
 //PREPARA O STATEMENT
 if(!mysqli_stmt_prepare($stmt,$query)) {
 
-    echo "Error" . mysqli_error;
+    echo "Error" . mysqli_error($local_link);
 }
 else {
 
@@ -35,7 +35,7 @@ else {
 //EXECUTA O STATEMENT
 if(!mysqli_stmt_execute($stmt)) {
 
-    echo "Error" . mysqli_error;
+    echo "Error" . mysqli_error($local_link);
 
 }
 
