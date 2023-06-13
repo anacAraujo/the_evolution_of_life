@@ -23,11 +23,10 @@
         <div class="row">
             <h1>Introduz os teus dados!</h1>
             <div class="col-8">
-                <form class="col-6" action="./scripts/sc_login.php" method="post" class="was-validated">
-                    <div class="mb-3 mt-3"><label for="uname" class="form-label">Login:</label>
-                        <input type="text" class="form-control" id="login" placeholder="Enter login" name="login"
-                            required>
-                        <div class="valid-feedback">Valid.</div>
+                <form class="col-6" action="../server/users/login.php" method="post" class="was-validated">
+                    <div class="mb-3 mt-3"><label for="uname" class="form-label">Username:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username"
+                            name="username" required>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="mb-3"><label for="pwd" class="form-label">Password:</label>
