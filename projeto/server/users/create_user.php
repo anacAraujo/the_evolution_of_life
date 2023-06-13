@@ -4,9 +4,12 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 
+var_dump($_POST['username']);
+var_dump($_POST['password']);
+
 if (isset($_POST["username"]) && isset($_POST["password"])) {
     $username = $_POST['username'];
-    $password = $_POST['password'];
+    $pwd_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     include_once "../connections/connection.php";
 
