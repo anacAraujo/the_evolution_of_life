@@ -40,6 +40,6 @@ $stmt->bind_param('ss', $username, $pwd_hash);
 
 $stmt->execute();
 
-echo json_encode(['status' => true, 'message' => 'Offer inserted successfully.']);
+echo json_encode(['status' => true, 'message' => 'User inserted successfully.']);
 
 $stmt->close();
