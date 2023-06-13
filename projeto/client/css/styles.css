@@ -133,3 +133,35 @@ height: 20vh;
     top: 37.62%;
     bottom: 11.77%;
 }
+
+/* INICIO INDEX/HTML */
+
+.aligned-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.aligned-top-left-1 {
+    position: absolute;
+    left: 25px;
+}
+
+.aligned-top-left-2 {
+    position: absolute;
+    left: 95px;
+}
+
+.aligned-top-left-3 {
+    position: absolute;
+    left: 165px;
+}
+
+.centered-planeta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 46px;
+}
