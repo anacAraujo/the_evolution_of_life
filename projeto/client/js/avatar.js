@@ -34,8 +34,23 @@ async function editAvatar(avatarId) {
     }
 }
 
+function avatarEventos() {
+
+    document.getElementById("Avatar_fullbody_2").style.display = "none";
+    document.getElementById("Avatar_fullbody_3").style.display = "none";
+
+    document.getElementById("Avatar_2").onclick = function () {
+        document.getElementById("Avatar_img_selected").style.display = "none";
+        document.getElementById("Avatar_fullbody_2").style.display = "block";
+    }
+
+    
+}
+
 window.onload = async function () {
 
     await getAllAvatars();
     console.log(allAvatars);
+    
+    avatarEventos();
 }
