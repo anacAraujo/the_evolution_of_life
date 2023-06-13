@@ -6,10 +6,8 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$my_item_id = $data['my_item_id'];
-$my_item_qty = $data['my_item_qty'];
-$other_item_id = $data['other_item_id'];
-$other_item_qty = $data['other_item_qty'];
+$username = $data['username'];
+$pwd_hash = $data['password'];
 
 include_once "../connections/connection.php";
 
@@ -35,10 +33,10 @@ if ($result->num_rows <= 0) {
 }
 
 // Create the offer
-$sql = "INSERT INTO utilizadores (nome, email, login, password_hash) VALUES (?,?,?,?)";
+$sql = "INSERT INTO users (username, pwd_hash) VALUES (?,?)";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param('ssss', $username, $email, $login, $password_hash);
+$stmt->bind_param('ss', $username, $pwd_hash);
 
 $stmt->execute();
 
