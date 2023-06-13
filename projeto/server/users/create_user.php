@@ -13,7 +13,7 @@ include_once "../connections/connection.php";
 
 $conn = new_db_connection();
 
-// Verify the user has the items
+// Verify the user exists
 $sql = "SELECT username
         FROM users
         WHERE username = ?";
@@ -27,7 +27,7 @@ $result = $stmt->get_result();
 
 $stmt->close();
 
-if ($result->num_rows <= 0) {
+if ($result->num_rows > 0) {
     echo json_encode(['status' => false, 'message' => 'Username already exists.']);
     return;
 }
