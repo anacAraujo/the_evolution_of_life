@@ -34,7 +34,7 @@ async function editAvatar(avatarId) {
     }
 }
 
-function avatarEventos() {
+/* function avatarEventos() {
 
     document.getElementById("Avatar_fullbody_2").style.display = "none";
     document.getElementById("Avatar_fullbody_3").style.display = "none";
@@ -46,11 +46,12 @@ function avatarEventos() {
 
     
 }
+*/
 
 window.onload = async function () {
 
     await getAllAvatars();
     console.log(allAvatars);
-    
+
     avatarEventos();
 }
