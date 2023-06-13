@@ -1,6 +1,4 @@
 <?php
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
 
 require_once "../connections/connection.php";
 
@@ -29,19 +27,20 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
                     session_start();
                     $_SESSION["id"] = $id_user;
                     $_SESSION["username"] = $username;
-                    $_SESSION["perfil"] = $perfil;
+                    $_SESSION["perfil"] = $id_profil;
+
 
                     // Feedback de sucesso
-                    header("Location: ../index.php");
+                    header("Location: ../../client/index.html");
                 } else {
                     // Password está errada
                     echo "Incorrect credentials!";
-                    echo "<a href='../login.php'>Try again</a>";
+                    echo "<a href='../../client/login.html'>Try again</a>";
                 }
             } else {
                 // Username não existe
                 echo "Incorrect credentials!";
-                echo "<a href='../login.php'>Try again</a>";
+                echo "<a href='../../client/login.html'>Try again</a>";
             }
         } else {
             // Acção de erro

@@ -31,11 +31,11 @@ function showOpcaoVenda() {
     }
 
     // TODO
-    //insertOffer(2, 20, 3, 10);
+    createOffer(1, 20, 3, 10);
 
 }
 
-async function insertOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
+async function createOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
 
     const data = {
         my_item_id: myItemId,

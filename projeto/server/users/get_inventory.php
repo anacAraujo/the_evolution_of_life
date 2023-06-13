@@ -1,17 +1,29 @@
 <?php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods, Access-Control-Allow-Headers, Authorization, X-Requested-With');
 
 include_once "../connections/connection.php";
 
+session_start();
+
 $conn = new_db_connection();
 
-// TODO use PHP SESSION ID to get the user id
+$user_id = $_SESSION["id"];
+
 $sql = "SELECT *
         FROM planets_items_inventory
-        WHERE planets_user_id = 1";
+        WHERE planets_user_id = ?";
 
-$result = $conn->query($sql);
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$stmt->close();
 
 if (!$result) {
     echo json_encode(['status' => false, 'message' => $conn->error]);

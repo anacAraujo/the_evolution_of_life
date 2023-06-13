@@ -6,13 +6,14 @@ header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Methods
 
 $data = json_decode(file_get_contents("php://input"), true);
 
+session_start();
+
 $my_item_id = $data['my_item_id'];
 $my_item_qty = $data['my_item_qty'];
 $other_item_id = $data['other_item_id'];
 $other_item_qty = $data['other_item_qty'];
 
-// TODO use PHP SESSION ID to get the user id
-$user_id = 1;
+$user_id = $_SESSION["id"];
 
 include_once "../connections/connection.php";
 
@@ -48,6 +49,9 @@ $stmt->bind_param("iiiii", $my_item_id, $my_item_qty, $other_item_id, $other_ite
 
 $stmt->execute();
 
-echo json_encode(['status' => true, 'message' => 'Offer inserted successfully.']);
+echo json_encode([
+    'status' => true, 'message' => 'Offer inserted successfully.',
+    'session' => $_SESSION
+]);
 
 $stmt->close();
