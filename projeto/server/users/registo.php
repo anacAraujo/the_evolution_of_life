@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST["planet"]);
 if (isset($_POST["username"]) && isset($_POST["planet"]) && isset($_POST["password"])) {
     $username = $_POST['username'];
     $planet_name = $_POST["planet"];
@@ -50,19 +49,19 @@ if (isset($_POST["username"]) && isset($_POST["planet"]) && isset($_POST["passwo
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
+
         $row = $result->fetch_assoc();
         $id_user = $row['id'];
-
-        echo "asdfghjk";
 
         $stmt->close();
 
         // Create planet
-        $sql = "INSERT INTO planets (user_id, id_settings, name) VALUES (?,?,?)";
+        $sql = 'INSERT INTO planets (user_id, id_settings, name) VALUES (?,?,?)';
 
-        //TODO cannot pass parameter 3
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param('iis', $id_user, 1, $planet_name);
+
+        $id_settings = 1;
+        $stmt->bind_param('iis', $id_user, $id_settings, $planet_name);
 
         $stmt->execute();
 
@@ -78,7 +77,7 @@ if (isset($_POST["username"]) && isset($_POST["planet"]) && isset($_POST["passwo
 
         $stmt->execute();
 
-        // header("Location: ../../client/login.html");
+        header("Location: ../../client/login.html");
 
         $stmt->close();
     }
