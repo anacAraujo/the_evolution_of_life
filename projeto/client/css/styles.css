@@ -133,6 +133,53 @@ height: 20vh;
     top: 37.62%;
     bottom: 11.77%;
 }
+.lab_button_div_out { 
+	width:188px;
+	height:44.23612594604492px;
+	position:absolute;
+}
+
+.lab_button_div_in { 
+	box-shadow:4px 4px 4px rgba(0, 0, 0, 0.25);
+	background-color:rgba(255, 168.30003708600998, 0, 1);
+	width:188px;
+	height:44.23612594604492px;
+	position:absolute;
+	left:0px;
+	top:0px;
+	border-top-left-radius:10px;
+	border-top-right-radius:10px;
+	border-bottom-left-radius:10px;
+	border-bottom-right-radius:10px;
+}
+
+.lab_button_span { 
+	color:rgba(0, 0, 0, 1);
+	width:139.37474060058594px;
+	height:18px;
+	position:absolute;
+	left:24.461688995361328px;
+	top: 9px;;
+	font-family:Karla;
+    line-height: 22.21px;
+    font-weight: 800;
+	text-align:center;
+	font-size:19px;
+	letter-spacing:0;
+}
+
+#lab_button_criar {
+    position: absolute;
+    top: 170px;
+    left: 618px;
+}
+
+#lab_button_decompor {
+    position: absolute;
+    top: 170px;
+    left: 20px;
+}
+
 
 /* INICIO INDEX/HTML */
 
