@@ -56,9 +56,10 @@ body {
 #Avatar_go_back {
 
     color: #35EBE0;
-    
+
 
 }
+
 /*FUNDO DA ESCOLHA DE AVATAR*/
 #Avatar_background {
 
@@ -73,7 +74,7 @@ body {
 
 /*FUNDO DO FORMULÁRIO DE IMAGENS*/
 #Avatar_form {
-    background: url("../assets/avatar_background/form/background.svg") no-repeat center center; 
+    background: url("../assets/avatar_background/form/background.svg") no-repeat center center;
     background-size: auto;
 
 }
@@ -81,10 +82,10 @@ body {
 /*BOTÕES DAS IMAGENS DO AVATAR*/
 .Avatar_form_button {
 
-background-color:#174180;
-border-radius: 25%;
-width: 10vw;
-height: 20vh;
+    background-color: #174180;
+    border-radius: 25%;
+    width: 10vw;
+    height: 20vh;
 
 
 }

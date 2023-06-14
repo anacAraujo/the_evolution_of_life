@@ -1,6 +1,8 @@
 <?php
-if (isset($_POST["username"]) && isset($_POST["password"])) {
+var_dump($_POST["planet"]);
+if (isset($_POST["username"]) && isset($_POST["planet"]) && isset($_POST["password"])) {
     $username = $_POST['username'];
+    $planet_name = $_POST["planet"];
     $pwd_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     include_once "../connections/connection.php";
@@ -35,7 +37,49 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
     $stmt->execute();
 
-    header("Location: ../../client/login.html");
-
     $stmt->close();
+
+    // Get id user
+    $sql = "SELECT id FROM users WHERE username = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $id_user = $row['id'];
+
+        echo "asdfghjk";
+
+        $stmt->close();
+
+        // Create planet
+        $sql = "INSERT INTO planets (user_id, id_settings, name) VALUES (?,?,?)";
+
+        //TODO cannot pass parameter 3
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('iis', $id_user, 1, $planet_name);
+
+        $stmt->execute();
+
+        $stmt->close();
+
+        // Create user inventory
+        $sql = "INSERT INTO planets_items_inventory (planets_user_id, item_id, qty)
+        SELECT ?, items.id, items.qnt_elements_default
+        FROM items";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id_user);
+
+        $stmt->execute();
+
+        // header("Location: ../../client/login.html");
+
+        $stmt->close();
+    }
 }
