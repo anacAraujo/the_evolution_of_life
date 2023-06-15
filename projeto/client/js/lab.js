@@ -33,6 +33,7 @@ function labEventos() {
     document.getElementById("lab_sinal_mais").style.display = "none";
     document.getElementById("lab_elemento1").style.display = "none";
     document.getElementById("lab_elemento2").style.display = "none";
+    document.getElementById("lab_decompoem").style.display = "none";
     document.getElementById("lab_elemento3").style.display = "none";
 
     
@@ -52,6 +53,7 @@ function labEventos() {
         document.getElementById("lab_texto").style.display = "none";
         document.getElementById("lab_criar").style.display = "none";
         document.getElementById("lab_decompor").style.display = "none";
+        document.getElementById("lab_decompoem").style.display = "block";
         document.getElementById("lab_elemento3").style.display = "block";
     }
     
