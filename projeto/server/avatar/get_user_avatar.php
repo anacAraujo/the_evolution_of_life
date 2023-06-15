@@ -7,38 +7,35 @@ include_once "../connections/connection.php";
 $local_link = new_db_connection();
 
 //VAI AO SESSION BUSCAR O USER ID
-if(isset($_SESSION['id_user']) && $_SESSION['id_user']!=""){
+if (isset($_SESSION['id_user']) && $_SESSION['id_user'] != "") {
 
     //GUARDA NUMA VARIÁVEL
-    $id_user=$_SESSION['id_user'];
+    $id_user = $_SESSION['id_user'];
 }
 
 //INICIA O STATEMENT
-$stmt=mysqli_stmt_init($local_link);
+$stmt = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY QUE VAI BUSCAR O AVATAR ATUAL DO USER
-$query="SELECT path FROM users INNER JOIN avatars ON avatar_id= avatars.id WHERE users.id=$id_user";
+$query = "SELECT path FROM users INNER JOIN avatars ON avatar_id= avatars.id WHERE users.id=$id_user";
 
 //PREPARA O STATEMENT
-if(!mysqli_stmt_prepare($stmt,$query)) {
+if (!mysqli_stmt_prepare($stmt, $query)) {
 
     echo "Error" . mysqli_error($local_link);
-}
-else {
+} else {
 
     //DÁ BIND DE RESULTADOS
-    mysqli_stmt_bind_result($stmt,$current_avatar);
+    mysqli_stmt_bind_result($stmt, $current_avatar);
 
     //VAI BUSCAR O VALOR
     mysqli_stmt_fetch($stmt);
 
-//EXECUTA O STATEMENT
-if(!mysqli_stmt_execute($stmt)) {
+    //EXECUTA O STATEMENT
+    if (!mysqli_stmt_execute($stmt)) {
 
-    echo "Error" . mysqli_error($local_link);
-
-}
-
+        echo "Error" . mysqli_error($local_link);
+    }
 }
 
 

@@ -9,39 +9,34 @@ include_once "../connections/connection.php";
 $local_link = new_db_connection();
 
 //INICIA O STATEMENT
-$stmt=mysqli_stmt_init($local_link);
+$stmt = mysqli_stmt_init($local_link);
 
 //DEFINE A QUERY
-$query="SELECT id, path FROM avatars";
+$query = "SELECT id, path FROM avatars";
 
 //CRIA O ARRAY QUE OS VAI GUARDAR
-$avatars=array();
+$avatars = array();
 
 //PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt,$query)) {
+if (mysqli_stmt_prepare($stmt, $query)) {
 
     //DÁ BIND DOS RESULTADOS
-    mysqli_stmt_bind_result($stmt,$avatar_id,$avatar_path);
+    mysqli_stmt_bind_result($stmt, $avatar_id, $avatar_path);
 
     //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt)) {
+    if (mysqli_stmt_execute($stmt)) {
 
 
         //VAI BUSCAR OS DADOS
-        while(mysqli_stmt_fetch($stmt)) {
+        while (mysqli_stmt_fetch($stmt)) {
 
             //MANDA PARA O ARRAY
-            $avatars[$id]=$avatar_path;
-
+            $avatars[$id] = $avatar_path;
         }
-    }
-    else {
+    } else {
         echo "Error" . mysqli_error($local_link);
     }
-
-
-}
-else {
+} else {
     echo "Error" . mysqli_error($local_link);
 }
 
