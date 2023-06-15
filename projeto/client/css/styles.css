@@ -1120,17 +1120,17 @@ body {
     left: 135px;
 }
 
-.container {
+.imgeditar {
     position: relative;
 }
 
-.container img {
+ .imgeditar img {
     position: absolute;
     top: 50px;
     left: 50px;
     width: 200px;
     height: 150px;
-}
+} 
 
 
 /* FIM PLANETA INTERIOR */
