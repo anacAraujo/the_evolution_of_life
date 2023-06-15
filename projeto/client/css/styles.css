@@ -105,7 +105,7 @@ body {
 /*DIV DO AVATAR ATUAL*/
 .Avatar_selected {
     position: absolute;
-    top: 11rem;
+    top: 15rem;
    
    
 }
@@ -114,6 +114,7 @@ body {
 #Avatar_img_selected {
     position: absolute;
     bottom: 1.5rem;
+    right:1.9rem;
    
 }
 
