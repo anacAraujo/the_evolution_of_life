@@ -28,6 +28,21 @@ function labEventos() {
     document.body.style.backgroundImage = 'url("img/fundo_lab.png")';
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
+
+    document.getElementById("lab_button_combinar").style.display = "none";
+    document.getElementById("lab_sinal_mais").style.display = "none";
+    document.getElementById("lab_button_elemento1").style.display = "none";
+    document.getElementById("lab_button_elemento2").style.display = "none";
+
+
+    document.getElementById("lab_button_criar").onclick = function () {
+        document.getElementById("lab_alien").style.display = "none";
+        document.getElementById("lab_texto").style.display = "none";
+        document.getElementById("lab_button_combinar").style.display = "block";
+        document.getElementById("lab_sinal_mais").style.display = "block";
+        document.getElementById("lab_button_elemento1").style.display = "block";
+        document.getElementById("lab_button_elemento2").style.display = "block";
+    }
     
     
 }
