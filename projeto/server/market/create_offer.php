@@ -38,7 +38,24 @@ if ($result->num_rows <= 0) {
     return;
 }
 
-//TODO verify num offers per user - max 6 
+//Verify num offers per user - max 6 
+$sql = "SELECT id
+        FROM market_offers
+        WHERE planets_user_id = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $user_id);
+
+$stmt->execute();
+
+$result = $stmt->get_result();
+
+$stmt->close();
+
+if ($result->num_rows >= 6) {
+    echo json_encode(['status' => false, 'message' => 'All user offers are actve.']);
+    return;
+}
 
 // Create the offer
 $sql = "INSERT INTO market_offers (my_item_id, my_item_qty, other_item_id, other_item_qty, planets_user_id) 
