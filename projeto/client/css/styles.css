@@ -104,17 +104,17 @@ body {
 
 /*DIV DO AVATAR ATUAL*/
 .Avatar_selected {
-    position: absolute;
-    top: 11rem;
-   
-   
+  position: absolute;
+  top: 11rem;
+
+
 }
 
 /*IMAGEM DO AVATAR QUE FOI SELECIONADO*/
 #Avatar_img_selected {
-    position: absolute;
-    bottom: 1.5rem;
-    top: -2.3rem;
+  position: absolute;
+  bottom: 1.5rem;
+  top: -2.3rem;
 }
 
 /*FIM AVATAR*/
@@ -219,6 +219,10 @@ body {
 
 
 /* INICIO INDEX/HTML */
+
+#modal_logout {
+  display: none;
+}
 
 .aligned-top-right {
   position: absolute;
