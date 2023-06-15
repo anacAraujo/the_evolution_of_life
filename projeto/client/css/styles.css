@@ -38,6 +38,12 @@ body {
   height: 51vh;
 }
 
+.mercado_barraca_user {
+    position: absolute;
+    left: 49px;
+    bottom: 45px;
+}
+
 .mercado_barracas_comprar {
   position: relative;
 }
