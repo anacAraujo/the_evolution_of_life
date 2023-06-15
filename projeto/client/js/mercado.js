@@ -1,6 +1,6 @@
 let allIems = {};
 let inventory = {};
-let allOffers = [];
+let planetOffers = {}; // Map <ID do planeta, Array de offers>
 
 async function getInventory() {
     const response = await fetch("../server/users/get_inventory.php");
@@ -11,17 +11,22 @@ async function getInventory() {
         return;
     }
 
-    for (const item of jsonData) {
-        inventory[item.item_id] = item;
+    for (const inv of jsonData) {
+        inventory[inv.item_id] = inv;
     }
-
-    return jsonData;
 }
 
-async function getAllOffers() {
+async function getPlanetOffers() {
     const response = await fetch("../server/market/get_all_offers.php");
     const jsonData = await response.json();
-    return jsonData;
+    console.log(jsonData);
+
+    for (const offer of jsonData) {
+        if (!planetOffers[offer.planets_user_id]) {
+            planetOffers[offer.planets_user_id] = [];
+        }
+        planetOffers[offer.planets_user_id].push(offer);
+    }
 }
 
 async function getAllItems() {
@@ -31,24 +36,6 @@ async function getAllItems() {
     for (const item of jsonData) {
         allIems[item.id] = item;
     }
-}
-
-function showOpcaoVenda() {
-    document.getElementById("mercado_opcoes_venda").style.display = "block";
-
-    document.getElementById("mercado_opcoes_venda_vender").onclick = function () {
-
-    }
-
-    document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
-        document.getElementById("mercado_barracas_comprar").style.display = "block";
-        document.getElementById("mercado_ver_mercado").style.display = "block";
-        document.getElementById("mercado_opcoes_venda").style.display = "none";
-    }
-
-    // TODO
-    // createOffer(1, 20, 3, 10);
-
 }
 
 async function createOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
@@ -77,6 +64,24 @@ async function createOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
     }
 }
 
+function showOpcaoVenda() {
+    document.getElementById("mercado_opcoes_venda").style.display = "block";
+
+    document.getElementById("mercado_opcoes_venda_vender").onclick = function () {
+
+    }
+
+    document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
+        document.getElementById("mercado_barracas_comprar").style.display = "block";
+        document.getElementById("mercado_ver_mercado").style.display = "block";
+        document.getElementById("mercado_opcoes_venda").style.display = "none";
+    }
+
+    // TODO
+    // createOffer(1, 20, 3, 10);
+
+}
+
 function mercadoEventos() {
     document.body.style.backgroundImage = 'url("img/fundo_mercado.png")';
 
@@ -90,11 +95,6 @@ function mercadoEventos() {
 
     document.getElementById("mercado_ver_mercado").onclick = async function () {
         document.getElementById("mercado_barracas_comprar").style.opacity = "100%";
-        allOffers = await getAllOffers();
-
-        for (const offer of allOffers) {
-            console.log(offer);
-        }
     }
 
 }
@@ -107,5 +107,15 @@ window.onload = async function () {
     await getInventory();
     console.log(inventory);
 
+    await getPlanetOffers();
+
+    console.log(planetOffers);
+
+    const planets = Object.keys(planetOffers);
+
+    for (const planet of planets) {
+        const offers = planetOffers[planet];
+        console.log(offers);
+    }
     mercadoEventos();
 }
