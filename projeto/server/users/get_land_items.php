@@ -21,8 +21,11 @@ $user_id = $_SESSION["id"];
 
 $conn = new_db_connection();
 
-$sql = "SELECT land_id, item_id, qt
+// TODO Join with items to get the symbol
+$sql = "SELECT land_id, item_id, qt, symbol
         FROM planets_land_items
+            INNER JOIN items
+            ON planets_land_items.item_id = items.id
         WHERE user_id = ?";
 
 $stmt = $conn->prepare($sql);
