@@ -20,11 +20,13 @@ if (!isset($_SESSION["id"])) {
 $user_id = $_SESSION["id"];
 
 $conn = new_db_connection();
+//TODO CALCULAR PROGRESSO
 
-// TODO get all user info (planet / user / avatar / etc)
-$sql = "SELECT *
-        FROM
-        WHERE planets_user_id = ?";
+// Get all user info
+$sql = 'SELECT id_settings, "name", progress, avatar_id
+        FROM planets
+            INNER JOIN users ON users.id = planets.user_id
+        WHERE users.id = ?';
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
@@ -33,14 +35,15 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
-$stmt->close();
-
 if (!$result) {
     echo json_encode(['status' => false, 'message' => $conn->error]);
     return;
 }
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    echo json_encode($row);
+if ($result->num_rows <= 0) {
+    echo json_encode(['status' => false, 'message' => 'User not found.']);
+    return;
 }
+
+$row = $result->fetch_assoc();
+echo json_encode($row);
