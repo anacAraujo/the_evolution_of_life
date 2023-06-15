@@ -2,6 +2,22 @@ let allIems = {};
 let inventory = {};
 let allOffers = [];
 
+async function getInventory() {
+    const response = await fetch("../server/users/get_inventory.php");
+    const jsonData = await response.json();
+
+    if (jsonData.code === 'NO_LOGIN') {
+        document.location.href = './login.html';
+        return;
+    }
+
+    for (const item of jsonData) {
+        inventory[item.item_id] = item;
+    }
+
+    return jsonData;
+}
+
 async function getAllOffers() {
     const response = await fetch("../server/market/get_all_offers.php");
     const jsonData = await response.json();
@@ -31,7 +47,7 @@ function showOpcaoVenda() {
     }
 
     // TODO
-    createOffer(1, 20, 3, 10);
+    // createOffer(1, 20, 3, 10);
 
 }
 
@@ -88,7 +104,8 @@ window.onload = async function () {
     await getAllItems();
     console.log(allIems);
 
-    // TODO inventory
+    await getInventory();
+    console.log(inventory);
 
     mercadoEventos();
 }

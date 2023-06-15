@@ -8,9 +8,18 @@ include_once "../connections/connection.php";
 
 session_start();
 
-$conn = new_db_connection();
+if (!isset($_SESSION["id"])) {
+    echo json_encode([
+        'status' => false,
+        'message' => 'No user logged in.',
+        'code' => 'NO_LOGIN'
+    ]);
+    return;
+}
 
 $user_id = $_SESSION["id"];
+
+$conn = new_db_connection();
 
 $sql = "SELECT *
         FROM planets_items_inventory
