@@ -29,21 +29,33 @@ function labEventos() {
     document.body.style.backgroundPosition = "center";
     document.body.style.backgroundSize = "cover";
 
-    document.getElementById("lab_button_combinar").style.display = "none";
+    document.getElementById("lab_combinar").style.display = "none";
     document.getElementById("lab_sinal_mais").style.display = "none";
-    document.getElementById("lab_button_elemento1").style.display = "none";
-    document.getElementById("lab_button_elemento2").style.display = "none";
+    document.getElementById("lab_elemento1").style.display = "none";
+    document.getElementById("lab_elemento2").style.display = "none";
+    document.getElementById("lab_decompoem").style.display = "none";
+    document.getElementById("lab_elemento3").style.display = "none";
 
-
-    document.getElementById("lab_button_criar").onclick = function () {
+    
+    document.getElementById("lab_criar").onclick = function () {
         document.getElementById("lab_alien").style.display = "none";
         document.getElementById("lab_texto").style.display = "none";
-        document.getElementById("lab_button_combinar").style.display = "block";
+        document.getElementById("lab_criar").style.display = "none";
+        document.getElementById("lab_decompor").style.display = "none";
+        document.getElementById("lab_combinar").style.display = "block";
         document.getElementById("lab_sinal_mais").style.display = "block";
-        document.getElementById("lab_button_elemento1").style.display = "block";
-        document.getElementById("lab_button_elemento2").style.display = "block";
+        document.getElementById("lab_elemento1").style.display = "block";
+        document.getElementById("lab_elemento2").style.display = "block";
     }
     
+    document.getElementById("lab_decompor").onclick = function () {
+        document.getElementById("lab_alien").style.display = "none";
+        document.getElementById("lab_texto").style.display = "none";
+        document.getElementById("lab_criar").style.display = "none";
+        document.getElementById("lab_decompor").style.display = "none";
+        document.getElementById("lab_decompoem").style.display = "block";
+        document.getElementById("lab_elemento3").style.display = "block";
+    }
     
 }
 
@@ -52,8 +64,6 @@ function labEventos() {
 
 
 window.onload = async function () {
-
-    
 
     labEventos();
 }

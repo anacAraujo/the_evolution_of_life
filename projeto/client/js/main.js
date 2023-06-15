@@ -56,4 +56,6 @@ window.onload = async function () {
 
     mainEvents();
     //TODO verify session -> updatePlanet()
+
+    logout();
 }

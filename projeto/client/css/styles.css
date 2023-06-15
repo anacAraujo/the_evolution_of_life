@@ -314,9 +314,9 @@ body {
 
 #lab_texto {
   position: absolute;
-  left: 44.95%;
+  left: 40.95%;
   right: 40.41%;
-  top: 38.62%;
+  top: 35.62%;
   bottom: 11.77%;
 }
 
@@ -347,31 +347,35 @@ body {
   position: absolute;
   left: 24.461688995361328px;
   top: 9px;
-  ;
-  font-family: Karla;
-  line-height: 22.21px;
+  font-family: 'Karla';
+  font-style: normal;
   font-weight: 800;
-  text-align: center;
   font-size: 19px;
-  letter-spacing: 0;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#lab_button_criar {
+.lab_button_criar {
   position: absolute;
   top: 170px;
   left: 618px;
 }
 
-#lab_button_decompor {
+.lab_button_decompor {
   position: absolute;
   top: 170px;
   left: 20px;
+  width: 200px !important;
 }
 
-#lab_button_combinar {
+.lab_mensagem {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  width: 330.48px;
+  height: 44.24px;
+  left: 268.24px;
+  top: 56.43px;
 }
 
 #lab_sinal_mais {
@@ -394,8 +398,12 @@ body {
   border-radius: 10px;
 }
 
-#lab_button_elemento2 {
+.lab_button_elemento2 {
   left: 488px;
+}
+
+.lab_button_elemento3 {
+  left: 380px;
 }
 
 
