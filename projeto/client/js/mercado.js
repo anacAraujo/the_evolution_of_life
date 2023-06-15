@@ -67,8 +67,15 @@ async function createOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
 function showOpcaoVenda() {
     document.getElementById("mercado_opcoes_venda").style.display = "block";
 
+    // TODO PERCORRER INVENTORY
+
+
+    // TODO PERCORRER ALL ITEMS
+
     document.getElementById("mercado_opcoes_venda_vender").onclick = function () {
 
+        // TODO
+        // createOffer(1, 20, 3, 10);
     }
 
     document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
@@ -76,9 +83,6 @@ function showOpcaoVenda() {
         document.getElementById("mercado_ver_mercado").style.display = "block";
         document.getElementById("mercado_opcoes_venda").style.display = "none";
     }
-
-    // TODO
-    // createOffer(1, 20, 3, 10);
 
 }
 
