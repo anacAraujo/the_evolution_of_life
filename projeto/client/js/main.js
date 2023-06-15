@@ -44,8 +44,8 @@ function logout() {
 
 function mainEvents() {
     document.getElementById("avatar").src += "<img src='assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg' alt=''>";
-    document.getElementById("frasco").src += '<img src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
-    document.getElementById("planeta").src += '<img class="centered-planeta" src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Planeta.svg">';
+    document.getElementById("frasco").src += '<img src="assets/icons_gerais/progresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
+    document.getElementById("planeta").src += '<img class="centered-planeta" src="assets/icons_gerais/progresso' + userInfo.id_settings + '/Planeta.svg">';
 }
 
 
