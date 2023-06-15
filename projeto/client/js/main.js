@@ -38,15 +38,8 @@ async function getUserInfo() {
 
 function mainEvents() {
     document.getElementById("avatar").src += "<img src='assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg' alt=''>";
-<<<<<<< HEAD
     document.getElementById("frasco").src += '<img src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
     document.getElementById("planeta").src += '<img class="centered-planeta" src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Planeta.svg">';
-=======
-    document.getElementById("frasco").src += '<img src="assets/icons_gerais/progresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
-    document.getElementById("planeta").src += '<img class="centered-planeta" src="assets/icons_gerais/progresso' + userInfo.id_settings + '/Planeta.svg">';
-}
-
->>>>>>> 166ca08eaa56c0e7b91b19fc5a9289863b835c5e
 
     // Logout click event
     document.getElementById("modal_trigger").onclick = function () {
