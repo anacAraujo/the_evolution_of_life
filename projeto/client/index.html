@@ -16,45 +16,48 @@
 
     <script src="js/particles/particles.js"></script>
     <script src="js/particles/app.js"></script>
-
-    <script src="js/main.js"></script>
 </head>
 
-<body>
-    <div class="container">
-        <div id="particles-js"></div>
+<body class="container">
+    <div id="particles-js"></div>
 
-        <!-- icones globais -->
-        <div class="row">
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-1" src="assets/icons_gerais/Barraquinha.svg" alt="">
-            </div>
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-2" src="assets/icons_gerais/pregresso1/Frasco.svg" alt="">
-            </div>
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-3" src="assets/icons_gerais/Atmosfera.svg" alt="">
-            </div>
-            <div class="col-1 m-2 aligned-top-right">
-                <img id="avatar" src="assets/avatar_perfil/Avatar1.svg" alt="">
+    <!-- icones globais -->
+     <div class="row m-4">
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/Atmosfera.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/pregresso1/Frasco_MundoVermelho.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/Barraquinha.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/avatar_perfil/Avatar1.svg" alt="">
+        </div>
+         <div class="col-1 m-2">
+            <i class="bi bi-box-arrow-right" id="modal_trigger"></i>
+        </div>
+    </div>
+
+    <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
+    <!-- background particulas fica associado a esta div ou ao body?? -->
+     <div class="row">
+
+        <div>
+            <img src="assets/icons_gerais/pregresso1/Mundo_Vermelho.svg">
+            <div class="progress my-5" style="width: 25%">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
             </div>
         </div>
-        <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
-        <!-- background particulas fica associado a esta div ou ao body?? -->
-        <div class="row">
+    </div>
 
-            <div>
-                <div>
-                    <img id="planeta" class="centered-planeta" src="assets/icons_gerais/pregresso1/Planeta.svg">
-                </div>
 
-                <div class="centered-planeta progress my-5 d-flex align-items-center justify-content-center"
-                    style="width: 25%">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
-                </div>
-            </div>
-        </div>
+
+
+    <!-- mudança avatar -->
+    <div>
 
     </div>
 
@@ -72,8 +75,32 @@
     <div>
 
     </div>
-    </div>
 
+    <!--Modal Logout -->
+<div class="pt-5 modal" tabindex="" id="modal_logout">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h5 class="modal-title fw-bold">Logout</h5>
+                <a>
+                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                </a>
+            </div>
+            <div class="modal-body text-center pb-0 pt-3">
+                <p>Tem a certeza que pretende terminar a sua sessão?</p>
+            </div>
+            <div class="modal-footer m-auto">
+                <a href="#" class="pe-2">
+                    <button type="button" class="btn btn-info shadow" data-bs-dismiss="modal">Continuar</button>
+                </a>
+                <a href="../server/users/sc_logout.php" class="ps-2">
+                    <button type="button" class="btn btn-primary shadow"> Terminar
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
