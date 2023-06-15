@@ -20,6 +20,7 @@ body {
 
 
 /* Mercado */
+/* Mercado */
 .mercado {
   height: 100vh;
   max-width: 100vw;
@@ -38,15 +39,64 @@ body {
   height: 45vh;
 }
 
-#mercado_barracas_comprar {
-  opacity: 20%;
+.mercado_barracas_comprar {
+  position: relative;
 }
 
-#mercado_opcoes_venda {
-  display: none;
-  height: 100vh;
+.mercado_barracas_comprar img {
+  opacity: 0.2;
+  position: absolute;
+  bottom: -144px;
+}
+
+.mercado_barracas_comprar img:first-child {
+  left: 0;
+}
+
+.mercado_barracas_comprar img:last-child {
+  right: 0;
+}
+  /* ATUALIZAZAÇÕES MERCADO */
+.botão {
+width:109.29896545410156px;
+height:38px;
+position:absolute;
+}
+
+.bmercado {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 207px;
+  left: 86px;
+  font-size: 13px;
+}
+
+.bmercado-1 {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 207px;
+  left: 117px;
+  font-size: 13px;
 }
 
 /* fim Mercado */
