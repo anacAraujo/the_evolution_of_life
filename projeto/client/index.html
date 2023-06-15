@@ -16,45 +16,48 @@
 
     <script src="js/particles/particles.js"></script>
     <script src="js/particles/app.js"></script>
-
-    <script src="js/main.js"></script>
 </head>
 
-<body>
-    <div class="container">
-        <div id="particles-js"></div>
+<body class="container">
+    <div id="particles-js"></div>
 
-        <!-- icones globais -->
-        <div class="row">
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-1" src="assets/icons_gerais/Barraquinha.svg" alt="">
-            </div>
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-2" src="assets/icons_gerais/pregresso1/Frasco.svg" alt="">
-            </div>
-            <div class="col-1 m-2">
-                <img class="aligned-top-left-3" src="assets/icons_gerais/Atmosfera.svg" alt="">
-            </div>
-            <div class="col-1 m-2 aligned-top-right">
-                <img id="avatar" src="assets/avatar_perfil/Avatar1.svg" alt="">
+    <!-- icones globais -->
+     <div class="row m-4">
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/Atmosfera.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/pregresso1/Frasco_MundoVermelho.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/icons_gerais/Barraquinha.svg" alt="">
+        </div>
+        <div class="col-1 m-2">
+            <img src="assets/avatar_perfil/Avatar1.svg" alt="">
+        </div>
+         <div class="col-1 m-2">
+            <svg xmlns="http://www.w3.org/2000/svg" id="modal_trigger" width="35" height="35" class="text-white" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+              </svg>
+        </div>
+    </div>
+
+    <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
+    <!-- background particulas fica associado a esta div ou ao body?? -->
+     <div class="row">
+
+        <div>
+            <img src="assets/icons_gerais/pregresso1/Mundo_Vermelho.svg">
+            <div class="progress my-5" style="width: 25%">
+                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
             </div>
         </div>
-        <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
-        <!-- background particulas fica associado a esta div ou ao body?? -->
-        <div class="row">
+    </div>
 
-            <div>
-                <div>
-                    <img id="planeta" class="centered-planeta" src="assets/icons_gerais/pregresso1/Planeta.svg">
-                </div>
-
-                <div class="centered-planeta progress my-5 d-flex align-items-center justify-content-center"
-                    style="width: 25%">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
-                </div>
-            </div>
-        </div>
+    <!-- mudança avatar -->
+    <div>
 
     </div>
 
@@ -72,8 +75,32 @@
     <div>
 
     </div>
-    </div>
 
+    <!--Modal Logout -->
+<div class="pt-5 modal" tabindex="" id="modal_logout">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header shadow">
+                <h5 class="modal-title fw-bold">Logout</h5>
+                <a>
+                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                </a>
+            </div>
+            <div class="modal-body text-center pb-0 pt-3">
+                <p>Tem a certeza que pretende terminar a sua sessão?</p>
+            </div>
+            <div class="modal-footer m-auto">
+                <a href="#" class="pe-2">
+                    <button type="button" class="btn btn-info shadow" data-bs-dismiss="modal">Continuar</button>
+                </a>
+                <a href="../server/users/sc_logout.php" class="ps-2">
+                    <button type="button" class="btn btn-primary shadow"> Terminar
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
