@@ -4,7 +4,7 @@
 function new_db_connection()
 {
 
-    $env = "";
+    $env = "localhost";
     // Variables for the database connection
     if ($env == "localhost") {
         $hostname = 'localhost';

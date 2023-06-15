@@ -10,16 +10,18 @@ include_once "../connections/connection.php";
 
 // Create a new DB connection
 $local_link = new_db_connection();
+$_SESSION['id']=1;
 
 //VAI AO SESSION BUSCAR O USER ID
-if(isset($_SESSION['id_user']) && $_SESSION['id_user']!=""){
+if(isset($_SESSION['id']) && $_SESSION['id']!=""){
 
     //GUARDA NUMA VARIÁVEL
-    $id_user=$_SESSION['id_user'];
+    $id_user=$_SESSION['id'];
 }
 
 //GUARDA NUM ARRAY O POST
 $dados=$_POST;
+
 
 //CRIA UM ARRAY ONDE OS VALORES SÃO OS NOMES DOS AVATARES
 $keys=array_keys($dados);
@@ -36,6 +38,7 @@ foreach ($keys as $key => $value) {
 
 }
 
+
 //INICIA O STATEMENT
 $stmt=mysqli_stmt_init($local_link);
 
@@ -49,16 +52,12 @@ if(mysqli_stmt_prepare($stmt,$query)) {
     mysqli_stmt_bind_param($stmt,'i',$valor_avatar);
 
     //EXECUTA A QUERY
-    if(mysqli_stmt_execute($stmt)) {
+    if(!mysqli_stmt_execute($stmt)) {
 
-        //DADOS ATUALIZADOS
-        header("Location:../profile.php?action=updated");
+        echo "Error" . mysqli_error($local_link);
     }
-    //SE DER ERRO NA EXECUÇÃO
     else {
-
-        //VAI PARA A PÁGINA DE ERROS
-        header("Location:../errors.php?error=execute");
+        header("Location:../../client/avatar.php");
     }
 
 
@@ -66,6 +65,5 @@ if(mysqli_stmt_prepare($stmt,$query)) {
 //SE DER ERRO NA PREPARAÇÃO DE UM STATEMENT
 else {
 
-    //VAI PARA A PÁGINA DE ERROS
-    header("Location:../errors.php?error=prepare");
+    echo "Error" . mysqli_error($local_link);
 }

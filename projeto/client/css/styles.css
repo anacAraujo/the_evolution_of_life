@@ -7,6 +7,7 @@ body {
     background-size: cover;
     margin: 0 !important;
     padding: 0 !important;
+    
 }
 
 
@@ -105,14 +106,16 @@ body {
 /*DIV DO AVATAR ATUAL*/
 .Avatar_selected {
     position: absolute;
-    bottom: 1rem;
+    top: 11rem;
+   
+   
 }
 
 /*IMAGEM DO AVATAR QUE FOI SELECIONADO*/
 #Avatar_img_selected {
     position: absolute;
     bottom: 1.5rem;
-    left: 2.5rem;
+    top: -2.3rem;
 }
 
 /*FIM AVATAR*/
