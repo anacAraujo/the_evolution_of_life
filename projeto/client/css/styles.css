@@ -155,14 +155,17 @@ position:absolute;
 /*DIV DO AVATAR ATUAL*/
 .Avatar_selected {
   position: absolute;
-  bottom: 1rem;
+  top: 15rem;
+
+
 }
 
 /*IMAGEM DO AVATAR QUE FOI SELECIONADO*/
 #Avatar_img_selected {
   position: absolute;
   bottom: 1.5rem;
-  left: 2.5rem;
+  right: 1.9rem;
+
 }
 
 /*FIM AVATAR*/
@@ -267,6 +270,10 @@ position:absolute;
 
 
 /* INICIO INDEX/HTML */
+
+#modal_logout {
+  display: none;
+}
 
 .aligned-top-right {
   position: absolute;
