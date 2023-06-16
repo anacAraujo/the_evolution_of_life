@@ -310,8 +310,8 @@ body {
 .locked {
   filter: blur(1px);
   opacity: 0.8;
-  
-  
+
+
 }
 
 /*DIV LOCK ICON*/
@@ -323,6 +323,7 @@ body {
   left: 5rem;
   top: 10.5rem;
 }
+
 /*DIV LOCK ICON*/
 #lock_icon2 {
   position: absolute;
@@ -332,6 +333,7 @@ body {
   left: 12rem;
   top: 10.5rem;
 }
+
 /*DIV LOCK ICON*/
 #lock_icon3 {
   position: absolute;
@@ -343,7 +345,9 @@ body {
 }
 
 /*LOCK ICON*/
-#lock_icon svg path, #lock_icon2 svg path, #lock_icon3 svg path {
+#lock_icon svg path,
+#lock_icon2 svg path,
+#lock_icon3 svg path {
   color: #35EBE0;
 }
 
