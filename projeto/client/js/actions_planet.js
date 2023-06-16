@@ -54,14 +54,32 @@ async function onLandClick() {
     const landItem = landItems[landId];
     console.log("landItem: ", landItem);
 
-
     // Land is empty, put water
-    // if (!landItem) {
-    putItemOnLand(landId, 'H2O');
-    // }
+    if (!landItem) {
+        document.getElementById("planeta_interior_balde").style.display = "block";
+        document.getElementById("planeta_interior_balde").onclick = async function () {
+            await putItemOnLand(landId, 'H2O');
+            await fillLandMap();
+            document.getElementById("planeta_interior_balde").style.display = "none";
+        }
+    }
+
+    //TODO verify if putItemOnLand() is successful then show organism
+    if (landItem.item_id === 3) {
+        document.getElementById("planeta_interior_orgnism").style.display = "block";
+        document.getElementById("planeta_interior_orgnism").onclick = async function () {
+            await putItemOnLand(landId, 'Organism');
+            var img = document.createElement("img");
+            img.setAttribute("class", "organismo_planeta_interior");
+            img.src = "assets/planeta_interior/MicroOrganismo.svg";
+            var src = document.getElementById(landId);
+            src.appendChild(img);
+            document.getElementById("planeta_interior_orgnism").style.display = "none";
+        }
+    }
 
 
-    await fillLandMap();
+
 }
 
 async function fillLandMap() {
@@ -73,7 +91,15 @@ async function fillLandMap() {
             document.getElementById(land.land_id).style.background = "radial-gradient(circle, #9ED4F4, #86A7DA)";
         }
 
-        // TODO if has Micro, display it
+        if (land.symbol === "Organism") {
+            document.getElementById(land.land_id).style.background = "radial-gradient(circle, #9ED4F4, #86A7DA)";
+            const divLand = document.getElementById(land.land_id);
+            if (divLand) {
+                const imageUrl = 'assets/planeta_interior/MicroOrganismo.svg';
+                const imgElement = divLand.querySelector("img");
+                imgElement.src = imageUrl;
+            }
+        }
     }
 }
 
