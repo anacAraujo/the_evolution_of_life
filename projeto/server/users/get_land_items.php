@@ -21,7 +21,6 @@ $user_id = $_SESSION["id"];
 
 $conn = new_db_connection();
 
-// TODO Join with items to get the symbol
 $sql = "SELECT land_id, item_id, qt, symbol
         FROM planets_land_items
             INNER JOIN items
