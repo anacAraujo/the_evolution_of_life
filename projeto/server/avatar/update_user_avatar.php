@@ -11,6 +11,8 @@ include_once "../connections/connection.php";
 // Create a new DB connection
 $local_link = new_db_connection();
 
+var_dump($_POST);
+
 
 //VAI AO SESSION BUSCAR O USER ID
 if (isset($_SESSION['id']) && $_SESSION['id'] != "") {

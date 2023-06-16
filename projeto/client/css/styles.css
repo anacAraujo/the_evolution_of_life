@@ -306,6 +306,47 @@ body {
 
 }
 
+/*AVATAR BLOQUEADO*/
+.locked {
+  filter: blur(1px);
+  opacity: 0.8;
+  
+  
+}
+
+/*DIV LOCK ICON*/
+#lock_icon {
+  position: absolute;
+  z-index: 1;
+  width: 5%;
+  height: 5%;
+  left: 5rem;
+  top: 10.5rem;
+}
+/*DIV LOCK ICON*/
+#lock_icon2 {
+  position: absolute;
+  z-index: 1;
+  width: 5%;
+  height: 5%;
+  left: 12rem;
+  top: 10.5rem;
+}
+/*DIV LOCK ICON*/
+#lock_icon3 {
+  position: absolute;
+  z-index: 1;
+  width: 5%;
+  height: 5%;
+  left: 19rem;
+  top: 10.5rem;
+}
+
+/*LOCK ICON*/
+#lock_icon svg path, #lock_icon2 svg path, #lock_icon3 svg path {
+  color: #35EBE0;
+}
+
 /*FIM AVATAR*/
 
 /* inicio lab */
