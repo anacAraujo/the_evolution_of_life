@@ -317,7 +317,6 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
                         </div>";
-
                         $avatar_write++;
                     }
                 }
