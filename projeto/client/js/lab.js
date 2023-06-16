@@ -65,6 +65,5 @@ function labEventos() {
 
 window.onload = async function () {
 
-    
     labEventos();
 }

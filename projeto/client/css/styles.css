@@ -20,7 +20,6 @@ body {
 
 
 /* Mercado */
-/* Mercado */
 .mercado {
   height: 100vh;
   max-width: 100vw;
@@ -36,7 +35,13 @@ body {
 }
 
 .mercado_barraca {
-  height: 45vh;
+  height: 51vh;
+}
+
+.mercado_barraca_user {
+    position: absolute;
+    left: 49px;
+    bottom: 45px;
 }
 
 .mercado_barracas_comprar {
@@ -56,11 +61,12 @@ body {
 .mercado_barracas_comprar img:last-child {
   right: 0;
 }
-  /* ATUALIZAZAÇÕES MERCADO */
+
+/* ATUALIZAZAÇÕES MERCADO */
 .botão {
-width:109.29896545410156px;
-height:38px;
-position:absolute;
+  width: 109.29896545410156px;
+  height: 38px;
+  position: absolute;
 }
 
 .bmercado {
@@ -77,26 +83,158 @@ position:absolute;
   position: absolute;
   z-index: 1;
   top: 207px;
-  left: 86px;
+  left: 94px;
   font-size: 13px;
 }
 
 .bmercado-1 {
-  background-color: #165034;
-  height: 38px;
-  width: 109.29896545410156px;
-  border-radius: 25px;
-  border: 1px solid #000000;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: absolute;
-  z-index: 1;
-  top: 207px;
   left: 117px;
+}
+
+.quadrado_venda {
+  background-color: rgba(22.26468488574028, 80.96249878406525, 52.78754644095898, 0.8199999928474426);
+  width: 381px;
+  height: 210px;
+  position: absolute;
+  left: 354px;
+  top: 113px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border: 2px solid black
+}
+
+.quadrado_venda_item {
+  background-color: rgba(37.00000159442425, 93.00000205636024, 93.00000205636024, 1);
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 405px;
+    top: 137px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 1;
+    border: 2px solid black
+}
+
+.quadrado_venda_item_base_venda {
+  background-color: rgba(37.00000159442425, 93.00000205636024, 93.00000205636024, 1);
+  width: 147px;
+  height: 38px;
+  position: absolute;
+  left: 524px;
+  top: 153px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid black
+}
+
+.quadrado_venda_item_base_venda_quantidade {
+  background-color: rgba(94.2207245528698, 146.83749675750732, 146.83749675750732, 1);
+  width: 67px;
+  height: 38px;
+  position: absolute;
+  left: 564px;
+  top: 153px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid black
+}
+
+.nadicionar {
+  color: rgba(255, 255, 255, 1);
+  width: 42px;
+  height: 13px;
+  position: absolute;
+  left: 629px;
+  top: 154px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.nremover {
+  color: rgba(255, 255, 255, 1);
+  width: 42px;
+  height: 13px;
+  position: absolute;
+  left: 525px;
+  top: 154px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.escrita_venda {
+  color: rgba(255, 255, 255, 1);
+  width: 155px;
+  height: 13px;
+  position: absolute;
+  left: 475px;
+  top: 119px;
+  text-align: center;
+  font-size: 14px;
+  z-index: 1;
+  text-shadow: #000000;
+}
+
+.quadrado_troca_item {
+  top: 239px;
+}
+
+.quadrado_troca_item_base_venda {
+  top: 256px;
+}
+
+.quadrado_troca_item_base_venda_quantidade{
+  top: 256px;
+}
+
+.nadicionar_troca {
+  top: 258px;
+}
+
+.nremover_troca {
+  top: 258px;
+}
+
+.escrita_troca {
+  top: 219px;
+}
+
+.sesquerda {
+  color: rgba(255, 255, 255, 1);
+  width: 31px;
+  height: 19px;
+  position: absolute;
+  left: 379px;
+  top: 161px;
+  text-align: center;
   font-size: 13px;
+}
+
+.sdireita {
+  color: rgba(255, 255, 255, 1);
+  width: 31px;
+  height: 19px;
+  position: absolute;
+  left: 469px;
+  top: 161px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.sesquerda_troca {
+  top: 263px;
+}
+
+.sdireita_troca {
+  top: 263px;
 }
 
 /* fim Mercado */
@@ -274,8 +412,7 @@ position:absolute;
   left: 380px;
 }
 
-
-
+/* fim lab */
 
 /* INICIO INDEX/HTML */
 
@@ -311,6 +448,33 @@ position:absolute;
   margin-left: auto;
   margin-right: auto;
   margin-top: 46px;
+}
+
+@keyframes slide-in {
+  0% {
+      transform: translateX(-350%);
+    }
+  100% {
+      transform: translate(200%, -100%);
+  }
+}
+
+.alien_animado {
+  position: absolute;
+  left: -150%;
+  top: -50%;
+  width: 162.38px;
+  height: 95.76px;
+  animation: slide-in 5s forwards;
+}
+  
+.alien_destino {
+  position: absolute;
+  left: 500px;
+  top: 120px;
+  width: 162.38px;
+  height: 95.76px;
+  
 }
 
 /* INCIO INTERIOR PLANETA */
@@ -914,7 +1078,7 @@ position:absolute;
   left: 509px;
   width: 658px;
   height: 208px;
-  transform: rotate(116deg);
+  transform: rotate(100deg);
 }
 
 .imgeditar-3 {
@@ -927,7 +1091,36 @@ position:absolute;
   left: -187px;
   width: 803px;
   height: 160px;
-  transform: rotate(45deg);
+  transform: rotate(145deg);
 }
 
+.PlanetaAssetsImgBA {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgBDA {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgc {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgMO {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgS {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgSol {
+  position: absolute;
+  z-index: 1;
+}
 /* FIM PLANETA INTERIOR */
