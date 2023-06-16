@@ -18,15 +18,15 @@ if (!isset($_SESSION["id"])) {
 }
 
 $land_id = $data['land_id'];
-$item_symbol = $data['symbol'];
+$item_symbol = $data['item_symbol'];
 $qty = 1;
 $user_id = $_SESSION["id"];
 $qty_atual = 0;
 
-//TODO Verify in PHP if symbol is H2O or Micro
+// Verify in PHP if symbol is H2O or Micro
 if ($item_symbol != "H2O" && $item_symbol != "Organism") {
     echo json_encode([
-        'status' => true, 'message' => 'Not found.'
+        'status' => false, 'message' => 'Symbol not valid.'
     ]);
     return;
 }
@@ -36,7 +36,7 @@ include_once "../connections/connection.php";
 $conn = new_db_connection();
 
 
-//TODO Get item id given the item symbol (SELECT items)
+// Get item id given the item symbol
 $sql = "SELECT id FROM items WHERE symbol = ?";
 
 $stmt = $conn->prepare($sql);
@@ -57,7 +57,10 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $item_id = $row['id'];
 } else {
-    $item_id = null;
+    echo json_encode([
+        'status' => false, 'message' => 'Symbol not found.'
+    ]);
+    return;
 }
 
 
@@ -86,14 +89,24 @@ if ($result->num_rows > 0) {
     return;
 }
 
+if ($qty_atual <= 0) {
+    echo json_encode([
+        'status' => false,
+        'message' => 'Not enought qty in user inventory.',
+        'qty_atual' => $qty_atual,
+    ]);
+    return;
+}
 
-//TODO verify if land has items needed (Micro must have water, and water must be empty) (SELECT planets_land_items)
+
+//TODO inner join, organism o rows
+//verify if land has items needed (Micro must have water, and water must be empty) (SELECT planets_land_items)
 $sql = "SELECT qt 
         FROM planets_land_items 
         WHERE user_id = ? AND land_id = ?";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $user_id, $item_id);
+$stmt->bind_param("ii", $user_id, $land_id);
 
 $stmt->execute();
 
@@ -106,50 +119,51 @@ if (!$result) {
     return;
 }
 
-if ($result->num_rows > 0 && $item_id === 3) {
-    echo json_encode(['status' => false, 'message' => 'Cannot put water. Land must be']);
+if ($result->num_rows > 0 && $item_symbol === "H2O") {
+    echo json_encode(['status' => false, 'message' => 'Cannot put water. Land must be empty']);
     return;
 }
 
-if ($result->num_rows > 0 && $item_id === 11) {
+if ($result->num_rows > 0 && $item_symbol === "Organism") {
     $row = $result->fetch_assoc();
-    $item_needed_id = $row['id'];
-    if ($item_needed_id != 3) {
+    $current_item = $row['id'];
+    if ($current_item != 3) {
         echo json_encode(['status' => false, 'message' => 'Cannot put organism. Land must have water']);
         return;
     }
 }
+// TODO exit 
 
 //TODO remove item from inventory (UPDATE inventory)
-$qty_atual = $qty_atual - 1;
+$qty_atual = $qty_atual - $qty;
+
+//Start transaction 
+$conn->begin_transaction();
+
 $sql = "UPDATE planets_items_inventory 
-        SET qty =? 
+        SET qty = ? 
         WHERE planets_user_id = ? AND item_id = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iii", $qty_atual, $user_id, $item_id);
-
 $stmt->execute();
-
-echo json_encode([
-    'status' => true, 'message' => 'Item inserted successfully.',
-    'session' => $_SESSION
-]);
-
 $stmt->close();
+
 
 // Insert item to land
 $sql = "INSERT INTO planets_land_items (item_id, user_id, land_id, qt) 
-    VALUES (?,?,?,?)";
+        VALUES (?,?,?,?)";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("iiii", $item_id, $user_id, $land_id, $qty);
-
 $stmt->execute();
+$stmt->close();
+
+$conn->commit();
 
 echo json_encode([
-    'status' => true, 'message' => 'Item inserted successfully.',
+    'status' => true,
+    'message' => 'Item inserted successfully.',
+    'land_id' => $land_id,
     'session' => $_SESSION
 ]);
-
-$stmt->close();
