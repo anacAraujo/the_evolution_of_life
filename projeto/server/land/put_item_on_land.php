@@ -64,7 +64,7 @@ if ($result->num_rows > 0) {
 }
 
 
-//TODO Verify user has item (SELECT inventory)
+// Verify user has item
 $sql = "SELECT qty FROM planets_items_inventory WHERE item_id = ? AND planets_user_id = ?";
 
 $stmt = $conn->prepare($sql);
@@ -99,10 +99,11 @@ if ($qty_atual <= 0) {
 }
 
 
-//TODO inner join, organism o rows
-//verify if land has items needed (Micro must have water, and water must be empty) (SELECT planets_land_items)
-$sql = "SELECT qt 
+//verify if land has items needed (Micro must have water, and water must be empty)
+$sql = "SELECT qt, symbol 
         FROM planets_land_items 
+            INNER JOIN items
+            ON item_id = items.id
         WHERE user_id = ? AND land_id = ?";
 
 $stmt = $conn->prepare($sql);
@@ -124,17 +125,23 @@ if ($result->num_rows > 0 && $item_symbol === "H2O") {
     return;
 }
 
+if ($result->num_rows <= 0 && $item_symbol === "Organism") {
+    echo json_encode(['status' => false, 'message' => 'Cannot put organism. Land is empty']);
+    return;
+}
+
 if ($result->num_rows > 0 && $item_symbol === "Organism") {
     $row = $result->fetch_assoc();
-    $current_item = $row['id'];
-    if ($current_item != 3) {
+    $current_item = $row['symbol'];
+    if ($current_item != 'H2O') {
         echo json_encode(['status' => false, 'message' => 'Cannot put organism. Land must have water']);
         return;
     }
 }
-// TODO exit 
 
-//TODO remove item from inventory (UPDATE inventory)
+
+
+//Remove item from inventory
 $qty_atual = $qty_atual - $qty;
 
 //Start transaction 
@@ -150,7 +157,7 @@ $stmt->execute();
 $stmt->close();
 
 
-// Insert item to land
+//Insert item to land
 $sql = "INSERT INTO planets_land_items (item_id, user_id, land_id, qt) 
         VALUES (?,?,?,?)";
 
