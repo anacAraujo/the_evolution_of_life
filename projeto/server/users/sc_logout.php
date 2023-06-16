@@ -4,7 +4,7 @@ unset($_SESSION['id']);
 
 
 //VAI PARA O LOGIN
-header(login.php);
+header("Location:../../client/login.html");
 
 
 ?>
