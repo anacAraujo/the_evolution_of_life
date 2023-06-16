@@ -1094,4 +1094,33 @@ body {
   transform: rotate(145deg);
 }
 
+.PlanetaAssetsImgBA {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgBDA {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgc {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgMO {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgS {
+  position: absolute;
+  z-index: 1;
+}
+
+.PlanetaAssetsImgSol {
+  position: absolute;
+  z-index: 1;
+}
 /* FIM PLANETA INTERIOR */
