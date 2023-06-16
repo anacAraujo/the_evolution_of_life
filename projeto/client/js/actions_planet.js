@@ -19,6 +19,7 @@ async function putItemOnLand(landID, itemSymbol) {
         land_id: landID,
         item_symbol: itemSymbol
     };
+
     try {
         const response = await fetch("../server/land/put_item_on_land.php", {
             method: "POST",
@@ -42,21 +43,25 @@ function setEvents() {
     const lands = document.querySelectorAll(".land");
     for (let i = 0; i < lands.length; i++) {
         const land = lands[i];
-        land.onclick = addItem;
+        land.onclick = onLandClick;
     }
 }
 
-function addItem() {
+async function onLandClick() {
     const landId = this.id;
-    console.log("itemID: ", itemID);
+    console.log("landId: ", landId);
 
     const landItem = landItems[landId];
+    console.log("landItem: ", landItem);
+
 
     // Land is empty, put water
-    if (!landItem) {
-        putItemOnLand(landId, 'H2O');
-    }
+    // if (!landItem) {
+    putItemOnLand(landId, 'H2O');
+    // }
 
+
+    await fillLandMap();
 }
 
 async function fillLandMap() {
