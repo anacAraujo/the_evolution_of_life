@@ -412,8 +412,7 @@ body {
   left: 380px;
 }
 
-
-
+/* fim lab */
 
 /* INICIO INDEX/HTML */
 
@@ -449,6 +448,33 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 46px;
+}
+
+@keyframes slide-in {
+  0% {
+      transform: translateX(-350%);
+    }
+  100% {
+      transform: translate(200%, -100%);
+  }
+}
+
+.alien_animado {
+  position: absolute;
+  left: -150%;
+  top: -50%;
+  width: 162.38px;
+  height: 95.76px;
+  animation: slide-in 5s forwards;
+}
+  
+.alien_destino {
+  position: absolute;
+  left: 500px;
+  top: 120px;
+  width: 162.38px;
+  height: 95.76px;
+  
 }
 
 /* INCIO INTERIOR PLANETA */
