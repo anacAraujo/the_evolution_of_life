@@ -64,8 +64,7 @@ async function fillLandMap() {
     console.log(landItems);
 
     for (const land of Object.values(landItems)) {
-        // TODO compare with H2O symbol
-        if (land.item_id === 3) {
+        if (land.symbol === "H2O") {
             document.getElementById(land.land_id).style.background = "radial-gradient(circle, #9ED4F4, #86A7DA)";
         }
 
