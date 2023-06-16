@@ -1140,40 +1140,24 @@ body {
   transform: rotate(145deg);
 }
 
-.PlanetaAssetsImgBA {
+.PlanetaAssetsImg {
   display: none;
   position: absolute;
   z-index: 1;
 }
 
-.PlanetaAssetsImgBDA {
-  display: none;
-  position: absolute;
-  z-index: 1;
+#planeta_interior_balde {
+  height: 60vh;
 }
 
-.PlanetaAssetsImgc {
-  display: none;
-  position: absolute;
-  z-index: 1;
+.land {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.PlanetaAssetsImgMO {
-  display: none;
-  position: absolute;
-  z-index: 1;
-}
-
-.PlanetaAssetsImgS {
-  display: none;
-  position: absolute;
-  z-index: 1;
-}
-
-.PlanetaAssetsImgSol {
-  display: none;
-  position: absolute;
-  z-index: 1;
+.organismo_planeta_interior {
+  height: 30vh;
 }
 
 /* FIM PLANETA INTERIOR */
