@@ -1,3 +1,23 @@
+<?php 
+
+//VAI BUSCAR A PÁGINA ANTERIOR
+$previous=$_SERVER['HTTP_REFERER'];
+
+//MANDA PRO SESSION
+$_SESSION['Avatar_referer'] = $previous;
+
+//DETERMINA PARA ONDE VAI
+if(isset($_SESSION['Avatar_referer']) && $_SESSION['Avatar_referer']!="") {
+
+    $return=$_SESSION['Avatar_referer'];
+}
+//ELSE
+else {
+    $return=$previous;
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -24,11 +44,14 @@
 
 <!--DIV COM PAINEL DE ESCOLHA-->
 <div class="col-8" id="Avatar_form">
+    <a href=<?=$return?>>
     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
         class="bi bi-arrow-left mt-2" id="Avatar_go_back" viewBox="0 0 16 16">
         <path fill-rule="evenodd"
             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
     </svg>
+    </a>
+    
     <!--Fórmulário de Imagens-->
     <form method="post" action="../server/avatar/update_user_avatar.php">
         
@@ -75,7 +98,7 @@ if(mysqli_stmt_prepare($stmt_get_avatars,$query_get_avatars)) {
 else {
     echo "Error" . mysqli_error($local_link);
 }
-$_SESSION['id']=1;
+
 //FECHA AS LIGAÇÕES
 mysqli_stmt_close($stmt_get_avatars);
 

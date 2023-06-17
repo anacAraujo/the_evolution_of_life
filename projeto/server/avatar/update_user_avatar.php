@@ -36,8 +36,16 @@ foreach ($keys as $key => $value) {
 
     //FILTRA O VALOR
     $valor_avatar = htmlspecialchars($valor_avatar);
+
 }
 
+//SE O VALOR QUE VÊM É UM DOS INPUTS QUE AINDA NÃO ESTÁ DESBLOOQUEADO
+if($valor_avatar=="") {
+    header("Location:../../client/avatar.php");
+}
+
+//SE VIER DEFINIDO
+else {
 
 //INICIA O STATEMENT
 $stmt = mysqli_stmt_init($local_link);
@@ -64,3 +72,7 @@ else {
 
     echo "Error" . mysqli_error($local_link);
 }
+
+}
+
+
