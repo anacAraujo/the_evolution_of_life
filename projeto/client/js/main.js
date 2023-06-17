@@ -59,6 +59,14 @@ function mainEvents() {
     document.getElementById("modal_trigger").onclick = function () {
         document.getElementById("modal_logout").style.display = "block";
     }
+
+    document.getElementById("close_modal"). onclick = function () {
+        document.getElementById("modal_logout").style.display = "none";
+    }
+
+    document.getElementById("cancel_modal"). onclick = function () {
+        document.getElementById("modal_logout").style.display = "none";
+    }
 }
 
 window.onload = async function () {
