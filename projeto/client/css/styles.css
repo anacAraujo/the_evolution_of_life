@@ -61,7 +61,7 @@ body {
 
 .mercado_barracas_comprar img:last-child {
   right: -101px;
-    top: -128px;
+  top: -128px;
 }
 
 /* ATUALIZAZAÇÕES MERCADO */
@@ -483,6 +483,7 @@ body {
 .lab_button_elemento3 {
   left: 380px;
 }
+
 .lab_escolha_elementos {
   box-sizing: border-box;
   position: absolute;
@@ -497,23 +498,24 @@ body {
 }
 
 .lab_elementos {
-    position: absolute;
-    width: 70px !important;
-    height: 70px;
-    left: 396px;
-    top: 108px;
-    background: #F59E1B;
-    border-radius: 20px;
-    border: 2px solid #000000;
+  position: absolute;
+  width: 70px !important;
+  height: 70px;
+  left: 396px;
+  top: 108px;
+  background: #F59E1B;
+  border-radius: 20px;
+  border: 2px solid #000000;
 }
 
 .lab_elementos_personalizacao {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
+
 .lab_nome_elemento {
   font-family: 'Karla';
   font-style: normal;
@@ -521,7 +523,7 @@ body {
   font-size: 9px;
   line-height: 11px;
   text-align: center;
-  color:white;
+  color: white;
   font-weight: bold;
 
 }
@@ -575,9 +577,9 @@ body {
 
 .barraprog {
   position: absolute;
-    top: 75%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes slide-in {
@@ -1244,6 +1246,44 @@ body {
 
 .organismo_planeta_interior {
   height: 30vh;
+}
+
+/* Estilos para a modal */
+/* Estilos para a modal */
+.planeta_interior_modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.planeta_interior_modal .modal-content {
+  background-color: #fff;
+  width: 300px;
+  margin: 100px auto;
+  padding: 20px;
+  text-align: center;
+  animation: fadeOut 5s linear 1;
+}
+
+/* Animação para a modal */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    display: none;
+  }
 }
 
 /* FIM PLANETA INTERIOR */
