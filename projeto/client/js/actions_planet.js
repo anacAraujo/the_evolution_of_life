@@ -37,6 +37,29 @@ async function putItemOnLand(landID, itemSymbol) {
     }
 }
 
+async function doFormulaOrganism(landID, formula) {
+    const data = {
+        land_id: landID,
+        formula_name: formula
+    };
+
+    try {
+        const response = await fetch("../server/land/microorganism_action.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log("Success:", result);
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 
 function setEvents() {
     // Set land on click events
@@ -64,22 +87,35 @@ async function onLandClick() {
         }
     }
 
-    //TODO verify if putItemOnLand() is successful then show organism
     if (landItem.item_id === 3) {
         document.getElementById("planeta_interior_orgnism").style.display = "block";
         document.getElementById("planeta_interior_orgnism").onclick = async function () {
             await putItemOnLand(landId, 'Organism');
-            var img = document.createElement("img");
-            img.setAttribute("class", "organismo_planeta_interior");
-            img.src = "assets/planeta_interior/MicroOrganismo.svg";
-            var src = document.getElementById(landId);
-            src.appendChild(img);
+            await fillLandMap();
             document.getElementById("planeta_interior_orgnism").style.display = "none";
         }
     }
 
+    if (landItem.item_id === 11) {
+        document.getElementById("planeta_interior_reproducao").style.display = "block";
+        document.getElementById("planeta_interior_fotossintese").style.display = "block";
 
+        // reprodução
+        document.getElementById("planeta_interior_reproducao").onclick = async function () {
+            await doFormulaOrganism(landId, "reproducao");
+            await fillLandMap();
+            document.getElementById("planeta_interior_reproducao").style.display = "none";
+            document.getElementById("planeta_interior_fotossintese").style.display = "none";
+        }
 
+        //fotossintese
+        document.getElementById("planeta_interior_fotossintese").onclick = async function () {
+            await doFormulaOrganism(landId, "fotossintese");
+            await fillLandMap();
+            document.getElementById("planeta_interior_fotossintese").style.display = "none";
+            document.getElementById("planeta_interior_reproducao").style.display = "none";
+        }
+    }
 }
 
 async function fillLandMap() {
