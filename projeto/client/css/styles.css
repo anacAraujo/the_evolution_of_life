@@ -103,6 +103,13 @@ body {
   top: 334px;
 }
 
+.imgbarraca {
+  width: 7%;
+  position: absolute;
+  top: 18px;
+  left: 166px;
+}
+
 .quadrado_venda {
   background-color: rgba(22.26468488574028, 80.96249878406525, 52.78754644095898, 0.8199999928474426);
   width: 381px;
@@ -515,6 +522,10 @@ body {
   position: absolute;
   left: 698px;
   top: 26px;
+}
+
+.aligned-top-left-4-dif {
+  left: 764px;
 }
 
 .centered-planeta {
