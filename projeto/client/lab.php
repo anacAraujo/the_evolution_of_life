@@ -61,8 +61,6 @@
 
 <?php
 
-session_start();
-
 if (isset($_GET['tipo_formula'])) {
   $botaoClicado = $_GET['tipo_formula'];
 
@@ -77,21 +75,24 @@ include_once "../server/connections/connection.php";
 $local_link= new_db_connection(); 
 
 //VAI AO SESSION BUSCAR A AÇÃO QUE PRECISAS DE FAZER
-
 $_SESSION['id']=1;
 
 //VAI BUSCAR O ID DO UTILIZADOR
 if(isset($_SESSION['id']) && $_SESSION['id']!="") {
 
     $user_id=$_SESSION['id'];
+
+ 
 }
 
-$_SESSION['lab_action']=1;
+$_SESSION['lab_action']=0;
 
 //SE VIER DEFINIDA A AÇÕA DO SIDE
 if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
 
     $action=$_SESSION['lab_action'];
+
+    
 
     //INICIA O STATEMENT QUE VAI BUSCAR OS ELEMENTOS PARA MUDAR
     $stmt=mysqli_stmt_init($local_link);
@@ -119,6 +120,7 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
         mysqli_stmt_store_result($stmt);
 
         $rows=mysqli_stmt_num_rows($stmt);
+
 
         if($rows>0) {
 
@@ -152,7 +154,6 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
             </div></div>";
         }
     }
-
     else {
         echo "Error" . mysqli_error($local_link);
     }
