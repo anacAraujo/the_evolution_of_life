@@ -51,9 +51,10 @@ function logout() {
 }
 
 function mainEvents() {
+    console.log(userInfo.id_settings);
     document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
-    document.getElementById("frasco").src = '<img src="assets/icons_gerais/progresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
-    document.getElementById("planeta").src = '<img class="centered-planeta" src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Planeta.svg">';
+    document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
+    document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
 
     // Logout click event
     document.getElementById("modal_trigger").onclick = function () {
