@@ -154,8 +154,9 @@ if ($result && $result->num_rows > 0) {
 
             if ($current_time < $break_end) {
                 echo json_encode([
-                    'status' => true,
-                    'message' => 'Microorganism is on break.'
+                    'status' => false,
+                    'message' => 'Microorganism is on break.',
+                    'code' => 'MAX_USAGE_REACHED'
                 ]);
                 return;
             }
@@ -170,17 +171,6 @@ echo json_encode([
     'status' => false,
     'message' => 'Microorganism is not on break.'
 ]);
-$new_item_usage = 0;
-
-// Reset item_usage
-$sql = "UPDATE microorganism_usage 
-        SET item_usage = ?
-        WHERE planets_land_items_item_id = ? AND planets_land_items_user_id = ? AND planets_land_items_land_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("iiii", $new_item_usage, $item_id, $user_id, $land_id);
-
-$stmt->execute();
-$stmt->close();
 
 // Remove and add items from iventory
 foreach ($formula_items as $item) {
