@@ -41,30 +41,31 @@ function logout() {
         document.getElementById("modal_logout").style.display = "block";
     }
 
-    document.getElementById("close_modal"). onclick = function () {
+    document.getElementById("close_modal").onclick = function () {
         document.getElementById("modal_logout").style.display = "none";
     }
 
-    document.getElementById("cancel_modal"). onclick = function () {
+    document.getElementById("cancel_modal").onclick = function () {
         document.getElementById("modal_logout").style.display = "none";
     }
 }
 
 function mainEvents() {
-    document.getElementById("avatar").src += "<img src='assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg' alt=''>";
-    document.getElementById("frasco").src += '<img src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Frasco.svg" alt="">';
-    document.getElementById("planeta").src += '<img class="centered-planeta" src="assets/icons_gerais/pregresso' + userInfo.id_settings + '/Planeta.svg">';
+    console.log(userInfo.id_settings);
+    document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
+    document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
+    document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
 
     // Logout click event
     document.getElementById("modal_trigger").onclick = function () {
         document.getElementById("modal_logout").style.display = "block";
     }
 
-    document.getElementById("close_modal"). onclick = function () {
+    document.getElementById("close_modal").onclick = function () {
         document.getElementById("modal_logout").style.display = "none";
     }
 
-    document.getElementById("cancel_modal"). onclick = function () {
+    document.getElementById("cancel_modal").onclick = function () {
         document.getElementById("modal_logout").style.display = "none";
     }
 }
