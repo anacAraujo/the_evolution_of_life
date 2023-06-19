@@ -116,7 +116,11 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
      //EXECUTA O STATEMENT
      if(mysqli_stmt_execute($stmt)) {
 
-        if(mysqli_stmt_num_rows($stmt)>0) {
+        mysqli_stmt_store_result($stmt);
+
+        $rows=mysqli_stmt_num_rows($stmt);
+
+        if($rows>0) {
 
         //VAI BUSCAR OS DADOS
         while(mysqli_stmt_fetch($stmt)) {
@@ -124,13 +128,15 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
             $elementos_compor[$element_id] = array("id" => $element_id, "name" => $element_name, "symbol" => $element_symbol, "goal" => $element_goal, "qnt_items_default" => $element_qnt_default, "side" => $element_side);
 
             //MOSTRA 
-            echo "<pre>" . print_r($elementos_compor[$element_id],true) . "ID DO ARRAY NUMÉRICO: $element_id". "</pre>";
+            //echo "<pre>" . print_r($elementos_compor[$element_id],true) . "ID DO ARRAY NUMÉRICO: $element_id". "</pre>";
 
             echo "<div class='lab_elementos'>
-                    <input class='lab_elementos_personalizacao' type='image' src='assets/lab/icons_elementos/$element_symbol.svg'>
-                    <p class='lab_nome_elemento'>$element_name</p>
+                    <input class='lab_elementos_personalizacao pt-3' type='image' src='assets/lab/icons_elementos/$element_symbol.svg'>
+                    <p class='lab_nome_elemento pt-2'>$element_name</p>
                 </div>";
         }
+
+        
 
         //FECHA O STATEMENT
         mysqli_stmt_close($stmt);
@@ -140,7 +146,10 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
         else {
 
             //MENSAGEM DE NÃO TER ITEMS PARA AÇÃO
-            echo "Os items que tentou selecionar não se encontram disponíveis.";
+            echo "<div class='row w-100'>
+            <div class='col-12'>
+            <p class='text-center fw-bold pt-2 w-100 ps-5'>Os items que tentou selecionar não se encontram disponíveis.</p>
+            </div></div>";
         }
     }
 

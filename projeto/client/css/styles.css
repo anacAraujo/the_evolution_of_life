@@ -504,6 +504,7 @@ body {
     top: 108px;
     background: #F59E1B;
     border-radius: 20px;
+    border: 2px solid #000000;
 }
 
 .lab_elementos_personalizacao {
@@ -520,8 +521,9 @@ body {
   font-size: 9px;
   line-height: 11px;
   text-align: center;
-  color: #FFFFFF;
-  border: 1px solid #000000;
+  color:white;
+  font-weight: bold;
+
 }
 
 /* fim lab */
