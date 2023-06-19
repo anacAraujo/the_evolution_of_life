@@ -167,15 +167,93 @@ echo json_encode([
     'message' => 'Microorganism is not on break.'
 ]);
 
+// Remove items from iventory
+foreach ($formula_items as $id_item) {
+    if ($id_item === 11) {
+        continue; // Ignorar atualização de quantidade para o item com ID 11
+    }
 
+    // Get current quantity
+    $sql = "SELECT qty FROM formula_itens WHERE items_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id_item);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
+    if (!$result) {
+        echo json_encode(['status' => false, 'message' => $conn->error]);
+        return;
+    }
 
-// TODO Remove items from iventory
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $qty = $row['qty'];
+
+        // Update planets_items_inventory
+        $sql = "UPDATE planets_items_inventory SET qty = qty - ? WHERE item_id = ? AND planets_user_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii", $qty, $item_id, $user_id);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    echo json_encode(['status' => true, 'message' => "done"]);
+    return;
+}
 
 // TODO Add items to inventory
 
+
 // TODO Add formula do history
+if ($formula_name === "fotossintese") {
+    $direcao = 0;
+} else if ($formula_name === "reproducao") {
+    $direcao = 1;
+}
+
+$sql = "INSERT INTO used_formulas_planet (planets_user_id, formula_id, direction) 
+        VALUES (?,?,?)";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iii", $user_id, $formula_id, $direcao);
+$stmt->execute();
+$stmt->close();
+
+$conn->commit();
+
+echo json_encode([
+    'status' => true,
+    'message' => 'Formula inserted successfully.'
+]);
 
 // TODO Increment organism actions
+// Get current quantity
+$sql = "SELECT item_usage FROM microorganism_usage
+WHERE planets_land_items_item_id = ? AND planets_land_items_user_id = ? AND planets_land_items_land_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iii", $item_id, $user_id, $land_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$stmt->close();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $item_usage = $row['item_usage'];
+    $new_item_usage = $item_usage + 1;
+
+    // Update planets_items_inventory
+    $sql = "UPDATE planets_items_inventory SET item_usage = ?
+     WHERE planets_land_items_item_id = ? AND planets_land_items_user_id = ? AND planets_land_items_land_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iiii", $new_item_usage, $item_id, $user_id, $land_id);
+
+    $stmt->execute();
+    $stmt->close();
+}
+
 
 // TODO Start break if organism has made max actions
+if ($new_item_usage) {
+    # code...
+}
