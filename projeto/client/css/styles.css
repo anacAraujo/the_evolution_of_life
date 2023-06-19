@@ -90,7 +90,7 @@ body {
 }
 
 .bmercado-1 {
-  left: 117px;
+  left: 154px;
 }
 
 .bmercado-2 {
@@ -254,6 +254,14 @@ body {
 
 .sdireita_troca {
   top: 263px;
+}
+
+.barracasgerais-def {
+  display: none;
+}
+
+.barracasprincipais-def {
+  display: block;
 }
 
 /* fim Mercado */
