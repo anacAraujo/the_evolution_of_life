@@ -132,7 +132,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             mysqli_stmt_fetch($stmt_current_avatar);
 
            if($avatar_atual==1) {
-            $fullbody="";
+            $fullbody="Avatar1.svg";
 
            }
            else {
@@ -361,7 +361,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
     //FECHA AS LIGAÇÕES
 mysqli_close($local_link);
 }
-$fullbody="Avatar1.svg";
+
 echo "
 <!--DIV QUE MOSTRA O AVATAR-->
 <div class='col-4 align-bottom text-center'>
