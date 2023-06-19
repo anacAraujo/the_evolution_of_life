@@ -469,6 +469,24 @@ body {
   border-radius: 20px;
 }
 
+.lab_elementos {
+    position: absolute;
+    width: 70px !important;
+    height: 70px;
+    left: 396px;
+    top: 108px;
+    background: #F59E1B;
+    border-radius: 20px;
+}
+
+.lab_elementos_personalizacao {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+}
+
 /* fim lab */
 
 /* INICIO INDEX/HTML */
