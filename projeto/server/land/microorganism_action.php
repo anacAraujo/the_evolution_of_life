@@ -197,9 +197,6 @@ foreach ($formula_items as $id_item) {
         $stmt->execute();
         $stmt->close();
     }
-
-    echo json_encode(['status' => true, 'message' => "done"]);
-    return;
 }
 
 // TODO Add items to inventory
