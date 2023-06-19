@@ -156,7 +156,7 @@ else {
 }
 
 //FECHA AS LIGAÇÕES
-mysqli_stmt_close($stmt_get_simple_elements);
+mysqli_stmt_close($stmt_get_complex_elements);
 
 
 
