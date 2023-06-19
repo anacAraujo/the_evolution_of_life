@@ -65,6 +65,8 @@ $local_link= new_db_connection();
 //INICIA O STATEMENT QUE VAI BUSCAR OS AVATARES
 $stmt_get_avatars=mysqli_stmt_init($local_link);
 
+$fullbody="Avatar1.svg";
+
 //CRIA A QUERY
 $query_get_avatars="SELECT id,path FROM avatars";
 
