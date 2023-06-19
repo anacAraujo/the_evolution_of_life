@@ -66,108 +66,86 @@ include_once "../server/connections/connection.php";
 //CRIA A LIGAÇÃO
 $local_link= new_db_connection(); 
 
-//INICIA O STATEMENT QUE VAI BUSCAR OS ELEMENTOS SIMPLES
-$stmt_get_simple_elements=mysqli_stmt_init($local_link);
+//VAI AO SESSION BUSCAR A AÇÃO QUE PRECISAS DE FAZER
+session_start();
 
-//CRIA A QUERY
-$query_get_simple_elements="SELECT *
-                            FROM items
-                            INNER JOIN formula_itens
-                            WHERE side = 0";
+$_SESSION['id']=1;
 
-//CRIA O ARRAY QUE OS VAI GUARDAR
-$simple_elements=array();
+//VAI BUSCAR O ID DO UTILIZADOR
+if(isset($_SESSION['id']) && $_SESSION['id']!="") {
 
-//PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_get_simple_elements,$query_get_simple_elements)) {
+    $user_id=$_SESSION['id'];
+}
 
-    //DÁ BIND DOS RESULTADOS
-    mysqli_stmt_bind_result($stmt_get_simple_elements,$simple_element_id, $simple_element_name, $simple_element_symbol, $simple_element_goal, $simple_element_qnt_default, $simple_element_side);
+$_SESSION['lab_action']=1;
 
-    //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_get_simple_elements)) {
+//SE VIER DEFINIDA A AÇÕA DO SIDE
+if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
 
+    $action=$_SESSION['lab_action'];
+
+    //INICIA O STATEMENT QUE VAI BUSCAR OS ELEMENTOS PARA MUDAR
+    $stmt=mysqli_stmt_init($local_link);
+
+    //DEFINE A QUERY
+    $query="SELECT items.id, items.name, symbol, goal, qnt_elements_default, side
+    FROM items
+    INNER JOIN formula_itens
+    ON items_id=items.id 
+    INNER JOIN planets_items_inventory ON item_id=items.id
+    WHERE planets_user_id=$user_id AND side = $action";
+
+    //CRIA O ARRAY QUE OS VAI GUARDAR
+    $elements=array();
+
+    //PREPARA O STATEMENT PARA COMPOR ELEMENTOS
+    if(mysqli_stmt_prepare($stmt,$query)) {
+
+         //DÁ BIND DOS RESULTADOS
+    mysqli_stmt_bind_result($stmt,$element_id, $element_name, $element_symbol, $element_goal, $element_qnt_default, $element_side);
+
+     //EXECUTA O STATEMENT
+     if(mysqli_stmt_execute($stmt)) {
+
+        if(mysqli_stmt_num_rows>0) {
 
         //VAI BUSCAR OS DADOS
-        while(mysqli_stmt_fetch($stmt_get_simple_elements)) {
+        while(mysqli_stmt_fetch($stmt)) {
 
-            //MANDA PARA O ARRAY
-            $simple_elements[$simple_element_id]++;
+            $elementos_compor[$element_id] = array("id" => $element_id, "name" => $element_name, "symbol" => $element_symbol, "goal" => $element_goal, "qnt_items_default" => $element_qnt_default, "side" => $element_side);
 
             //MOSTRA 
-            echo "";
+            echo "<pre>" . print_r($elementos_compor[$element_id],true) . "ID DO ARRAY NUMÉRICO: $element_id". "</pre>";
 
         }
+
+        //FECHA O STATEMENT
+        mysqli_stmt_close($stmt);
+
+        }
+        //SE TIVER 0 DADOS
+        else {
+
+            //MENSAGEM DE NÃO TER ITEMS PARA AÇÃO
+        }
+
+
+        
+        
     }
+
     else {
         echo "Error" . mysqli_error($local_link);
     }
-}
-else {
-    echo "Error" . mysqli_error($local_link);
-}
 
-//FECHA AS LIGAÇÕES
-mysqli_stmt_close($stmt_get_simple_elements);
-
-
-//INICIA O STATEMENT QUE VAI BUSCAR OS ELEMENTOS COMPLEXOS
-$stmt_get_complex_elements=mysqli_stmt_init($local_link);
-
-//CRIA A QUERY
-$query_get_complex_elements="SELECT *
-                            FROM items
-                            INNER JOIN formula_itens
-                            WHERE side = 0";
-
-//CRIA O ARRAY QUE OS VAI GUARDAR
-$complex_elements=array();
-
-//PREPARA O STATEMENT
-if(mysqli_stmt_prepare($stmt_get_complex_elements,$query_get_complex_elements)) {
-
-    //DÁ BIND DOS RESULTADOS
-    mysqli_stmt_bind_result($stmt_get_complex_elements,$complex_element_id, $complex_element_name, $complex_element_symbol, $complex_element_goal, $complex_element_qnt_default, $complex_element_side);
-
-    //EXECUTA O STATEMENT
-    if(mysqli_stmt_execute($stmt_get_complex_elements)) {
-
-
-        //VAI BUSCAR OS DADOS
-        while(mysqli_stmt_fetch($stmt_get_complex_elements)) {
-
-            //MANDA PARA O ARRAY
-            $complex_elements[$complex_element_id]++;
-        }
-        // MOSTRA
-        echo "
-        <div class='col-3 pt-3 mt-2 text-center'>
-            <button class='Avatar_form_button' id='Avatar_current'>
-                <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
-            </button>
-        </div>";
     }
+    //SE DER ERRO NA PREPARAÇÃO DE UM STATEMENT
     else {
         echo "Error" . mysqli_error($local_link);
     }
-}
-else {
-    echo "Error" . mysqli_error($local_link);
-}
 
-//FECHA AS LIGAÇÕES
-mysqli_stmt_close($stmt_get_complex_elements);
-
-
-
-
-
-
-
-
-
-
-
+    }
+    
 
 
 
