@@ -104,6 +104,8 @@ else {
 //FECHA AS LIGAÇÕES
 mysqli_stmt_close($stmt_get_avatars);
 
+session_start();
+
 //VAI DESCOBRIR QUAL É O AVATAR SELECIONADO
 if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
 
@@ -134,6 +136,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             mysqli_stmt_fetch($stmt_current_avatar);
 
            if($avatar_atual==1) {
+
             $fullbody="Avatar1.svg";
 
            }
