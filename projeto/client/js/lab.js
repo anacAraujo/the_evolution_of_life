@@ -35,6 +35,7 @@ function labEventos() {
     document.getElementById("lab_elemento2").style.display = "none";
     document.getElementById("lab_decompoem").style.display = "none";
     document.getElementById("lab_elemento3").style.display = "none";
+    document.getElementById("lab_escolha").style.display = "none";
 
     
     document.getElementById("lab_criar").onclick = function () {
@@ -46,6 +47,18 @@ function labEventos() {
         document.getElementById("lab_sinal_mais").style.display = "block";
         document.getElementById("lab_elemento1").style.display = "block";
         document.getElementById("lab_elemento2").style.display = "block";
+        
+        document.getElementById("lab_elemento1").onclick = function() {
+            document.getElementById("lab_combinar").style.display = "none";
+            document.getElementById("lab_escolha").style.display = "block";
+
+        }
+
+        document.getElementById("lab_elemento2").onclick = function() {
+            document.getElementById("lab_combinar").style.display = "none";
+            document.getElementById("lab_escolha").style.display = "block";
+
+        }
     }
     
     document.getElementById("lab_decompor").onclick = function () {
@@ -55,6 +68,14 @@ function labEventos() {
         document.getElementById("lab_decompor").style.display = "none";
         document.getElementById("lab_decompoem").style.display = "block";
         document.getElementById("lab_elemento3").style.display = "block";
+
+        document.getElementById("lab_elemento3").onclick = function() {
+            document.getElementById("lab_decompoem").style.display = "none";
+            document.getElementById("lab_escolha").style.display = "block";
+
+
+        }
+        
     }
     
 }
