@@ -35,13 +35,13 @@ body {
 }
 
 .mercado_barraca {
-  height: 51vh;
+  height: 67vh;
 }
 
 .mercado_barraca_user {
   position: absolute;
-  left: 49px;
-  bottom: 45px;
+  left: 4px;
+  bottom: 19px;
 }
 
 .mercado_barracas_comprar {
@@ -55,11 +55,13 @@ body {
 }
 
 .mercado_barracas_comprar img:first-child {
-  left: 0;
+  left: -19px;
+  top: -128px;
 }
 
 .mercado_barracas_comprar img:last-child {
-  right: 0;
+  right: -101px;
+    top: -128px;
 }
 
 /* ATUALIZAZAÇÕES MERCADO */
@@ -89,6 +91,16 @@ body {
 
 .bmercado-1 {
   left: 117px;
+}
+
+.bmercado-2 {
+  left: 502px;
+  top: 334px;
+}
+
+.bmercado-3 {
+  left: 626px;
+  top: 334px;
 }
 
 .quadrado_venda {
@@ -456,6 +468,18 @@ body {
 .lab_button_elemento3 {
   left: 380px;
 }
+.lab_escolha_elementos {
+  box-sizing: border-box;
+  position: absolute;
+  width: 362px;
+  height: 205px;
+  left: 250px;
+  top: 91px;
+  background: #FFCB76;
+  border: 2px solid #000000;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
 
 /* fim lab */
 
@@ -467,8 +491,7 @@ body {
 
 .aligned-top-right {
   position: absolute;
-  top: 0;
-  right: 0;
+  left: 776px;
 }
 
 .aligned-top-left-1 {
@@ -483,16 +506,29 @@ body {
 
 .aligned-top-left-3 {
   position: absolute;
-  left: 165px;
+  left: 149px;
+  width: 7%;
+  top: 20px;
+}
+
+.aligned-top-left-4 {
+  position: absolute;
+  left: 698px;
+  top: 26px;
 }
 
 .centered-planeta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 46px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.barraprog {
+  position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 @keyframes slide-in {
@@ -512,11 +548,12 @@ body {
   width: 162.38px;
   height: 95.76px;
   animation: slide-in 5s forwards;
+  z-index: 1;
 }
 
 .alien_destino {
   position: absolute;
-  left: 500px;
+  left: 510px;
   top: 120px;
   width: 162.38px;
   height: 95.76px;
