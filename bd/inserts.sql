@@ -112,7 +112,9 @@ INSERT INTO `land` (`id`) VALUES
 --
 
 INSERT INTO `formulas` (`id`, `formula_location_id`, `name`) VALUES
-(1, 1, 'Água');
+(1, 1, 'agua'),
+(2, 2, 'reproducao'),
+(3, 2, 'fotossintese');
 
 --
 -- Extraindo dados da tabela `formula_itens`
@@ -122,6 +124,8 @@ INSERT INTO `formula_itens` (`items_id`, `formula_id`, `qty`, `side`) VALUES
 (1, 1, 2, 0),
 (2, 1, 1, 0),
 (3, 1, 1, 1);
+INSERT INTO `formula_itens` (`formula_id`, `items_id`, `qty`, `side`) VALUES ('2', '10', '10', '0'), ('2', '11', '1', '1');
+INSERT INTO `formula_itens` (`formula_id`, `items_id`, `qty`, `side`) VALUES ('3', '5', '1', '1'), ('3', '2', '1', '0'), ('3', '10', '1', '0');
 
 --
 -- Extraindo dados da tabela `market_offers`
