@@ -361,7 +361,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
     //FECHA AS LIGAÇÕES
 mysqli_close($local_link);
 }
-
+$fullbody="Avatar1.svg";
 echo "
 <!--DIV QUE MOSTRA O AVATAR-->
 <div class='col-4 align-bottom text-center'>
