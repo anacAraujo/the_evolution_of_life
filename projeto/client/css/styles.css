@@ -90,7 +90,7 @@ body {
 }
 
 .bmercado-1 {
-  left: 117px;
+  left: 154px;
 }
 
 .bmercado-2 {
@@ -254,6 +254,14 @@ body {
 
 .sdireita_troca {
   top: 263px;
+}
+
+.barracasgerais-def {
+  display: none;
+}
+
+.barracasprincipais-def {
+  display: block;
 }
 
 /* fim Mercado */
@@ -486,6 +494,36 @@ body {
   border: 2px solid #000000;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+}
+
+.lab_elementos {
+    position: absolute;
+    width: 70px !important;
+    height: 70px;
+    left: 396px;
+    top: 108px;
+    background: #F59E1B;
+    border-radius: 20px;
+    border: 2px solid #000000;
+}
+
+.lab_elementos_personalizacao {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  
+}
+.lab_nome_elemento {
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 9px;
+  line-height: 11px;
+  text-align: center;
+  color:white;
+  font-weight: bold;
+
 }
 
 /* fim lab */

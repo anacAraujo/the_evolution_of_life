@@ -39,6 +39,7 @@ function labEventos() {
 
     
     document.getElementById("lab_criar").onclick = function () {
+        enviarInformacao();
         document.getElementById("lab_alien").style.display = "none";
         document.getElementById("lab_texto").style.display = "none";
         document.getElementById("lab_criar").style.display = "none";
@@ -62,6 +63,7 @@ function labEventos() {
     }
     
     document.getElementById("lab_decompor").onclick = function () {
+        enviarInformacao();
         document.getElementById("lab_alien").style.display = "none";
         document.getElementById("lab_texto").style.display = "none";
         document.getElementById("lab_criar").style.display = "none";
@@ -77,6 +79,19 @@ function labEventos() {
         }
         
     }
+
+    function enviarInformacao(botao) {
+        // Requisição AJAX para enviar a informação para o arquivo PHP
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            // Callback de sucesso (opcional)
+            console.log("Informação enviada com sucesso para o PHP");
+          }
+        };
+        xmlhttp.open("GET", "lab.php?tipo_formula=" + botao, true);
+        xmlhttp.send();
+      }
     
 }
 
