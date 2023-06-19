@@ -60,6 +60,16 @@
     </div>
 
 <?php
+
+session_start();
+
+if (isset($_GET['tipo_formula'])) {
+  $botaoClicado = $_GET['tipo_formula'];
+
+  // Armazene a informação do botão clicado na sessão
+  $_SESSION['tipo_formula'] = $botaoClicado;
+}
+
 //FAZ LIGAÇÃO À BASE DE DADOS
 include_once "../server/connections/connection.php";
 
@@ -116,6 +126,10 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
             //MOSTRA 
             echo "<pre>" . print_r($elementos_compor[$element_id],true) . "ID DO ARRAY NUMÉRICO: $element_id". "</pre>";
 
+            echo "<div class='lab_elementos'>
+                    <input class='lab_elementos_personalizacao' type='image' src='assets/lab/icons_elementos/$element_symbol.svg'>
+                    <p class='lab_nome_elemento'>$element_name</p>
+                </div>";
         }
 
         //FECHA O STATEMENT
@@ -126,6 +140,7 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
         else {
 
             //MENSAGEM DE NÃO TER ITEMS PARA AÇÃO
+            echo "Os items que tentou selecionar não se encontram disponíveis.";
         }
     }
 
