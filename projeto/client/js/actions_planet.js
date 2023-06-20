@@ -34,6 +34,7 @@ async function putItemOnLand(landID, itemSymbol) {
         return result;
     } catch (error) {
         console.error("Error:", error);
+        console.log("Error response:", error.response);
     }
 }
 
