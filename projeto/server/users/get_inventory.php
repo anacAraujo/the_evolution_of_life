@@ -21,8 +21,9 @@ $user_id = $_SESSION["id"];
 
 $conn = new_db_connection();
 
-$sql = "SELECT *
+$sql = "SELECT planets_user_id, item_id, qty, symbol
         FROM planets_items_inventory
+            INNER JOIN items ON items.id = planets_items_inventory.item_id
         WHERE planets_user_id = ?";
 
 $stmt = $conn->prepare($sql);
@@ -43,7 +44,9 @@ $response = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $response[] = $row;
+        if ($row['qty'] > 0) {
+            $response[] = $row;
+        }
     }
 }
 
