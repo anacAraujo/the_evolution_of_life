@@ -16,7 +16,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
     $id_user = $_SESSION['id'];
 }
 
-echo "<pre>" . print_r($element_data, true) . "</pre>";
+//echo "<pre>" . print_r($element_data, true) . "</pre>";
 
 //CRIA UM ARRAY ONDE OS VALORES SÃO OS NOMES DOS INPUTS DAS IMAGENS QUE É O I
 $keys = array_keys($element_data);

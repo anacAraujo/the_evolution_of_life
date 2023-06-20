@@ -76,8 +76,6 @@ include_once "../server/connections/connection.php";
 //CRIA A LIGAÇÃO
 $local_link= new_db_connection(); 
 
-//VAI AO SESSION BUSCAR A AÇÃO QUE PRECISAS DE FAZER
-$_SESSION['id']=1;
 
 //VAI BUSCAR O ID DO UTILIZADOR
 if(isset($_SESSION['id']) && $_SESSION['id']!="") {
@@ -87,7 +85,7 @@ if(isset($_SESSION['id']) && $_SESSION['id']!="") {
  
 }
 
-$_SESSION['lab_action']=0;
+$_SESSION['lab_action']=1;
 
 //SE VIER DEFINIDA A AÇÕA DO SIDE
 if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
