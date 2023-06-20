@@ -666,6 +666,9 @@ body {
 }
 
 /* INCIO INTERIOR PLANETA */
+#planeta_interior {
+  display: none;
+}
 
 .v13_5 {
   width: 100%;
