@@ -1248,8 +1248,6 @@ body {
   height: 30vh;
 }
 
-/* Estilos para a modal */
-/* Estilos para a modal */
 .planeta_interior_modal {
   display: none;
   position: fixed;
@@ -1267,7 +1265,7 @@ body {
   margin: 100px auto;
   padding: 20px;
   text-align: center;
-  animation: fadeOut 5s linear 1;
+  animation: fadeOut 5s linear infinite;
 }
 
 /* Animação para a modal */
@@ -1282,7 +1280,6 @@ body {
 
   100% {
     opacity: 0;
-    display: none;
   }
 }
 
