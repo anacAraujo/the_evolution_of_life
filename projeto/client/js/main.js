@@ -68,6 +68,24 @@ function mainEvents() {
     document.getElementById("cancel_modal").onclick = function () {
         document.getElementById("modal_logout").style.display = "none";
     }
+
+    // List of the quantity of elements
+    document.getElementById("div_quantidade_elementos").style.display = "none";
+
+    document.getElementById("icon_atmosfera").onclick = function() {
+        document.getElementById("div_quantidade_elementos").style.display = "block";
+        moverElemento();
+    }
+}
+
+function moverElemento() {
+    var elemento = document.getElementById("planeta_lateral");
+  
+    var larguraPagina = window.innerWidth;
+    var novaPosicao = (larguraPagina / 2) - (elemento.offsetWidth / 2);
+  
+    elemento.style.transition = "all 1s ease";
+    elemento.style.left = novaPosicao + "px";
 }
 
 window.onload = async function () {
