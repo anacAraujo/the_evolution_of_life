@@ -44,7 +44,9 @@ $response = array();
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $response[] = $row;
+        if ($row['qty'] > 0) {
+            $response[] = $row;
+        }
     }
 }
 
