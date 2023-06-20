@@ -53,7 +53,21 @@ async function doFormulaOrganism(landID, formula) {
         });
 
         const result = await response.json();
-        console.log("Success:", result);
+        if (result.code === 'MAX_USAGE_REACHED') {
+            const limitModal = document.getElementById('limitModal');
+            limitModal.style.display = 'block';
+
+            //TODO fix modal
+            setTimeout(() => {
+                limitModal.style.animation = 'fadeOut 1s';
+                setTimeout(() => {
+                    limitModal.style.display = 'none';
+                    limitModal.style.animation = '';
+                }, 1000);
+            }, 20000);
+            return;
+        }
+        console.log(result);
         return result;
     } catch (error) {
         console.error("Error:", error);
