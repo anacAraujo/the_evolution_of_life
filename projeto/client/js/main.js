@@ -51,6 +51,7 @@ function logout() {
 }
 
 function mainEvents() {
+    
     console.log(userInfo.id_settings);
     document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
     document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
@@ -70,16 +71,26 @@ function mainEvents() {
     }
 
     // List of the quantity of elements
-    document.getElementById("div_quantidade_elementos").style.display = "none";
-
+    
     document.getElementById("icon_atmosfera").onclick = function() {
-        document.getElementById("div_quantidade_elementos").style.display = "block";
-        moverElemento();
+        document.getElementById("quantidades_elementos").style.display = "block";
+        
+        document.getElementById("go_back_to_index").onclick = function() {
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("icon_atmosfera").style.display = "none";
+        document.getElementById("icon_lab").style.display = "none";
+        document.getElementById("icon_mercado").style.display = "none";
+        document.getElementById("icon_avatar").style.display = "none";
+        document.getElementById("modal_trigger").style.display = "none";
+
+        
     }
 }
 
 function moverElemento() {
-    var elemento = document.getElementById("planeta_lateral");
+    var elemento = document.getElementById("");
   
     var larguraPagina = window.innerWidth;
     var novaPosicao = (larguraPagina / 2) - (elemento.offsetWidth / 2);
