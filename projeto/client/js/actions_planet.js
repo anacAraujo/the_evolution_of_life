@@ -57,14 +57,13 @@ async function doFormulaOrganism(landID, formula) {
             const limitModal = document.getElementById('limitModal');
             limitModal.style.display = 'block';
 
-            //TODO fix modal
             setTimeout(() => {
-                limitModal.style.animation = 'fadeOut 1s';
+                limitModal.classList.add('fadeOut');
                 setTimeout(() => {
                     limitModal.style.display = 'none';
-                    limitModal.style.animation = '';
+                    limitModal.classList.remove('fadeOut');
                 }, 1000);
-            }, 20000);
+            }, 5000); // Tempo ajustado para 5 segundos (5000 milissegundos)
             return;
         }
         console.log(result);
