@@ -611,11 +611,51 @@ body {
 
 }
 
+#quantidades_elementos {
+  display: none;
+}
+
 .planeta_quantidade_elementos {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.planeta_quantidade_elementos_seta {
+  position: absolute;
+  top: 21px;
+  left: 5px;
+}
+
+.planeta_quantidade_elementos_titulo {
+  position: absolute;
+  width: 163px;
+  height: 23px;
+  left: 53px;
+  top: 58px;
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.planeta_quantidade_elementos_ul {
+  list-style: none;
+  position: absolute;
+  width: 215px;
+  height: 235px;
+  left: 29px;
+  top: 92px;
+  font-family: 'Karla';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: #FFFFFF;
 }
 
 /* INCIO INTERIOR PLANETA */
