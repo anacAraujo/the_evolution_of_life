@@ -528,6 +528,12 @@ body {
 
 }
 
+.lab_container {
+  background-image: url("../img/fundo_lab.png");
+  background-position: center;
+  background-size: cover;
+}
+
 /* fim lab */
 
 /* INICIO INDEX/HTML */
