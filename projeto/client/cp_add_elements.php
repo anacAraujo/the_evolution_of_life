@@ -129,7 +129,7 @@ if(isset($_GET['choice']) && $_GET['choice'] !="") {
                     <?php
 
                     //PERCORRE O ARRAY DOS ELEMENTOS
-                    foreach($elementos_compor as $key => $value){
+                    foreach($elementos_compor as $key => $value) {
 
                         echo '<option class="text-center" value='. $elementos_compor[$key]["symbol"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
                     }
