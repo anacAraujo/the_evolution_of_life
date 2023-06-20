@@ -17,7 +17,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
 
 
 //SE VIER DEFINIDA A AÇÕA DO SIDE
-if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
+if ((isset($_GET['lab_action']) && $_GET['lab_action'] != "")) {
 
     $action = htmlspecialchars($_GET['lab_action']);
 
@@ -30,7 +30,7 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
     INNER JOIN formula_itens
     ON items_id=items.id 
     INNER JOIN planets_items_inventory ON item_id=items.id
-    WHERE planets_user_id=$user_id AND side = $action LIMIT 4";
+    WHERE planets_user_id=$user_id AND side = $action AND planets_items_inventory.qty > 0 LIMIT 10";
 
     //CRIA O ARRAY QUE OS VAI GUARDAR
     $elements = array();
@@ -83,6 +83,13 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
     else {
         echo "Error" . mysqli_error($local_link);
     }
+}
+
+$modal_state=0;
+//VAI VER SE TEM DE ESCOLHER UM ELEMENTO
+if(isset($_GET['choice']) && $_GET['choice'] !="") {
+
+    $modal_state=1;
 }
 ?>
 
@@ -150,18 +157,25 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
 
                 if(isset($_GET['error']) && $_GET['error'] != "") {
 
-                    echo "<p class='text-center fw-bold'>Escolha os símbolos antes de os combinar!</p>";
+                    if($_GET['error']=="empty") {
+
+                        echo "<p class='text-center fw-bold'>Escolha os símbolos antes de os combinar!</p>";
+
+                    }
+                    else if($_GET['error']=="qty") {
+
+                        echo "<p class='text-center fw-bold'>Não possui itens suficientes!</p>";
+                    }
+                    else if($_GET['error']=="formula") {
+                        echo "<p class='text-center fw-bold'>Não é possível combinar esses elementos!</p>";
+                    }
+
+                    
                 }
                     ?>
 
-                
-
-            
-
-
-
         </div>
     </div>
-</body>
 
+</body>
 </html>
