@@ -611,6 +611,13 @@ body {
 
 }
 
+.planeta_quantidade_elementos {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* INCIO INTERIOR PLANETA */
 
 .v13_5 {

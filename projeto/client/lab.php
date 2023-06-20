@@ -30,7 +30,7 @@
             </div>
 
             <!--criar elementos-->
-            <div id="lab_criar" class="lab_button_criar lab_button_div_out">
+            <div id="lab_criar" class="lab_button_criar lab_button_div_out w-0">
                 <div class="lab_button_div_in"></div><span class="lab_button_span">Criar</span>
             </div>
             <div>
@@ -60,12 +60,14 @@
     </div>
 
 <?php
+session_start();
 
 if (isset($_GET['tipo_formula'])) {
   $botaoClicado = $_GET['tipo_formula'];
 
   // Armazene a informação do botão clicado na sessão
   $_SESSION['tipo_formula'] = $botaoClicado;
+
 }
 
 //FAZ LIGAÇÃO À BASE DE DADOS
@@ -74,8 +76,6 @@ include_once "../server/connections/connection.php";
 //CRIA A LIGAÇÃO
 $local_link= new_db_connection(); 
 
-//VAI AO SESSION BUSCAR A AÇÃO QUE PRECISAS DE FAZER
-$_SESSION['id']=1;
 
 //VAI BUSCAR O ID DO UTILIZADOR
 if(isset($_SESSION['id']) && $_SESSION['id']!="") {
@@ -85,7 +85,7 @@ if(isset($_SESSION['id']) && $_SESSION['id']!="") {
  
 }
 
-$_SESSION['lab_action']=0;
+$_SESSION['lab_action']=1;
 
 //SE VIER DEFINIDA A AÇÕA DO SIDE
 if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
@@ -124,21 +124,43 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
 
         if($rows>0) {
 
+            //SE ELE FOR COMPOR ELEMENTOS
+            if($action==0) {
+
+            echo "
+            <form method='post' action='../server/lab/sc_join_elements.php' class='row'>";
+            }
+            //SE FOR DECOMPOR
+            else if($action==1) {
+                echo "
+                <form method='post' action='../server/lab/sc_separate_elements.php' class='row'>";
+            }
+
         //VAI BUSCAR OS DADOS
         while(mysqli_stmt_fetch($stmt)) {
 
-            $elementos_compor[$element_id] = array("id" => $element_id, "name" => $element_name, "symbol" => $element_symbol, "goal" => $element_goal, "qnt_items_default" => $element_qnt_default, "side" => $element_side);
+            $elementos_compor[$element_id] = array(
+                "id" => $element_id, 
+                "name" => $element_name, 
+                "symbol" => $element_symbol, 
+                "goal" => $element_goal, 
+                "qnt_items_default" => $element_qnt_default, 
+                "side" => $element_side
+            );
 
             //MOSTRA 
             //echo "<pre>" . print_r($elementos_compor[$element_id],true) . "ID DO ARRAY NUMÉRICO: $element_id". "</pre>";
 
-            echo "<div class='lab_elementos'>
-                    <input class='lab_elementos_personalizacao pt-3' type='image' src='assets/lab/icons_elementos/$element_symbol.svg'>
-                    <p class='lab_nome_elemento pt-2'>$element_name</p>
+                echo "<div class='lab_elementos col-3'>
+                <input class='lab_elementos_personalizacao pt-3' type='image' name='$element_id' src='assets/lab/icons_elementos/$element_symbol.svg'>
+                <p class='lab_nome_elemento pt-2'>$element_name</p>
                 </div>";
+                
         }
-
         
+        echo "</form>";
+
+        var_dump($_SESSION);
 
         //FECHA O STATEMENT
         mysqli_stmt_close($stmt);
