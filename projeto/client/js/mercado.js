@@ -1,6 +1,7 @@
 let allIems = {};
 let inventory = {};
 let planetOffers = {}; // Map <ID do planeta, Array de offers>
+let current_user_id = 0;
 
 async function getInventory() {
     const response = await fetch("../server/users/get_inventory.php");
@@ -66,8 +67,28 @@ async function createOffer(myItemId, myItemQty, otherItemId, otherItemQty) {
 
 function showOpcaoVenda() {
     document.getElementById("mercado_opcoes_venda").style.display = "block";
+    document.getElementById("mercado_opcoes_venda_cancelar").style.display = "block";
+    document.getElementById("mercado_opcoes_venda_vender").style.display = "block";
 
-    // TODO PERCORRER INVENTORY
+    // PERCORRER INVENTORY
+    getInventory();
+
+    document.querySelector(".sdireita").onclick = function () {
+        current_user_id++;
+        if (current_user_id > 11) {
+            current_user_id = 1;
+        }
+        let item_symbol = inventory[current_user_id].symbol;
+        document.getElementById("mercado_user_items").src = "assets/iconsfrascos/" + item_symbol + ".svg";
+    }
+    document.querySelector(".sesquerda").onclick = function () {
+        current_user_id--;
+        if (current_user_id < 1) {
+            current_user_id = 11;
+        }
+        let item_symbol = inventory[current_user_id].symbol;
+        document.getElementById("mercado_user_items").src = "assets/iconsfrascos/" + item_symbol + ".svg";
+    }
 
 
     // TODO PERCORRER ALL ITEMS
@@ -79,9 +100,11 @@ function showOpcaoVenda() {
     }
 
     document.getElementById("mercado_opcoes_venda_cancelar").onclick = function () {
-        document.getElementById("mercado_barracas_comprar").style.display = "block";
+        document.querySelector(".mercado_barracas_comprar").style.display = "block";
         document.getElementById("mercado_ver_mercado").style.display = "block";
         document.getElementById("mercado_opcoes_venda").style.display = "none";
+        document.getElementById("mercado_opcoes_venda_cancelar").style.display = "none";
+        document.getElementById("mercado_opcoes_venda_vender").style.display = "none";
     }
 
 }
