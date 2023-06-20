@@ -35,7 +35,6 @@ include_once "../connections/connection.php";
 
 $conn = new_db_connection();
 
-
 // Get item id given the item symbol
 $sql = "SELECT id FROM items WHERE symbol = ?";
 
@@ -62,7 +61,6 @@ if ($result->num_rows > 0) {
     ]);
     return;
 }
-
 
 // Verify user has item
 $sql = "SELECT qty FROM planets_items_inventory WHERE item_id = ? AND planets_user_id = ?";
@@ -92,18 +90,16 @@ if ($result->num_rows > 0) {
 if ($qty_atual <= 0) {
     echo json_encode([
         'status' => false,
-        'message' => 'Not enought qty in user inventory.',
+        'message' => 'Not enough quantity in user inventory.',
         'qty_atual' => $qty_atual,
     ]);
     return;
 }
 
-
-//verify if land has items needed (Micro must have water, and water must be empty)
+// Verify if land has items needed (Micro must have water, and water must be empty)
 $sql = "SELECT qt, symbol 
         FROM planets_land_items 
-            INNER JOIN items
-            ON item_id = items.id
+        INNER JOIN items ON item_id = items.id
         WHERE user_id = ? AND land_id = ?";
 
 $stmt = $conn->prepare($sql);
@@ -143,15 +139,20 @@ $item_usage = 0;
 $current_time = time();
 
 try {
-    if ($item_id === 11) {
+    if ($item_symbol === "Organism") {
         // Insert Organism to microorganism_usage
         $sql = "INSERT INTO microorganism_usage (break_start, item_usage, planets_land_items_item_id, planets_land_items_user_id, planets_land_items_land_id) 
-    VALUES (?,?,?,?,?)";
+        VALUES (FROM_UNIXTIME(?),?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iiiii", $current_time, $item_usage, $item_id, $user_id, $land_id);
-        $stmt->execute();
-        $stmt->close();
+
+        if (!$stmt) {
+            echo "Error: " . $conn->error; // Exibe uma mensagem de erro caso a preparação da consulta falhe
+        } else {
+            $stmt->bind_param("iiiii", $current_time, $item_usage, $item_id, $user_id, $land_id);
+            $stmt->execute();
+            $stmt->close();
+        }
     }
 
     // Remove item from inventory
@@ -187,9 +188,5 @@ try {
         'session' => $_SESSION
     ]);
 } catch (Exception $e) {
-    $conn->rollback(); // Rollback em caso de erro
-    echo json_encode([
-        'status' => false,
-        'message' => 'Error: ' . $e->getMessage()
-    ]);
+    echo "Error: " . $e->getMessage();
 }
