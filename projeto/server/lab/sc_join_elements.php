@@ -32,7 +32,6 @@ foreach ($keys as $key => $value) {
 
 }
 
-
 if(isset($_SESSION['first_item']) && $_SESSION['first_item'] !="") {
 
     //MANDA O SEGUNDO ITEM
@@ -46,6 +45,7 @@ else {
 
     //MANDA PRO SESSION PARA DAR PARA ESCREVER O PRIMEIRO ITEM
     $_SESSION['first_item']=$id_item;
+
 
     header("Location:../../client/lab.php?action=add");
 }

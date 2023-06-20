@@ -60,6 +60,7 @@
     </div>
 
 <?php
+session_start();
 
 if (isset($_GET['tipo_formula'])) {
   $botaoClicado = $_GET['tipo_formula'];
@@ -160,6 +161,8 @@ if(isset($_SESSION['lab_action']) && $_SESSION['lab_action']!="") {
         }
         
         echo "</form>";
+
+        var_dump($_SESSION);
 
         //FECHA O STATEMENT
         mysqli_stmt_close($stmt);
