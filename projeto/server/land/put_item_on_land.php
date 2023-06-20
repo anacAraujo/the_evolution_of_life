@@ -139,38 +139,57 @@ if ($result->num_rows > 0 && $item_symbol === "Organism") {
     }
 }
 
+$item_usage = 0;
+$current_time = time();
 
+try {
+    if ($item_id === 11) {
+        // Insert Organism to microorganism_usage
+        $sql = "INSERT INTO microorganism_usage (break_start, item_usage, planets_land_items_item_id, planets_land_items_user_id, planets_land_items_land_id) 
+    VALUES (?,?,?,?,?)";
 
-//Remove item from inventory
-$qty_atual = $qty_atual - $qty;
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iiiii", $current_time, $item_usage, $item_id, $user_id, $land_id);
+        $stmt->execute();
+        $stmt->close();
+    }
 
-//Start transaction 
-$conn->begin_transaction();
+    // Remove item from inventory
+    $qty_atual = $qty_atual - $qty;
 
-$sql = "UPDATE planets_items_inventory 
-        SET qty = ? 
-        WHERE planets_user_id = ? AND item_id = ?";
+    // Start transaction
+    $conn->begin_transaction();
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("iii", $qty_atual, $user_id, $item_id);
-$stmt->execute();
-$stmt->close();
+    $sql = "UPDATE planets_items_inventory 
+            SET qty = ? 
+            WHERE planets_user_id = ? AND item_id = ?";
 
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iii", $qty_atual, $user_id, $item_id);
+    $stmt->execute();
+    $stmt->close();
 
-//Insert item to land
-$sql = "INSERT INTO planets_land_items (item_id, user_id, land_id, qt) 
-        VALUES (?,?,?,?)";
+    // Insert item to land
+    $sql = "INSERT INTO planets_land_items (item_id, user_id, land_id, qt) 
+            VALUES (?,?,?,?)";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("iiii", $item_id, $user_id, $land_id, $qty);
-$stmt->execute();
-$stmt->close();
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("iiii", $item_id, $user_id, $land_id, $qty);
+    $stmt->execute();
+    $stmt->close();
 
-$conn->commit();
+    $conn->commit();
 
-echo json_encode([
-    'status' => true,
-    'message' => 'Item inserted successfully.',
-    'land_id' => $land_id,
-    'session' => $_SESSION
-]);
+    echo json_encode([
+        'status' => true,
+        'message' => 'Item inserted successfully.',
+        'land_id' => $land_id,
+        'session' => $_SESSION
+    ]);
+} catch (Exception $e) {
+    $conn->rollback(); // Rollback em caso de erro
+    echo json_encode([
+        'status' => false,
+        'message' => 'Error: ' . $e->getMessage()
+    ]);
+}
