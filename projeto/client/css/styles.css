@@ -534,6 +534,12 @@ body {
   background-size: cover;
 }
 
+.element_drop {
+
+    appearance: none;
+  
+}
+
 /* fim lab */
 
 /* INICIO INDEX/HTML */
