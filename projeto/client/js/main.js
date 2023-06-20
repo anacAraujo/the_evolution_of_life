@@ -84,6 +84,13 @@ function mainEvents() {
         document.getElementById("icon_avatar").style.display = "none";
         document.getElementById("modal_trigger").style.display = "none";
     };
+
+    document.getElementById("planeta").onclick = function () {
+        document.getElementById("particles-js").style.display = "none";
+        document.getElementById("planeta_interior").style.display = "block";
+        document.getElementById("icons_gerais").style.display = "block";
+
+    }
 }
 
 function moverElemento() {

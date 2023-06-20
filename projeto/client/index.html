@@ -21,10 +21,27 @@
 </head>
 
 <body class="container">
-    <div id="particles-js"></div>
+    <div id="particles-js">
+        <!-- div alien -->
+        <div id="index_alien">
+            <img class="alien_animado alien_destino" src="assets/lab/alien.svg" alt="">
+        </div>
 
+        <div class="row">
+
+            <div>
+                <a href="planeta_interior.html">
+                    <img id="planeta" class="centered-planeta" src="">
+                </a>
+                <div class="progress my-5 barraprog" style="width: 25%">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
+                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- icones globais -->
-    <div class="row m-4">
+    <div id="icons_gerais" class="row m-4">
         <div id="icon_atmosfera" class="col-1 m-2">
             <a>
                 <img src="assets/icons_gerais/Atmosfera.svg" alt="">
@@ -61,26 +78,6 @@
 
         </div>
 
-    </div>
-    <!-- div alien -->
-    <div id="index_alien">
-        <img class="alien_animado alien_destino" src="assets/lab/alien.svg" alt="">
-    </div>
-
-
-    <!-- planeta e barra de progresso (mudar consoante o progresso do user) -->
-    <!-- background particulas fica associado a esta div ou ao body?? -->
-    <div class="row">
-
-        <div>
-            <a href="planeta_interior.html">
-                <img id="planeta" class="centered-planeta" src="">
-            </a>
-            <div class="progress my-5 barraprog" style="width: 25%">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
-            </div>
-        </div>
     </div>
 
     <!-- mercado -->
@@ -201,57 +198,56 @@
                 <img src="assets/icons_gerais/Cratera.svg" alt="">
             </div>
         </div>
-
-        <!--Modal Logout -->
-        <div class="pt-5 modal" tabindex="" id="modal_logout">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header shadow">
-                        <h5 class="modal-title fw-bold">Logout</h5>
-                        <a id="close_modal">
-                            <button type="button" class="btn-close fs-5" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </a>
-                    </div>
-                    <div class="modal-body text-center pb-0 pt-3">
-                        <p>Tem a certeza que pretende terminar a sua sessão?</p>
-                    </div>
-                    <div class="modal-footer m-auto">
-                        <a href="#" class="pe-2" id="cancel_modal">
-                            <button type="button" class="btn btn-info shadow" data-bs-dismiss="modal">Continuar</button>
-                        </a>
-                        <a href="../server/users/sc_logout.php" class="ps-2">
-                            <button type="button" class="btn btn-primary shadow"> Terminar
-                            </button>
-                        </a>
-                    </div>
+    </div>
+    <!--Modal Logout -->
+    <div class="pt-5 modal" tabindex="" id="modal_logout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header shadow">
+                    <h5 class="modal-title fw-bold">Logout</h5>
+                    <a id="close_modal">
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </a>
+                </div>
+                <div class="modal-body text-center pb-0 pt-3">
+                    <p>Tem a certeza que pretende terminar a sua sessão?</p>
+                </div>
+                <div class="modal-footer m-auto">
+                    <a href="#" class="pe-2" id="cancel_modal">
+                        <button type="button" class="btn btn-info shadow" data-bs-dismiss="modal">Continuar</button>
+                    </a>
+                    <a href="../server/users/sc_logout.php" class="ps-2">
+                        <button type="button" class="btn btn-primary shadow"> Terminar
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!--Div que mostra as quantidades dos elementos -->
-        <div id="quantidades_elementos">
-            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                class="bi bi-arrow-left mt-2 planeta_quantidade_elementos_seta" id="go_back_to_index"
-                viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg>
-            <h1 class="planeta_quantidade_elementos_titulo mt-1">Atmosfera Atual</h1>
-            <ul class="planeta_quantidade_elementos_ul mt-1">
-                <li class="m-1">Vapor de Água (H2O)</li>
-                <li class="m-1">Azoto (N2)</li>
-                <li class="m-1">Dióxido de carbono (CO2)</li>
-                <li class="m-1">Hidrogénio (H2)</li>
-                <li class="m-1">Metano (CH4)</li>
-                <li class="m-1">Amónio (NH3)</li>
-                <li class="m-1">Nitrogénio (N)</li>
-                <li class="m-1">Oxigénio (O2)</li>
-                <li class="m-1">Ozono (O3)</li>
-                <li class="m-1">Carbono (C)</li>
-            </ul>
-        </div>
     </div>
+
+    <!--Div que mostra as quantidades dos elementos -->
+    <div id="quantidades_elementos">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+            class="bi bi-arrow-left mt-2 planeta_quantidade_elementos_seta" id="go_back_to_index" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+        </svg>
+        <h1 class="planeta_quantidade_elementos_titulo mt-1">Atmosfera Atual</h1>
+        <ul class="planeta_quantidade_elementos_ul mt-1">
+            <li class="m-1">Vapor de Água (H2O)</li>
+            <li class="m-1">Azoto (N2)</li>
+            <li class="m-1">Dióxido de carbono (CO2)</li>
+            <li class="m-1">Hidrogénio (H2)</li>
+            <li class="m-1">Metano (CH4)</li>
+            <li class="m-1">Amónio (NH3)</li>
+            <li class="m-1">Nitrogénio (N)</li>
+            <li class="m-1">Oxigénio (O2)</li>
+            <li class="m-1">Ozono (O3)</li>
+            <li class="m-1">Carbono (C)</li>
+        </ul>
+    </div>
+
 </body>
 
 </html>
