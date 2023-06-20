@@ -30,7 +30,7 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
     INNER JOIN formula_itens
     ON items_id=items.id 
     INNER JOIN planets_items_inventory ON item_id=items.id
-    WHERE planets_user_id=$user_id AND side = $action";
+    WHERE planets_user_id=$user_id AND side = $action LIMIT 4";
 
     //CRIA O ARRAY QUE OS VAI GUARDAR
     $elements = array();
@@ -116,7 +116,7 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
             </div>
 
                 <div id="lab_elemento1">
-                <select class="element_drop lab_button_elementos fs-6">
+                <select class="element_drop lab_button_elementos fs-6" name="Elemento1">
                 <option value="" disabled selected></option>
                 
                     <?php
@@ -124,15 +124,14 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
                     //PERCORRE O ARRAY DOS ELEMENTOS
                     foreach($elementos_compor as $key => $value){
 
-                        echo '<option class="text-center" value='. $elementos_compor[$key]["id"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
-
+                        echo '<option class="text-center" value='. $elementos_compor[$key]["symbol"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
                     }
                     ?>
 
                 </select>
                 </div>
                 <div id="lab_elemento2">
-                <select class="element_drop lab_button_elementos lab_button_elemento2 fs-6">
+                <select class="element_drop lab_button_elementos lab_button_elemento2 fs-6" name="Elemento2">
                 <option value="" disabled selected></option>
                 
                     <?php
@@ -140,16 +139,24 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
                     //PERCORRE O ARRAY DOS ELEMENTOS
                     foreach($elementos_compor as $key => $value){
 
-                        echo '<option class="text-center" value='. $elementos_compor[$key]["id"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
+                        echo '<option class="text-center" value='. $elementos_compor[$key]["symbol"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
 
                     }
+
+                    echo "</select>
+                    </div>
+                </form>";
+
+
+                if(isset($_GET['error']) && $_GET['error'] != "") {
+
+                    echo "<p class='text-center fw-bold'>Escolha os símbolos antes de os combinar!</p>";
+                }
                     ?>
 
-                </select>
+                
 
-
-                </div>
-            </form>
+            
 
 
 
