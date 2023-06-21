@@ -56,12 +56,12 @@ body {
 
 .mercado_barracas_comprar img:first-child {
   left: -19px;
-  top: -128px;
+  top: -227px;
 }
 
 .mercado_barracas_comprar img:last-child {
   right: -101px;
-  top: -128px;
+  top: -228px;
 }
 
 /* ATUALIZAZAÇÕES MERCADO */
@@ -263,6 +263,17 @@ body {
 .barracasprincipais-def {
   display: block;
 }
+
+#shelf1 { 
+    width: 40px; 
+    height: 40px;
+    background-color: rgb(140, 0, 255);
+    position: absolute;
+    z-index: 1;
+    left: 84px;
+    top: 221px;
+}
+
 
 /* fim Mercado */
 
@@ -616,11 +627,25 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.right-planeta {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-75%, -75%);
+}
+
 .barraprog {
   position: absolute;
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.barraprogRight {
+  position: absolute;
+  top: 75%;
+  left:75%;
+  transform: translate(-75%, -75%);
 }
 
 @keyframes slide-in {
@@ -652,8 +677,45 @@ body {
 
 }
 
-#quantidades_elementos {
-  display: none;
+
+.lista_elementos1 {
+
+  position: absolute;
+  left: 5rem !important;
+}
+
+.lista_elementos1 li {
+
+  color:#E41B17;
+}
+
+.lista_elementos2 {
+
+  position: absolute;
+  left: 7rem !important;
+}
+
+.lista_elementos_divisoria {
+
+  position: absolute;
+  left: 6.3rem !important;
+}
+
+#atual_atmosfera {
+
+  left: 8.7rem !important;
+  color:#E41B17;
+}
+
+#divisor_atmosfera {
+
+  left: 10.5rem !important;
+
+}
+
+#objetivo_atmosfera {
+
+  left: 13rem !important;
 }
 
 .planeta_quantidade_elementos {
