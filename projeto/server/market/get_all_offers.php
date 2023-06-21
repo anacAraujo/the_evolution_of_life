@@ -10,9 +10,10 @@ session_start();
 
 $user_id = $_SESSION["id"];
 
-$sql = "SELECT *
-        FROM market_offers mo
-        WHERE mo.completed = 0 AND planets_user_id != ?
+$sql = "SELECT market_offers.id, my_item_id, my_item_qty, other_item_id, other_item_qty, planets_user_id, planets.name
+        FROM market_offers
+            INNER JOIN planets ON user_id = planets_user_id
+        WHERE completed = 0 AND planets_user_id != ?
         ORDER BY planets_user_id";
 
 $stmt = $conn->prepare($sql);
