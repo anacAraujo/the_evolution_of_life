@@ -540,6 +540,19 @@ body {
   
 }
 
+.lab_criar_final {
+  position: absolute;
+  width: 87.32px !important;
+  height: 79px;
+  left: 380px;
+  top: 165px;
+  background: #F59E1B;
+  border: 2px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+}
+
 /* fim lab */
 
 /* INICIO INDEX/HTML */
