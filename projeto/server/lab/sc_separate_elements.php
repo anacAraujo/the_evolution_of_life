@@ -24,7 +24,7 @@ if (!empty($element_data)) {
      //GUARDA OS ITENS
      $item3 = $element_data['Elemento3'];
 
-    if (($item3 == "H20")) {
+    if (($item3 == "H2O")) {
 
         //DESFAZER AGUA
         //VE SE TEM ITENS
@@ -316,8 +316,7 @@ if (!empty($element_data)) {
  
                 if (mysqli_stmt_execute($stmt_remove_ch4)) {
  
-                    
-
+                
                 } else {
  
                     echo "Error" . mysqli_error($local_link);
@@ -630,6 +629,5 @@ if (!empty($element_data)) {
 
     header("Location:../../client/cp_decompose_elements.php?error=empty&lab_action=1");
 }
-
 
 ?>
