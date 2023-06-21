@@ -536,8 +536,8 @@ body {
 
 .element_drop {
 
-    appearance: none;
-  
+  appearance: none;
+
 }
 
 .lab_criar_final {
@@ -550,7 +550,6 @@ body {
   border: 2px solid #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-}
 
 .lab_decompor_final {
   position: absolute;
