@@ -188,9 +188,6 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
 
            }
 
-            
-
-
             //CRIA A VARIÁVEL QUE ESCREVE OS AVATARES
             $avatar_write=2;
 
@@ -202,7 +199,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                 //SE O AVATAR QUE VAI ESCREVER FOR O DO USER
                 if($avatar_write==$avatar_atual ) {
                     echo "
-            <div class='col-3 pt-3 mt-2 text-center'>
+            <div class='col-3 pt-4 mt-4 text-center'>
                 <button class='Avatar_form_button' id='Avatar_current'>
                     <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                 </button>
@@ -213,7 +210,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                 else {
 
                     echo "
-                    <div class='col-3 pt-3 mt-2 text-center'>
+                    <div class='col-3 pt-4 mt-4 text-center'>
                         <button class='Avatar_form_button'>
                             <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                         </button>
@@ -235,7 +232,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                     if($progresso<40) {
 
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1' disabled>
                             </button>
@@ -246,7 +243,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1 disabled'>
                             </button>
@@ -257,7 +254,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1 disabled'>
                             </button>
@@ -272,7 +269,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                     else if($progresso>40 && $progresso<60) {
 
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
@@ -280,7 +277,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center '>
+                        <div class='col-3 pt-4 mt-2 text-center '>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1 disabled'>
                             </button>
@@ -291,7 +288,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1 disabled'>
                             </button>
@@ -306,7 +303,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                     else if($progresso>60 && $progresso<80) {
 
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-3 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
@@ -314,7 +311,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
@@ -322,7 +319,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             
                         $avatar_write++;
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button locked' disabled>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' class='rounded border-1'>
                             </button>
@@ -336,7 +333,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                     }
                     else if($progresso>80) {
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-3 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
@@ -345,7 +342,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                         $avatar_write++;
 
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
@@ -354,7 +351,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                         $avatar_write++;
 
                         echo "
-                        <div class='col-3 pt-3 mt-2 text-center'>
+                        <div class='col-3 pt-4 mt-2 text-center'>
                             <button class='Avatar_form_button'>
                                 <input type='image' src='assets/avatar_upperbody/$avatars[$avatar_write]' name='$avatar_write' class='rounded border-1'>
                             </button>
