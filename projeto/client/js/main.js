@@ -50,12 +50,16 @@ function logout() {
     };
 }
 
-function mainEvents() {
-    console.log(userInfo.id_settings);
+async function updateVisualElements() {
+    await getUserInfo();
     document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
     document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
     document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
+    document.getElementById("progress_bar_in").ariaValueNow = userInfo.progress;
+    document.getElementById("progress_bar_in").style.width = userInfo.progress + "%";
+}
 
+function mainEvents() {
     // Logout click event
     document.getElementById("modal_trigger").onclick = function () {
         document.getElementById("modal_logout").style.display = "block";
@@ -70,7 +74,6 @@ function mainEvents() {
     };
 
     // List of the quantity of elements
-
     document.getElementById("icon_atmosfera").onclick = function () {
         document.getElementById("quantidades_elementos").style.display = "block";
 
@@ -85,11 +88,12 @@ function mainEvents() {
         document.getElementById("modal_trigger").style.display = "none";
     };
 
-    document.getElementById("planeta").onclick = function () {
+    document.getElementById("planeta").onclick = async function () {
         document.getElementById("particles-js").style.display = "none";
         document.getElementById("planeta_interior").style.display = "block";
         document.getElementById("icons_gerais").style.display = "block";
-
+        await fillLandMap();
+        setEvents();
     }
 }
 
@@ -104,8 +108,6 @@ function moverElemento() {
 }
 
 window.onload = async function () {
-    await getUserInfo();
-    console.log(userInfo);
-
+    await updateVisualElements();
     mainEvents();
 };

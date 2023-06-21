@@ -152,10 +152,3 @@ async function fillLandMap() {
         }
     }
 }
-
-window.onload = async function () {
-
-    await fillLandMap();
-
-    setEvents();
-}

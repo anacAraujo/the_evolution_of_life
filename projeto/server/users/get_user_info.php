@@ -66,8 +66,7 @@ if ($result->num_rows > 0) {
         $progress = 0;
     }
     $progress = max(0, min($progress, 100));
-
-    var_dump($progress);
+    $progress = "50%";
 }
 
 // Update progress
