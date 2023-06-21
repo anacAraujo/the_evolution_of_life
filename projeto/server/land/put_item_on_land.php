@@ -136,8 +136,6 @@ if ($result->num_rows > 0 && $item_symbol === "Organism") {
 }
 
 $item_usage = 0;
-//$current_time = new DateTime('now', new DateTimeZone('Europe/Lisbon'));
-
 
 try {
     // Remove item from inventory
@@ -167,7 +165,7 @@ try {
     $current_time = date('Y-m-d H:i:s');
     $int_land = (int)$land_id;
     if ($item_symbol === "Organism") {
-        //TODO Insert Organism to microorganism_usage
+        // Insert Organism to microorganism_usage
         $sql = "INSERT INTO microorganism_usage (break_start, item_usage, planets_land_items_item_id, planets_land_items_user_id, planets_land_items_land_id) 
         VALUES (?,?,?,?,?)";
 

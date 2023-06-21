@@ -69,10 +69,11 @@ async function getUserOffers() {
     const response = await fetch("../server/market/get_user_offers.php");
     const jsonData = await response.json();
 
-    for (const item of jsonData) {
-        userOffers[item.id] = item;
+    for (const offer of jsonData) {
+        console.log(offer);
+        userOffers.push(offer);
     }
-    console.log(userOffers);
+    console.log("userOffers: " + userOffers);
 }
 
 async function createOffer(myItem, myItemQty, otherItem, otherItemQty) {
@@ -101,13 +102,7 @@ async function createOffer(myItem, myItemQty, otherItem, otherItemQty) {
 }
 
 async function showOpcaoVenda() {
-    let offers = planetOffers[planetsWithOffers[currentOffer]];
-    let shelf = 1;
-    for (const offer of offers) {
-        document.getElementById("troca1_shelf" + shelf).style.display = "none";
-        document.getElementById("troca2_shelf" + shelf).style.display = "none";
-        shelf++;
-    }
+
     document.querySelector(".mercado_barracas_comprar").style.display = "none";
     document.getElementById("mercado_ver_mercado").style.display = "none";
     document.getElementById("mercado_vender").style.display = "none";
@@ -219,6 +214,9 @@ function changeOffers(offerToChange) {
     }
 
     let offers = planetOffers[planetsWithOffers[offerToChange]];
+    console.log(offers);
+    console.log(offerToChange);
+    console.log(planetsWithOffers[offerToChange]);
 
     let shelf = 1;
     for (const offer of offers) {
@@ -247,21 +245,24 @@ async function showMarketOffers() {
 
     changeOffers(currentOffer);
     document.getElementById("botaotrocadireita").onclick = function () {
+        console.log("AAAA");
+        //TODO verify
         currentOffer = currentOffer + 2;
         changeOffers(currentOffer);
     }
 
-    document.getElementById("botaotrocadireita").onclick = function () {
+    document.getElementById("botaotrocaesquerda").onclick = function () {
+        console.log("BBBB");
+        //TODO verify
         currentOffer = currentOffer - 3;
         changeOffers(currentOffer);
     }
 }
 
 async function showUserOffers() {
-    getUserOffers();
+    await getUserOffers();
     let shelf = 1;
     for (const offerUser of userOffers) {
-        console.log(offerUser.my_item_symbol);
         document.getElementById("user_shelf" + shelf).style.display = "block";
         document.getElementById("user_shelf" + shelf).src = "assets/iconsfrascos/" + offerUser.my_item_symbol + ".svg";
         shelf++;

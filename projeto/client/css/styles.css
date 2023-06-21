@@ -470,6 +470,7 @@ body {
   bottom: 30px;
   left: 51px;
   color: #165034;
+  z-index: 1;
 }
 
 #botaotrocaesquerda {
@@ -477,6 +478,7 @@ body {
   bottom: 30px;
   left: 400px;
   color: #165034;
+  z-index: 1;
 }
 
 
