@@ -160,6 +160,16 @@ if ($result && $result->num_rows > 0) {
                 ]);
                 return;
             }
+            if ($item_usage >= $max_usage) {
+                $item_usage = 0;
+                $sql = "UPDATE microorganism_usage SET item_usage = ?
+                WHERE planets_land_items_item_id = ? AND planets_land_items_user_id = ? AND planets_land_items_land_id = ?";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("iiii", $item_usage, $item_id, $user_id, $land_id);
+
+                $stmt->execute();
+                $stmt->close();
+            }
         }
     }
 } else {
@@ -212,22 +222,22 @@ foreach ($formula_items as $item) {
     }
 }
 
-// TODO Add formula do history - duplicated primary key
+// Add formula do history - duplicated primary key
 
-// $sql = "INSERT INTO used_formulas_planet (planets_user_id, formula_id, direction) 
-//         VALUES (?,?,?)";
+$sql = "INSERT INTO used_formulas_planet (planets_user_id, formula_id, direction) 
+        VALUES (?,?,?)";
 
-// $stmt = $conn->prepare($sql);
-// $stmt->bind_param("iii", $user_id, $formula_id, $direcao);
-// $stmt->execute();
-// $stmt->close();
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("iii", $user_id, $formula_id, $direcao);
+$stmt->execute();
+$stmt->close();
 
-// $conn->commit();
+$conn->commit();
 
-// echo json_encode([
-//     'status' => true,
-//     'message' => 'Formula inserted successfully.'
-// ]);
+echo json_encode([
+    'status' => true,
+    'message' => 'Formula inserted successfully.'
+]);
 
 
 // Increment organism actions
