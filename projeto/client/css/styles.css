@@ -116,11 +116,6 @@ body {
   left: 166px;
 }
 
-#atencion_alien {
-  height: 9vh;
-  display: none;
-}
-
 .quadrado_venda {
   background-color: rgba(22.26468488574028, 80.96249878406525, 52.78754644095898, 0.8199999928474426);
   width: 381px;
@@ -996,7 +991,6 @@ body {
 }
 
 .alien_animado {
-  display: none;
   position: absolute;
   left: -150%;
   top: -50%;
