@@ -18,6 +18,7 @@
     <script src="js/particles/app.js"></script>
 
     <script src="js/main.js"></script>
+    <script src="js/actions_planet.js"></script>
 </head>
 
 <body class="container">
@@ -30,12 +31,11 @@
         <div class="row">
 
             <div>
-                
-                    <img id="planeta" class="centered-planeta" src="">
-                
-                <div class="progress my-5 barraprog" style="width: 25%">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar"
-                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+                <img id="planeta" class="centered-planeta" src="">
+                <div id="progress_bar_out" class="progress my-5 barraprog" style="width: 25%">
+                    <div id="progress_bar_in" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                        role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                    </div>
                 </div>
             </div>
         </div>
