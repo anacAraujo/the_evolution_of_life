@@ -533,6 +533,42 @@ body {
   display: none;
 }
 
+#bmercado_user1 {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 11px;
+  left: 95px;
+  font-size: 13px;
+}
+
+#bmercado_user2 {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 268px;
+  font-size: 13px;
+}
+
 /* fim Mercado */
 
 /*AVATAR*/
