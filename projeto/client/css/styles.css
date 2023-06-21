@@ -459,6 +459,12 @@ body {
   height: 14vh;
 }
 
+#mercado_all_items {
+  height: 14vh;
+  z-index: 1;
+}
+
+
 #botaotrocadireita {
   position: absolute;
   bottom: 30px;
