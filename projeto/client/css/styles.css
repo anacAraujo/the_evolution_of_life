@@ -45,11 +45,11 @@ body {
 }
 
 .mercado_barracas_comprar {
+  opacity: 0.2;
   position: relative;
 }
 
 .mercado_barracas_comprar img {
-  opacity: 0.2;
   position: absolute;
   bottom: -144px;
 }
