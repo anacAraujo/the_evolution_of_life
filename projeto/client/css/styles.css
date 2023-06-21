@@ -1347,3 +1347,8 @@ body {
 }
 
 /* FIM PLANETA INTERIOR */
+
+#icons_gerais {
+  position: fixed;
+  z-index: 9;
+}
