@@ -56,12 +56,12 @@ body {
 
 .mercado_barracas_comprar img:first-child {
   left: -19px;
-  top: -128px;
+  top: -227px;
 }
 
 .mercado_barracas_comprar img:last-child {
   right: -101px;
-  top: -128px;
+  top: -228px;
 }
 
 /* ATUALIZAZAÇÕES MERCADO */
@@ -263,6 +263,17 @@ body {
 .barracasprincipais-def {
   display: block;
 }
+
+#shelf1 { 
+    width: 40px; 
+    height: 40px;
+    background-color: rgb(140, 0, 255);
+    position: absolute;
+    z-index: 1;
+    left: 84px;
+    top: 221px;
+}
+
 
 /* fim Mercado */
 
