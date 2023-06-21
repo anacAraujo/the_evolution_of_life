@@ -72,6 +72,7 @@ async function getUserOffers() {
     for (const item of jsonData) {
         userOffers[item.id] = item;
     }
+    console.log(userOffers);
 }
 
 async function createOffer(myItem, myItemQty, otherItem, otherItemQty) {
@@ -100,6 +101,13 @@ async function createOffer(myItem, myItemQty, otherItem, otherItemQty) {
 }
 
 async function showOpcaoVenda() {
+    let offers = planetOffers[planetsWithOffers[currentOffer]];
+    let shelf = 1;
+    for (const offer of offers) {
+        document.getElementById("troca1_shelf" + shelf).style.display = "none";
+        document.getElementById("troca2_shelf" + shelf).style.display = "none";
+        shelf++;
+    }
     document.querySelector(".mercado_barracas_comprar").style.display = "none";
     document.getElementById("mercado_ver_mercado").style.display = "none";
     document.getElementById("mercado_vender").style.display = "none";
@@ -237,7 +245,27 @@ async function showMarketOffers() {
     await getPlanetOffers();
     console.log(planetOffers);
 
-    changeOffers(0);
+    changeOffers(currentOffer);
+    document.getElementById("botaotrocadireita").onclick = function () {
+        currentOffer = currentOffer + 2;
+        changeOffers(currentOffer);
+    }
+
+    document.getElementById("botaotrocadireita").onclick = function () {
+        currentOffer = currentOffer - 3;
+        changeOffers(currentOffer);
+    }
+}
+
+async function showUserOffers() {
+    getUserOffers();
+    let shelf = 1;
+    for (const offerUser of userOffers) {
+        console.log(offerUser.my_item_symbol);
+        document.getElementById("user_shelf" + shelf).style.display = "block";
+        document.getElementById("user_shelf" + shelf).src = "assets/iconsfrascos/" + offerUser.my_item_symbol + ".svg";
+        shelf++;
+    }
 }
 
 async function updateVisualElements() {
@@ -267,6 +295,7 @@ function mercadoEventos() {
 
     document.getElementById("mercado_vender").onclick = async function () {
         await showOpcaoVenda();
+        await showUserOffers();
     }
 
     document.getElementById("mercado_ver_mercado").onclick = async function () {
@@ -275,6 +304,7 @@ function mercadoEventos() {
 }
 
 window.onload = async function () {
+    await showUserOffers();
     await updateVisualElements();
     await getAllItems();
     const planets = Object.keys(planetOffers);
