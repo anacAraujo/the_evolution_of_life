@@ -678,8 +678,8 @@ body {
   z-index: 1;
   width: 5%;
   height: 5%;
-  left: 5rem;
-  top: 11.5rem;
+  left: 7rem;
+  top: 14.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -688,8 +688,8 @@ body {
   z-index: 1;
   width: 5%;
   height: 5%;
-  left: 12rem;
-  top: 11.5rem;
+  left: 15.5rem;
+  top: 14.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -698,8 +698,8 @@ body {
   z-index: 1;
   width: 5%;
   height: 5%;
-  left: 19rem;
-  top: 11.5rem;
+  left: 24rem;
+  top: 14.5rem;
 }
 
 /*LOCK ICON*/
@@ -707,6 +707,14 @@ body {
 #lock_icon2 svg path,
 #lock_icon3 svg path {
   color: #35EBE0;
+}
+
+.align_avatars_top {
+  margin-top: 1.5rem !important;
+}
+
+.align_avatars_left {
+  margin-left: 0.1rem !important;
 }
 
 /*FIM AVATAR*/
@@ -949,9 +957,9 @@ body {
 
 .right-planeta {
   position: absolute;
-  top: 50%;
-  left: 75%;
-  transform: translate(-75%, -75%);
+  z-index: 1;
+  left: 489px;
+  top: 40px;
 }
 
 .barraprog {
@@ -963,9 +971,9 @@ body {
 
 .barraprogRight {
   position: absolute;
-  top: 75%;
-  left: 75%;
-  transform: translate(-75%, -75%);
+  left: 497px;
+  width: 25%;
+  top: 252px;
 }
 
 @keyframes slide-in {

@@ -169,14 +169,40 @@ mysqli_stmt_close($stmt_get_goal);
         </ul>
 
         <div>
-            <img id="planeta" class="right-planeta" src="">
-            <div id="progress_bar_out" class="progress my-5 barraprogRight" style="width: 25%">
-                <div id="progress_bar_in" class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            <img class="right-planeta" id="planeta" src="">
+            <div id="progress_bar_out" class="progress my-5 barraprogRight">
+                <div id="progress_bar_in" class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                    role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
                 </div>
             </div>
         </div>
 
-    </div>
+        <script>
+
+            async function getUserInfo() {
+                const response = await fetch("../server/users/get_user_info.php");
+                const jsonData = await response.json();
+
+                if (jsonData.code === 'NO_LOGIN') {
+                    document.location.href = './login.html';
+                    return;
+                }
+                userInfo = jsonData;
+            }    
+            
+            async function updateVisualElements() {
+                await getUserInfo();
+                document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
+                document.getElementById("progress_bar_in").ariaValueNow = userInfo.progress;
+                document.getElementById("progress_bar_in").style.width = userInfo.progress + "%";
+            }
+
+            window.onload = async function () {
+                await updateVisualElements();
+            }         
+
+        </script>
+
 
 </body>
 
