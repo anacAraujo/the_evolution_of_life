@@ -50,10 +50,6 @@ async function getPlanetOffers() {
             planetsWithOffers.push(offer.planets_user_id);
         }
     }
-
-    console.log(planetsWithOffers);
-
-    console.log(planetOffers);
 }
 
 async function getAllItems() {
@@ -223,6 +219,7 @@ function changeOffers(offerToChange) {
         document.getElementById("troca1_shelf" + shelf).style.display = "block";
         document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
         shelf++;
+        document.getElementById("bmercado_user1").innerHTML = offer.name;
     }
 
     if (offerToChange + 1 < planetsWithOffers.length) {
@@ -232,6 +229,7 @@ function changeOffers(offerToChange) {
             document.getElementById("troca2_shelf" + shelf).style.display = "block";
             document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
             shelf++;
+            document.getElementById("bmercado_user2").innerHTML = offer.name;
         }
     }
 }
@@ -245,15 +243,17 @@ async function showMarketOffers() {
 
     changeOffers(currentOffer);
     document.getElementById("botaotrocaesquerda").onclick = function () {
-        console.log("AAAA");
-        //TODO verify
+        if (currentOffer > planetsWithOffers.length) {
+            return;
+        }
         currentOffer = currentOffer + 2;
         changeOffers(currentOffer);
     }
 
     document.getElementById("botaotrocadireita").onclick = function () {
-        console.log("BBBB");
-        //TODO verify
+        if (currentOffer <= 0) {
+            return;
+        }
         currentOffer = currentOffer - 3;
         changeOffers(currentOffer);
     }
@@ -296,7 +296,6 @@ function mercadoEventos() {
 
     document.getElementById("mercado_vender").onclick = async function () {
         await showOpcaoVenda();
-        await showUserOffers();
     }
 
     document.getElementById("mercado_ver_mercado").onclick = async function () {
