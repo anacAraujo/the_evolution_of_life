@@ -1,6 +1,7 @@
 let allIems = {};
 let inventory = {};
 let userInfo = {};
+let userOffers = [];
 let planetOffers = {}; // Map <ID do planeta, Array de offers>
 let current_user_item_id = 1;
 let current_item_id = 1;
@@ -61,6 +62,15 @@ async function getAllItems() {
 
     for (const item of jsonData) {
         allIems[item.id] = item;
+    }
+}
+
+async function getUserOffers() {
+    const response = await fetch("../server/market/get_user_offers.php");
+    const jsonData = await response.json();
+
+    for (const item of jsonData) {
+        userOffers[item.id] = item;
     }
 }
 
@@ -194,6 +204,32 @@ async function showOpcaoVenda() {
 
 }
 
+function changeOffers(offerToChange) {
+    if (offerToChange >= planetsWithOffers.length) {
+        // No more offers to display
+        return;
+    }
+
+    let offers = planetOffers[planetsWithOffers[offerToChange]];
+
+    let shelf = 1;
+    for (const offer of offers) {
+        document.getElementById("troca1_shelf" + shelf).style.display = "block";
+        document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
+        shelf++;
+    }
+
+    if (offerToChange + 1 < planetsWithOffers.length) {
+        offers = planetOffers[planetsWithOffers[offerToChange + 1]];
+        shelf = 1;
+        for (const offer of offers) {
+            document.getElementById("troca2_shelf" + shelf).style.display = "block";
+            document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
+            shelf++;
+        }
+    }
+}
+
 async function showMarketOffers() {
     document.getElementById("mercado_ver_mercado").style.display = "none";
     document.querySelector(".mercado_barracas_comprar").style.opacity = "100%";
@@ -201,30 +237,7 @@ async function showMarketOffers() {
     await getPlanetOffers();
     console.log(planetOffers);
 
-    changeOffers(0); //para trás -3
-}
-
-function changeOffers(offerToChange) {
-
-    let offers = [];
-
-    offers = planetOffers[planetsWithOffers[offerToChange]];
-
-    let shelf = 1;
-    for (const offer of offers) {
-        document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
-        shelf++;
-    }
-
-    currentOffer++;
-    offers = changeOffers(currentOffer);
-    shelf = 1;
-    for (const offer of offers) {
-        document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
-        shelf++;
-    }
-    currentOffer++;
-
+    changeOffers(0);
 }
 
 async function updateVisualElements() {
