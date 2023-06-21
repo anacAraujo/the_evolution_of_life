@@ -29,7 +29,8 @@ if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
     INNER JOIN formula_itens
     ON items_id=items.id 
     INNER JOIN planets_items_inventory ON item_id=items.id
-    WHERE planets_user_id=$user_id AND side = $action AND planets_items_inventory.qty > 0 LIMIT 10";
+    INNER JOIN formulas ON formulas.id = formula_id
+    WHERE planets_user_id=$user_id AND side = $action AND planets_items_inventory.qty > 0 AND formula_location_id=1 LIMIT 10";
 
     //CRIA O ARRAY QUE OS VAI GUARDAR
     $elements = array();
