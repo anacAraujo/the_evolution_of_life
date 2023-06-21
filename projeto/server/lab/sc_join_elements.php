@@ -18,7 +18,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
 
 
 //ARRAY COM OS POSSÍVEIS RESULTADOS
-$results = array("H2O", "CO2", "CH4", "NH4", "03");
+$results = array("H2O", "CO2", "CH4", "NH4", "O3");
 
 
 if (!empty($element_data)) {
