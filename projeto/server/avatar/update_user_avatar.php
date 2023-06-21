@@ -39,7 +39,7 @@ foreach ($keys as $key => $value) {
 
 }
 
-//SE O VALOR QUE VÊM É UM DOS INPUTS QUE AINDA NÃO ESTÁ DESBLOOQUEADO
+//SE O VALOR QUE VÊM É UM DOS INPUTS QUE AINDA NÃO ESTÁ DESBLOQUEADO
 if($valor_avatar=="") {
     header("Location:../../client/avatar.php");
 }
@@ -64,7 +64,16 @@ if (mysqli_stmt_prepare($stmt, $query)) {
 
         echo "Error" . mysqli_error($local_link);
     } else {
-        header("Location:../../client/avatar.php");
+
+        if(isset($_GET['origin']) && $_GET['origin']) {
+
+            header("Location:../../client/avatar.php?origin=mercado");
+
+        }
+        else {
+            header("Location:../../client/avatar.php");
+        }
+        
     }
 }
 //SE DER ERRO NA PREPARAÇÃO DE UM STATEMENT
