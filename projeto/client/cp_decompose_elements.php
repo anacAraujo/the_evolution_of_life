@@ -15,9 +15,8 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
     $user_id = $_SESSION['id'];
 }
 
-
 //SE VIER DEFINIDA A AÇÕA DO SIDE
-if ((isset($_GET['lab_action']) && $_GET['lab_action'] != "")) {
+if (isset($_GET['lab_action']) && $_GET['lab_action'] != "") {
 
     $action = htmlspecialchars($_GET['lab_action']);
 
@@ -84,13 +83,6 @@ if ((isset($_GET['lab_action']) && $_GET['lab_action'] != "")) {
         echo "Error" . mysqli_error($local_link);
     }
 }
-
-$modal_state=0;
-//VAI VER SE TEM DE ESCOLHER UM ELEMENTO
-if(isset($_GET['choice']) && $_GET['choice'] !="") {
-
-    $modal_state=1;
-}
 ?>
 
 <!doctype html>
@@ -106,76 +98,50 @@ if(isset($_GET['choice']) && $_GET['choice'] !="") {
     <link rel="icon" type="image/x-icon" href="assets/icons_gerais/progresso3/Planeta.svg">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 
 <body class="container lab_container">
     <!-- lab -->
     <div class="lab">
         <div class="row">
-        <form method='post' action='../server/lab/sc_join_elements.php' class='row'>
-            <div>
-                <button class="btn" type="submit">
-                <img id="lab_combinar" class="lab_mensagem" src="assets/lab/combina_elementos.svg" alt="">
-                </button> 
-            </div>
-            <div>
-                <img id="lab_sinal_mais" src="assets/lab/sinal_mais.svg" alt="">
-            </div>
-
-                <div id="lab_elemento1">
-                <select class="element_drop lab_button_elementos fs-6" name="Elemento1">
-                <option value="" disabled selected></option>
-                
-                    <?php
-
-                    //PERCORRE O ARRAY DOS ELEMENTOS
-                    foreach($elementos_compor as $key => $value) {
-
-                        echo '<option class="text-center" value='. $elementos_compor[$key]["symbol"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
-                    }
-                    ?>
-
-                </select>
+            <form method='post' action='../server/lab/sc_separate_elements.php' class='row'>
+                <div>
+                    <button class="btn" type="submit">
+                        <img id="lab_decompoem" class="lab_mensagem" src="assets/lab/decompoem_elemento.svg" alt="">
+                    </button>
                 </div>
-                <div id="lab_elemento2">
-                <select class="element_drop lab_button_elementos lab_button_elemento2 fs-6" name="Elemento2">
-                <option value="" disabled selected></option>
-                
+
+                <select class="element_drop lab_button_elementos lab_button_elemento3 fs-6" name="Elemento3">
+                    <option value="" disabled selected></option>
+
                     <?php
 
                     //PERCORRE O ARRAY DOS ELEMENTOS
-                    foreach($elementos_compor as $key => $value){
+                    foreach ($elementos_compor as $key => $value) {
 
-                        echo '<option class="text-center" value='. $elementos_compor[$key]["symbol"] .'>'. $elementos_compor[$key]["symbol"]. '</option>';
-
+                        echo '<option class="text-center" value=' . $elementos_compor[$key]["symbol"] . '>' . $elementos_compor[$key]["symbol"] . '</option>';
                     }
 
                     echo "</select>
-                    </div>
-                </form>";
+                </div>
+            </form>";
 
+                    if (isset($_GET['error']) && $_GET['error'] != "") {
 
-                if(isset($_GET['error']) && $_GET['error'] != "") {
+                        if ($_GET['error'] == "empty") {
 
-                    if($_GET['error']=="empty") {
+                            echo "<p class='text-center fw-bold'>Escolha o símbolo antes de os decompôr!</p>";
+                        } else if ($_GET['error'] == "qty") {
 
-                        echo "<p class='text-center fw-bold'>Escolha os símbolos antes de os combinar!</p>";
-
+                            echo "<p class='text-center fw-bold'>Não possui itens suficientes!</p>";
+                        } else if ($_GET['error'] == "formula") {
+                            echo "<p class='text-center fw-bold'>Não é possível decompôr esse elemento!</p>";
+                        }
                     }
-                    else if($_GET['error']=="qty") {
-
-                        echo "<p class='text-center fw-bold'>Não possui itens suficientes!</p>";
-                    }
-                    else if($_GET['error']=="formula") {
-                        echo "<p class='text-center fw-bold'>Não é possível combinar esses elementos!</p>";
-                    }
-
-                    
-                }
                     ?>
 
         </div>
     </div>
 
 </body>
-</html>
