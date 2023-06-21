@@ -16,9 +16,6 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != "") {
     $id_user = $_SESSION['id'];
 }
 
-//ARRAY COM OS POSSÍVEIS RESULTADOS
-$results = array("H", "C", "N", "O");
-
 if (!empty($element_data)) {
 
      //GUARDA OS ITENS
@@ -60,7 +57,7 @@ if (!empty($element_data)) {
         mysqli_stmt_close($stmt_h2o);
 
         //VÊ SE OS ITENS SÃO SUFICIENTES
-        if ($qty_h20 > 0) {
+        if ($qty_h2o > 0) {
 
             //RETIRA O ELEMENTO
             $stmt_remove_h2o = mysqli_stmt_init($local_link);
@@ -75,19 +72,18 @@ if (!empty($element_data)) {
             //PREPARA A QUERY
             if (mysqli_stmt_prepare($stmt_remove_h2o, $query_remove_h2o)) {
  
-                if (mysqli_stmt_execute($stmt_remove_h2o)) {
- 
-                    
+                if (!mysqli_stmt_execute($stmt_remove_h2o)) {
 
-                } else {
- 
                     echo "Error" . mysqli_error($local_link);
+ 
+                
                 }
             } else {
                 echo "Error" . mysqli_error($local_link);
             }
 
             mysqli_stmt_close($stmt_remove_h2o);
+
 
         } else {
 
@@ -122,7 +118,7 @@ if (!empty($element_data)) {
         $stmt_add_o = mysqli_stmt_init($local_link);
 
         //QUERY
-        $query_add_h = "UPDATE planets_items_inventory 
+        $query_add_o = "UPDATE planets_items_inventory 
                     SET qty = qty+1 WHERE item_id=2 AND planets_user_id=$id_user";
 
         //PREPARA A QUERY
@@ -188,20 +184,17 @@ if (!empty($element_data)) {
             //QUERY
             $query_remove_co2 = "UPDATE planets_items_inventory 
             SET qty = 
-            CASE WHEN item_id =5 AND planets_user_id=$id_user 
+            CASE WHEN item_id = 5 AND planets_user_id=$id_user 
             THEN qty - 1 
             ELSE qty END";
  
             //PREPARA A QUERY
             if (mysqli_stmt_prepare($stmt_remove_co2, $query_remove_co2)) {
  
-                if (mysqli_stmt_execute($stmt_remove_co2)) {
- 
-                    
+                if (!mysqli_stmt_execute($stmt_remove_co2)) {
 
-                } else {
- 
                     echo "Error" . mysqli_error($local_link);
+
                 }
             } else {
                 echo "Error" . mysqli_error($local_link);
@@ -314,12 +307,11 @@ if (!empty($element_data)) {
             //PREPARA A QUERY
             if (mysqli_stmt_prepare($stmt_remove_ch4, $query_remove_ch4)) {
  
-                if (mysqli_stmt_execute($stmt_remove_ch4)) {
+                if (!mysqli_stmt_execute($stmt_remove_ch4)) {
+
+                    echo "Error" . mysqli_error($local_link);
  
                 
-                } else {
- 
-                    echo "Error" . mysqli_error($local_link);
                 }
             } else {
                 echo "Error" . mysqli_error($local_link);
@@ -432,13 +424,11 @@ if (!empty($element_data)) {
             //PREPARA A QUERY
             if (mysqli_stmt_prepare($stmt_remove_nh4, $query_remove_nh4)) {
  
-                if (mysqli_stmt_execute($stmt_remove_nh4)) {
- 
-                    
+                if (!mysqli_stmt_execute($stmt_remove_nh4)) {
 
-                } else {
- 
                     echo "Error" . mysqli_error($local_link);
+
+
                 }
             } else {
                 echo "Error" . mysqli_error($local_link);
@@ -504,7 +494,7 @@ if (!empty($element_data)) {
     } else if (($item3 == "O3")) {
         //DESFAZER OZONO
         //VE SE TEM ITENS
-        $stmt_co2 = mysqli_stmt_init($local_link);
+        $stmt_o3 = mysqli_stmt_init($local_link);
 
         //QUERY
         $query_o3 = "SELECT qty FROM planets_items_inventory INNER JOIN items ON items.id =item_id WHERE planets_user_id = $id_user AND items.name='Ozono'";
@@ -551,14 +541,11 @@ if (!empty($element_data)) {
             //PREPARA A QUERY
             if (mysqli_stmt_prepare($stmt_remove_o3, $query_remove_o3)) {
  
-                if (mysqli_stmt_execute($stmt_remove_o3)) {
- 
-                    
-
-                } else {
+                if (!mysqli_stmt_execute($stmt_remove_o3)) {
  
                     echo "Error" . mysqli_error($local_link);
-                }
+
+                } 
             } else {
                 echo "Error" . mysqli_error($local_link);
             }
