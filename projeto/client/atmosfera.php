@@ -122,7 +122,7 @@ mysqli_stmt_close($stmt_get_goal);
 
             <?php
             //PERCORRER OS ARRAY
-            foreach ($current_elements as $key => $value) {
+            foreach ($goal_elements as $key => $value) {
 
                 echo "<li class='m-1'>$key</li>";
             }
@@ -136,7 +136,7 @@ mysqli_stmt_close($stmt_get_goal);
 
             <?php
             //PERCORRER OS ARRAY
-            foreach ($goal_elements as $key => $value) {
+            foreach ($current_elements as $key => $value) {
 
                 echo "<li class='mt-1 ms-5 ps-5'>$value</li>";
             }
