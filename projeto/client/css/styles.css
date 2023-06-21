@@ -459,6 +459,60 @@ body {
   height: 5vh;
 }
 
+
+.mercado_item_barracas {
+  height: 15vh !important;
+  display: none;
+}
+
+#troca1_shelf1 {
+  display: none;
+}
+
+#troca1_shelf2 {
+  display: none;
+}
+
+#troca1_shelf3 {
+  display: none;
+}
+
+#troca1_shelf4 {
+  display: none;
+}
+
+#troca1_shelf5 {
+  display: none;
+}
+
+#troca1_shelf6 {
+  display: none;
+}
+
+#troca2_shelf1 {
+  display: none;
+}
+
+#troca2_shelf2 {
+  display: none;
+}
+
+#troca2_shelf3 {
+  display: none;
+}
+
+#troca2_shelf4 {
+  display: none;
+}
+
+#troca2_shelf5 {
+  display: none;
+}
+
+#troca2_shelf6 {
+  display: none;
+}
+
 /* fim Mercado */
 
 /*AVATAR*/
