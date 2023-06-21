@@ -63,22 +63,22 @@ function logout() {
     };
 }
 
-function showAlienRandomly() {
-    const indexAlienDiv = document.querySelector(".alien_animado");
+// function showAlienRandomly() {
+//     const indexAlienDiv = document.querySelector(".alien_animado");
 
-    const hideIndexAlien = () => {
-        indexAlienDiv.style.display = 'none';
-    };
+//     const hideIndexAlien = () => {
+//         indexAlienDiv.style.display = 'none';
+//     };
 
-    const randomNumber = Math.random();
-    const randomDelay = Math.floor(randomNumber * 3000) + 1000;
+//     const randomNumber = Math.random();
+//     const randomDelay = Math.floor(randomNumber * 3000) + 1000;
 
-    setTimeout(() => {
-        indexAlienDiv.style.display = 'block';
+//     setTimeout(() => {
+//         indexAlienDiv.style.display = 'block';
 
-        setTimeout(hideIndexAlien, 5000);
-    }, randomDelay);
-}
+//         setTimeout(hideIndexAlien, 5000);
+//     }, randomDelay);
+// }
 
 
 function mainEvents() {
@@ -100,6 +100,6 @@ function mainEvents() {
 
 window.onload = async function () {
     await updateVisualElements();
-    showAlienRandomly();
+    //  showAlienRandomly();
     mainEvents();
 };

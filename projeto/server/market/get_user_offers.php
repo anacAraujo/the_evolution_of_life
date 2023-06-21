@@ -12,8 +12,7 @@ $user_id = $_SESSION["id"];
 
 $sql = "SELECT *
         FROM market_offers mo
-        WHERE mo.completed = 0 AND planets_user_id != ?
-        ORDER BY planets_user_id";
+        WHERE mo.completed = 0 AND planets_user_id = ?";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $user_id);
