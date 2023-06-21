@@ -136,20 +136,28 @@ if ($result->num_rows > 0 && $item_symbol === "Organism") {
 }
 
 $item_usage = 0;
-$current_time = time();
+//$current_time = new DateTime('now', new DateTimeZone('Europe/Lisbon'));
 
+$current_time = date('Y-m-d H:i:s');
+$int_land = (int)$land_id;
 try {
     if ($item_symbol === "Organism") {
         //TODO Insert Organism to microorganism_usage
         $sql = "INSERT INTO microorganism_usage (break_start, item_usage, planets_land_items_item_id, planets_land_items_user_id, planets_land_items_land_id) 
-        VALUES (FROM_UNIXTIME(?),?,?,?,?,?)";
+        VALUES (?,?,?,?,?)";
 
         $stmt = $conn->prepare($sql);
 
         if (!$stmt) {
             echo "Error: " . $conn->error; // Exibe uma mensagem de erro caso a preparação da consulta falhe
         } else {
-            $stmt->bind_param("iiiii", $current_time, $item_usage, $item_id, $user_id, $land_id);
+            var_dump($current_time);
+            var_dump($item_usage);
+            var_dump($item_id);
+            var_dump($user_id);
+            var_dump($int_land);
+
+            $stmt->bind_param("siiii", $current_time, $item_usage, $item_id, $user_id, $int_land);
             $stmt->execute();
             $stmt->close();
         }
