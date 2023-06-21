@@ -204,7 +204,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
             //CRIA A VARIÁVEL QUE ESCREVE OS AVATARES
             $avatar_write=2;
 
-            echo "<div class='row'>
+            echo "<div class='row align_avatars_top align_avatars_left'>
             <div class='col-1 ms-3'></div>";
 
             while($avatar_write !=5) {
@@ -238,7 +238,7 @@ if(isset($_SESSION['id']) && $_SESSION['id'] != "") {
                 ///DÁ RESET VARIÁVEL QUE ESCREVE OS AVATARES
                 $avatar_write=2;
 
-                echo"<div class='row'>
+                echo"<div class='row align_avatars_left'>
                 <div class='col-1 ms-3'></div>";
                 if($avatar_write!=5) {
 
