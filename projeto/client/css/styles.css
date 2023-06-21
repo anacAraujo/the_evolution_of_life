@@ -51,7 +51,7 @@ body {
 
 .mercado_barracas_comprar img {
   position: absolute;
-  bottom: -144px;
+  bottom: -66px;
 }
 
 .mercado_barracas_comprar img:first-child {
@@ -61,7 +61,7 @@ body {
 
 .mercado_barracas_comprar img:last-child {
   right: -101px;
-  top: -228px;
+  top: -226px;
 }
 
 /* ATUALIZAZAÇÕES MERCADO */
@@ -279,6 +279,179 @@ body {
   top: 221px;
 }
 
+#user_shelf2 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 129px;
+  top: 221px;
+}
+
+#user_shelf3 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 173px;
+  top: 221px;
+}
+
+#user_shelf4 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 84px;
+  top: 264px;
+}
+
+#user_shelf5 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 129px;
+  top: 264px;
+}
+
+#user_shelf6 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 173px;
+  top: 264px;
+}
+
+#troca1_shelf1 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 444px;
+  top: 221px;
+}
+
+#troca1_shelf2 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 488px;
+  top: 221px;
+}
+
+#troca1_shelf3 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 532px;
+  top: 221px;
+}
+
+#troca1_shelf4 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 444px;
+  top: 264px;
+}
+
+#troca1_shelf5 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 488px;
+  top: 264px;
+}
+
+#troca1_shelf6 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 532px;
+  top: 264px;
+}
+
+#troca2_shelf1 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 612px;
+  top: 221px;
+}
+
+#troca2_shelf2 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 657px;
+  top: 221px;
+}
+
+#troca2_shelf3 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 702px;
+  top: 221px;
+}
+
+#troca2_shelf4 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 702px;
+  top: 264px;
+}
+
+#troca2_shelf5 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 657px;
+  top: 264px;
+}
+
+#troca2_shelf6 {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(140, 0, 255, 0);
+  position: absolute;
+  z-index: 1;
+  left: 612px;
+  top: 264px;
+}
+
+#mercado_user_items {
+  height: 5vh;
+}
 
 /* fim Mercado */
 
@@ -364,7 +537,7 @@ body {
   width: 5%;
   height: 5%;
   left: 5rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -374,7 +547,7 @@ body {
   width: 5%;
   height: 5%;
   left: 12rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -384,7 +557,7 @@ body {
   width: 5%;
   height: 5%;
   left: 19rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*LOCK ICON*/
