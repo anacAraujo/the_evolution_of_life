@@ -4,6 +4,9 @@ let userInfo = {};
 let planetOffers = {}; // Map <ID do planeta, Array de offers>
 let current_user_item_id = 1;
 let current_item_id = 1;
+let currentOffer = 0;
+
+let planetsWithOffers = [];
 
 async function getUserInfo() {
     const response = await fetch("../server/users/get_user_info.php");
@@ -33,14 +36,23 @@ async function getInventory() {
 async function getPlanetOffers() {
     const response = await fetch("../server/market/get_all_offers.php");
     const jsonData = await response.json();
-    console.log(jsonData);
+    // console.log(jsonData);
 
     for (const offer of jsonData) {
         if (!planetOffers[offer.planets_user_id]) {
             planetOffers[offer.planets_user_id] = [];
         }
         planetOffers[offer.planets_user_id].push(offer);
+
+        //verifica se offer.planets_user_id existe em planetsWithOffer, se não existir, push;
+        if (!planetsWithOffers.includes(offer.planets_user_id)) {
+            planetsWithOffers.push(offer.planets_user_id);
+        }
     }
+
+    console.log(planetsWithOffers);
+
+    console.log(planetOffers);
 }
 
 async function getAllItems() {
@@ -189,16 +201,30 @@ async function showMarketOffers() {
     await getPlanetOffers();
     console.log(planetOffers);
 
+    changeOffers(0); //para trás -3
+}
+
+function changeOffers(offerToChange) {
+
     let offers = [];
-    offers = planetOffers[1];
-    console.log(offers);
+
+    offers = planetOffers[planetsWithOffers[offerToChange]];
 
     let shelf = 0;
     for (const offer of offers) {
-        //TODO give id to img element
-        document.getElementById("shelf" + shelf).src = "assets/iconsfrascos/" + my_item_symbol + ".svg";
+        document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
         shelf++;
     }
+
+    currentOffer++;
+    offers = changeOffers(currentOffer);
+    shelf = 0;
+    for (const offer of offers) {
+        document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
+        shelf++;
+    }
+    currentOffer++;
+
 }
 
 async function updateVisualElements() {

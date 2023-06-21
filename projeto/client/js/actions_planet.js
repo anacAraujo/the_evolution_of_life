@@ -33,7 +33,7 @@ async function putItemOnLand(landID, itemSymbol) {
         console.log("Success:", result);
         return result;
     } catch (error) {
-        console.error("Error:", error);
+        console.error(error);
         console.log("Error response:", error.response);
     }
 }

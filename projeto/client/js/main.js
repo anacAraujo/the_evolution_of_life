@@ -36,6 +36,10 @@ async function getUserInfo() {
     userInfo = jsonData;
 }
 
+async function createRewardOfferAlien() {
+    await fetch("../server/alien/create_reward.php");
+}
+
 async function updateVisualElements() {
     await getUserInfo();
     document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
@@ -59,17 +63,38 @@ function logout() {
     };
 }
 
+function showAlienRandomly() {
+    const indexAlienDiv = document.querySelector(".alien_animado");
+
+    const hideIndexAlien = () => {
+        indexAlienDiv.style.display = 'none';
+    };
+
+    const randomNumber = Math.random();
+    const randomDelay = Math.floor(randomNumber * 3000) + 1000;
+
+    setTimeout(() => {
+        indexAlienDiv.style.display = 'block';
+
+        setTimeout(hideIndexAlien, 5000);
+    }, randomDelay);
+}
+
+
 function mainEvents() {
     logout();
 
-
-
     document.getElementById("planeta").onclick = async function () {
+        document.body.style.backgroundImage = "url('img/fundo_planeta_interior.png')";
         document.getElementById("particles-js").style.display = "none";
         document.getElementById("planeta_interior").style.display = "block";
-        document.getElementById("icons_gerais").style.display = "block";
+        document.getElementById("icons_gerais").style.display = "flex";
         await fillLandMap();
         setEvents();
+    }
+
+    document.getElementById("index_alien").onclick = function () {
+
     }
 }
 
@@ -85,5 +110,6 @@ function moverElemento() {
 
 window.onload = async function () {
     await updateVisualElements();
+    showIndexAlienRandomly();
     mainEvents();
 };
