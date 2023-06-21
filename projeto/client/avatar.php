@@ -67,10 +67,11 @@ else {
     </a>
 
     <?php 
-    if(isset($return)) {
+    if(isset($return) && $return=="mercado.html") {
 
         echo '<!--Fórmulário de Imagens-->
-        <form method="post" action="../server/avatar/update_user_avatar.php?origin=mercado">';
+            <form method="post" action="../server/avatar/update_user_avatar.php?origin=mercado">';
+       
     }
     else {
         echo '<!--Fórmulário de Imagens-->

@@ -595,6 +595,15 @@ body {
   font-size: 13px;
 }
 
+.icon_atmosfera_position {
+  float: right;
+  margin-right: -17px;
+}
+
+#mercado_go_back {
+  color: #fff;
+}
+
 /* fim Mercado */
 
 /*AVATAR*/
@@ -1058,6 +1067,7 @@ body {
   position: absolute;
   top: 21px;
   left: 5px;
+  color: #000000;
 }
 
 .planeta_quantidade_elementos_titulo {
