@@ -210,7 +210,7 @@ function changeOffers(offerToChange) {
 
     offers = planetOffers[planetsWithOffers[offerToChange]];
 
-    let shelf = 0;
+    let shelf = 1;
     for (const offer of offers) {
         document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
         shelf++;
@@ -218,7 +218,7 @@ function changeOffers(offerToChange) {
 
     currentOffer++;
     offers = changeOffers(currentOffer);
-    shelf = 0;
+    shelf = 1;
     for (const offer of offers) {
         document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
         shelf++;
