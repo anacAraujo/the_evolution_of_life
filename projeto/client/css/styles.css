@@ -1380,3 +1380,7 @@ body {
   position: fixed;
   z-index: 9;
 }
+
+#icons_gerais a img {
+  height: 40px;
+}
