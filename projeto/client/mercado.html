@@ -15,7 +15,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
-
     <script src="js/mercado.js"></script>
 
 </head>
@@ -23,6 +22,48 @@
 <body class="container">
     <!-- mercado -->
     <div class="mercado">
+        <!-- icones globais -->
+        <div id="icons_gerais" class="row m-4">
+            <div id="icon_atmosfera" class="col-1 m-2">
+                <a>
+                    <img src="assets/icons_gerais/Atmosfera.svg" alt="">
+                </a>
+
+            </div>
+            <div id="icon_lab" class="col-1 m-2">
+                <a href="lab.php">
+                    <img id="frasco" src="assets/icons_gerais/progresso1/Frasco.svg" alt="">
+                </a>
+
+            </div>
+            <div id="icon_mercado" class="col-1 m-2">
+                <a href="mercado.html">
+                    <img class="imgbarraca" src="assets/icons_gerais/Barraquinha.svg" alt="">
+                </a>
+            </div>
+            <div id="icon_avatar" class="col-1 m-2">
+                <a href="avatar.php">
+                    <img id="avatar" class="aligned-top-left-4 aligned-top-left-4-dif"
+                        src="assets/avatar_perfil/Avatar1.svg" alt="">
+                </a>
+            </div>
+            
+            <div class="col-1 m-2 aligned-top-left-4">
+                <a href="#" id="modal_trigger"> <svg xmlns="http://www.w3.org/2000/svg" id="modal_trigger" width="35"
+                        height="35" class="text-white" fill="currentColor" class="bi bi-box-arrow-right"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
+                        <path fill-rule="evenodd"
+                            d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+                    </svg></a>
+
+            </div>
+
+        </div>
+
+    <div id="shelf1"></div>
+
         <div class="row barracasprincipais-def">
             <div id="" class="col-6">
                 <div id='botão' class='botão'>
@@ -41,6 +82,7 @@
             </div>
             <div class="col-6 mercado_barracas_comprar">
                 <img class="mercado_barraca m-3" src="assets/mercado/barraca_user.svg" alt="">
+
                 <img class="mercado_barraca m-3" src="assets/mercado/barraca_user.svg" alt="">
             </div>
         </div>
@@ -89,9 +131,31 @@
     </div>
     </div>
 
-    <!--  -->
-    <div>
-
+    <!--Modal Logout -->
+    <div class="pt-5 modal" tabindex="" id="modal_logout">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header shadow">
+                    <h5 class="modal-title fw-bold">Logout</h5>
+                    <a id="close_modal">
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </a>
+                </div>
+                <div class="modal-body text-center pb-0 pt-3">
+                    <p>Tem a certeza que pretende terminar a sua sessão?</p>
+                </div>
+                <div class="modal-footer m-auto">
+                    <a href="#" class="pe-2" id="cancel_modal">
+                        <button type="button" class="btn btn-info shadow" data-bs-dismiss="modal">Continuar</button>
+                    </a>
+                    <a href="../server/users/sc_logout.php" class="ps-2">
+                        <button type="button" class="btn btn-primary shadow"> Terminar
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 
