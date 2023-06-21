@@ -193,7 +193,12 @@ async function showMarketOffers() {
     offers = planetOffers[1];
     console.log(offers);
 
-
+    let shelf = 0;
+    for (const offer of offers) {
+        //TODO give id to img element
+        document.getElementById("shelf" + shelf).src = "assets/iconsfrascos/" + my_item_symbol + ".svg";
+        shelf++;
+    }
 }
 
 async function updateVisualElements() {
