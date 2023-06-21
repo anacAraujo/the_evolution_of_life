@@ -459,6 +459,20 @@ body {
   height: 5vh;
 }
 
+#botaotrocadireita {
+  position: absolute;
+  bottom: 30px;
+  left: 51px;
+  color: #165034;
+}
+
+#botaotrocaesquerda {
+  position: absolute;
+  bottom: 30px;
+  left: 400px;
+  color: #165034;
+}
+
 /* fim Mercado */
 
 /*AVATAR*/
