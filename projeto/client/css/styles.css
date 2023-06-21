@@ -450,6 +450,10 @@ body {
   top: 264px;
 }
 
+#mercado_user_items {
+  height: 5vh;
+}
+
 /* fim Mercado */
 
 /*AVATAR*/
