@@ -8,7 +8,8 @@ $conn = new_db_connection();
 
 $sql = "SELECT *
         FROM market_offers mo
-        WHERE mo.completed = 0";
+        WHERE mo.completed = 0
+        ORDER BY planets_user_id";
 
 $result = $conn->query($sql);
 

@@ -110,6 +110,11 @@ body {
   left: 166px;
 }
 
+#atencion_alien {
+  height: 9vh;
+  display: none;
+}
+
 .quadrado_venda {
   background-color: rgba(22.26468488574028, 80.96249878406525, 52.78754644095898, 0.8199999928474426);
   width: 381px;
@@ -264,16 +269,10 @@ body {
   display: block;
 }
 
-.mercado_drop {
-  position: absolute;
-  top: -214px;
-  left: 191px;
-}
-
-#user_shelf1 {
+#shelf1 {
   width: 40px;
   height: 40px;
-  background-color: rgba(140, 0, 255, 0);
+  background-color: rgb(140, 0, 255);
   position: absolute;
   z-index: 1;
   left: 84px;
@@ -823,7 +822,7 @@ body {
 .barraprogRight {
   position: absolute;
   top: 75%;
-  left:75%;
+  left: 75%;
   transform: translate(-75%, -75%);
 }
 
@@ -838,6 +837,7 @@ body {
 }
 
 .alien_animado {
+  display: none;
   position: absolute;
   left: -150%;
   top: -50%;
@@ -865,7 +865,7 @@ body {
 
 .lista_elementos1 li {
 
-  color:#E41B17;
+  color: #E41B17;
 }
 
 .lista_elementos2 {
@@ -883,7 +883,7 @@ body {
 #atual_atmosfera {
 
   left: 8.7rem !important;
-  color:#E41B17;
+  color: #E41B17;
 }
 
 #divisor_atmosfera {
@@ -953,6 +953,7 @@ body {
   position: absolute;
   /* top: 1px; */
   left: 0px;
+  margin-top: -100px;
 }
 
 .v13_8 {
@@ -1616,10 +1617,3 @@ body {
 }
 
 /* FIM PLANETA INTERIOR */
-
-.planetabckg {
-  background: url("../img/fundo_planeta_interior.png") no-repeat center center fixed;
-  background-size: cover;
-  height: 100vh !important;
-  width: 100vw !important;
-}
