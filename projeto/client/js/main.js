@@ -98,18 +98,8 @@ function mainEvents() {
     }
 }
 
-function moverElemento() {
-    var elemento = document.getElementById("");
-
-    var larguraPagina = window.innerWidth;
-    var novaPosicao = larguraPagina / 2 - elemento.offsetWidth / 2;
-
-    elemento.style.transition = "all 1s ease";
-    elemento.style.left = novaPosicao + "px";
-}
-
 window.onload = async function () {
     await updateVisualElements();
-    showIndexAlienRandomly();
+    showAlienRandomly();
     mainEvents();
 };
