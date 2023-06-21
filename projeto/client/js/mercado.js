@@ -244,14 +244,14 @@ async function showMarketOffers() {
     console.log(planetOffers);
 
     changeOffers(currentOffer);
-    document.getElementById("botaotrocadireita").onclick = function () {
+    document.getElementById("botaotrocaesquerda").onclick = function () {
         console.log("AAAA");
         //TODO verify
         currentOffer = currentOffer + 2;
         changeOffers(currentOffer);
     }
 
-    document.getElementById("botaotrocaesquerda").onclick = function () {
+    document.getElementById("botaotrocadireita").onclick = function () {
         console.log("BBBB");
         //TODO verify
         currentOffer = currentOffer - 3;

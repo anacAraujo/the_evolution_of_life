@@ -275,10 +275,10 @@ body {
   display: block;
 }
 
-#shelf1 {
+#user_shelf1 {
   width: 40px;
   height: 40px;
-  background-color: rgb(140, 0, 255);
+  background-color: rgba(140, 0, 255, 0);
   position: absolute;
   z-index: 1;
   left: 84px;
