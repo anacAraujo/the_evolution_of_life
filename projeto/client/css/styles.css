@@ -1,5 +1,5 @@
 body {
-  background-color: #131a72 !important;
+  background-color: red !important;
   min-height: 100vh;
   font-family: 'Source Code Pro', monospace;
   overflow: hidden;
@@ -536,8 +536,8 @@ body {
 
 .element_drop {
 
-    appearance: none;
-  
+  appearance: none;
+
 }
 
 .lab_criar_final {
