@@ -36,6 +36,15 @@ async function getUserInfo() {
     userInfo = jsonData;
 }
 
+async function updateVisualElements() {
+    await getUserInfo();
+    document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
+    document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
+    document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
+    document.getElementById("progress_bar_in").ariaValueNow = userInfo.progress;
+    document.getElementById("progress_bar_in").style.width = userInfo.progress + "%";
+}
+
 function logout() {
     document.getElementById("modal_trigger").onclick = function () {
         document.getElementById("modal_logout").style.display = "block";
@@ -50,33 +59,10 @@ function logout() {
     };
 }
 
-async function updateVisualElements() {
-    await getUserInfo();
-    document.getElementById("avatar").src = "assets/avatar_perfil/Avatar" + userInfo.avatar_id + ".svg";
-    document.getElementById("frasco").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Frasco.svg";
-    document.getElementById("planeta").src = "assets/icons_gerais/progresso" + userInfo.id_settings + "/Planeta.svg";
-    document.getElementById("progress_bar_in").ariaValueNow = userInfo.progress;
-    document.getElementById("progress_bar_in").style.width = userInfo.progress + "%";
-}
-
 function mainEvents() {
-    // Logout click event
     logout();
 
-    // List of the quantity of elements
-    document.getElementById("icon_atmosfera").onclick = function () {
-        document.getElementById("quantidades_elementos").style.display = "block";
 
-        document.getElementById("go_back_to_index").onclick = function () {
-            window.location.href = "index.html";
-        };
-
-        document.getElementById("icon_atmosfera").style.display = "none";
-        document.getElementById("icon_lab").style.display = "none";
-        document.getElementById("icon_mercado").style.display = "none";
-        document.getElementById("icon_avatar").style.display = "none";
-        document.getElementById("modal_trigger").style.display = "none";
-    };
 
     document.getElementById("planeta").onclick = async function () {
         document.getElementById("particles-js").style.display = "none";

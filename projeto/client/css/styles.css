@@ -534,7 +534,7 @@ body {
   width: 5%;
   height: 5%;
   left: 5rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -544,7 +544,7 @@ body {
   width: 5%;
   height: 5%;
   left: 12rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*DIV LOCK ICON*/
@@ -554,7 +554,7 @@ body {
   width: 5%;
   height: 5%;
   left: 19rem;
-  top: 10.5rem;
+  top: 11.5rem;
 }
 
 /*LOCK ICON*/
@@ -802,11 +802,25 @@ body {
   transform: translate(-50%, -50%);
 }
 
+.right-planeta {
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-75%, -75%);
+}
+
 .barraprog {
   position: absolute;
   top: 75%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.barraprogRight {
+  position: absolute;
+  top: 75%;
+  left:75%;
+  transform: translate(-75%, -75%);
 }
 
 @keyframes slide-in {
@@ -838,8 +852,45 @@ body {
 
 }
 
-#quantidades_elementos {
-  display: none;
+
+.lista_elementos1 {
+
+  position: absolute;
+  left: 5rem !important;
+}
+
+.lista_elementos1 li {
+
+  color:#E41B17;
+}
+
+.lista_elementos2 {
+
+  position: absolute;
+  left: 7rem !important;
+}
+
+.lista_elementos_divisoria {
+
+  position: absolute;
+  left: 6.3rem !important;
+}
+
+#atual_atmosfera {
+
+  left: 8.7rem !important;
+  color:#E41B17;
+}
+
+#divisor_atmosfera {
+
+  left: 10.5rem !important;
+
+}
+
+#objetivo_atmosfera {
+
+  left: 13rem !important;
 }
 
 .planeta_quantidade_elementos {
