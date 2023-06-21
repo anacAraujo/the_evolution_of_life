@@ -470,6 +470,7 @@ body {
   bottom: 30px;
   left: 51px;
   color: #165034;
+  z-index: 1;
 }
 
 #botaotrocaesquerda {
@@ -477,11 +478,36 @@ body {
   bottom: 30px;
   left: 400px;
   color: #165034;
+  z-index: 1;
 }
 
 
 .mercado_item_barracas {
   height: 15vh !important;
+  display: none;
+}
+
+#user_shelf1 {
+  display: none;
+}
+
+#user_shelf2 {
+  display: none;
+}
+
+#user_shelf3 {
+  display: none;
+}
+
+#user_shelf4 {
+  display: none;
+}
+
+#user_shelf5 {
+  display: none;
+}
+
+#user_shelf6 {
   display: none;
 }
 
@@ -531,6 +557,42 @@ body {
 
 #troca2_shelf6 {
   display: none;
+}
+
+#bmercado_user1 {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 11px;
+  left: 95px;
+  font-size: 13px;
+}
+
+#bmercado_user2 {
+  background-color: #165034;
+  height: 38px;
+  width: 109.29896545410156px;
+  border-radius: 25px;
+  border: 1px solid #000000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  top: 13px;
+  left: 268px;
+  font-size: 13px;
 }
 
 /* fim Mercado */

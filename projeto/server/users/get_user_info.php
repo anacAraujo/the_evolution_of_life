@@ -52,9 +52,9 @@ if ($result->num_rows > 0) {
 
         if ($item_qty != 0 && $item_goal != 0) {
             if ($item_goal > $item_qty) {
-                $progress = ($item_qty / $item_goal);
-            } elseif ($item_goal < $item_qty) {
-                $progress = ($item_qty / $item_goal);
+                $progress += ($item_qty / $item_goal);
+            } else if ($item_goal < $item_qty) {
+                $progress += ($item_qty / $item_goal);
             } else if ($item_goal === $item_qty) {
                 $progress += 100;
             } else if ($qnt_elements_default === $item_qty) {
