@@ -178,6 +178,7 @@ function mercadoEventos() {
     }
 
     document.getElementById("mercado_ver_mercado").onclick = async function () {
+        document.getElementById("mercado_ver_mercado").style.display = "none";
         document.querySelector(".mercado_barracas_comprar").style.opacity = "100%";
     }
 }
