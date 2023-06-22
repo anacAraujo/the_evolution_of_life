@@ -20,6 +20,33 @@ async function getUserInfo() {
     userInfo = jsonData;
 }
 
+async function makeTroca(myItem, myItemQty, otherItem, otherItemQty, planetId) {
+
+    const data = {
+        my_item_id: myItem,
+        my_item_qty: myItemQty,
+        other_item: otherItem,
+        other_item_qty: otherItemQty,
+        planets_user_id: planetId
+    };
+
+    try {
+        const response = await fetch("../server/market/update_inventory.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log("Success:", result);
+        return result;
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
 async function getInventory() {
     const response = await fetch("../server/users/get_inventory.php");
     const jsonData = await response.json();
@@ -220,6 +247,21 @@ function changeOffers(offerToChange) {
         document.getElementById("troca1_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
         shelf++;
         document.getElementById("bmercado_user1").innerHTML = offer.name;
+        document.getElementById("troca2_shelf" + shelf).onclick = function () {
+            document.getElementById("modal_troca").style.display = "block";
+
+            document.getElementById("close_modal").onclick = function () {
+                document.getElementById("modal_troca").style.display = "none";
+            }
+            document.getElementById("cancel_modal_trocar").onclick = function () {
+                document.getElementById("modal_troca").style.display = "none";
+            }
+
+            document.getElementById("trocar_modal_trocar").onclick = async function () {
+                await makeTroca(offer.my_item_id, offer.my_item_qty, offer.other_item_id, offer.other_item_qty, offer.planets_user_id);
+                document.getElementById("modal_troca").style.display = "none";
+            }
+        }
     }
 
     if (offerToChange + 1 < planetsWithOffers.length) {
@@ -230,8 +272,25 @@ function changeOffers(offerToChange) {
             document.getElementById("troca2_shelf" + shelf).src = "assets/iconsfrascos/" + offer.my_item_symbol + ".svg";
             shelf++;
             document.getElementById("bmercado_user2").innerHTML = offer.name;
+
+            document.getElementById("troca2_shelf" + shelf).onclick = function () {
+                document.getElementById("modal_troca").style.display = "block";
+
+                document.getElementById("close_modal").onclick = function () {
+                    document.getElementById("modal_troca").style.display = "none";
+                }
+                document.getElementById("cancel_modal_trocar").onclick = function () {
+                    document.getElementById("modal_troca").style.display = "none";
+                }
+
+                document.getElementById("trocar_modal_trocar").onclick = async function () {
+                    await makeTroca(offer.my_item_id, offer.my_item_qty, offer.other_item_id, offer.other_item_qty, offer.planets_user_id);
+                    document.getElementById("modal_troca").style.display = "none";
+                }
+            }
         }
     }
+
 }
 
 async function showMarketOffers() {

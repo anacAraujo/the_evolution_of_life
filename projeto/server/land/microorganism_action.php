@@ -162,12 +162,13 @@ if ($result && $result->num_rows > 0) {
             }
         }
         $item_usage = $row['item_usage'];
+        $break_start_reset = "null";
         if ($item_usage >= $max_usage) {
             $item_usage_reset = 0;
-            $sql = "UPDATE microorganism_usage SET item_usage = ?
+            $sql = "UPDATE microorganism_usage SET item_usage = ? AND break_start = ?
             WHERE planets_land_items_item_id = ? AND planets_land_items_user_id = ? AND planets_land_items_land_id = ?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("iiii", $item_usage_reset, $item_id, $user_id, $land_id);
+            $stmt->bind_param("isiii", $item_usage_reset, $break_start_reset, $item_id, $user_id, $land_id);
 
             $stmt->execute();
             $stmt->close();
